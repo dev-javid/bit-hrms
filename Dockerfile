@@ -19,17 +19,15 @@ WORKDIR /src
 COPY ["/src/Application/Application.csproj", "./Application/"]
 COPY ["/src/Domain/Domain.csproj", "./Domain/"]
 COPY ["/src/Infrastructure/Infrastructure.csproj", "./Infrastructure/"]
-COPY ["/src/Presentation/Presentation.csproj", "./Presentation/"]
+COPY ["/src/Presentation.Server/Presentation.csproj", "./Presentation.Server/"]
 COPY ["/src/Database/Database.csproj", "./Database/"]
-COPY ["/src/react.client/react.client.esproj", "./react.client/"]
+COPY ["/src/presentation.client/react.client.esproj", "./presentation.client/"]
 
-RUN dotnet restore "./Presentation/Presentation.csproj"
+RUN dotnet restore "./Presentation.Server/Presentation.csproj"
 
 COPY src .
 
-WORKDIR "/src/Presentation"
-
-RUN ls -la ./
+WORKDIR "/src/Presentation.Server"
 
 RUN dotnet build "./Presentation.csproj" -c $BUILD_CONFIGURATION -o /src/build
 
