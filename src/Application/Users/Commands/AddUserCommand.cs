@@ -1,0 +1,77 @@
+using Application.Users.Events;
+using Domain.Companies;
+using Domain.Identity;
+
+namespace Application.Users.Commands;
+
+public class AddUserCommand : IAddCommand<int>
+{
+    public required string Name { get; init; }
+
+    public required string Email { get; init; }
+
+    public required string PhoneNumber { get; init; }
+
+    public required string Role { get; init; }
+
+    [JsonIgnore]
+    public int CompanyId { get; init; }
+
+    [JsonIgnore]
+    public bool UseTransaction { get; init; } = true;
+
+    internal class Handler(IIdentityService identityService, IDbContext dbContext, ICurrentUser currentUser) : IAddCommandHandler<AddUserCommand, int>
+    {
+        public async Task<int> Handle(AddUserCommand request, CancellationToken cancellationToken)
+        {
+            if (!request.UseTransaction)
+            {
+                return await CreateUserAsync(request,  cancellationToken);
+            }
+
+            using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
+            try
+            {
+                var userId = await CreateUserAsync(request, cancellationToken);
+                await transaction.CommitAsync(cancellationToken);
+                return userId;
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                throw;
+            }
+        }
+
+        private async Task<int> CreateUserAsync(AddUserCommand request, CancellationToken cancellationToken)
+        {
+            var companyId = currentUser.CompanyId != 0 ? currentUser.CompanyId : request.CompanyId;
+            var company = await dbContext.Companies.FirstAsync(x => x.Id == companyId, cancellationToken);
+
+            var user = await CreateIdentity(company, request);
+
+            await dbContext.SaveChangesAsync(cancellationToken);
+            return user.Id;
+        }
+
+        private async Task<User> CreateIdentity(Company company, AddUserCommand request)
+        {
+            var role = await identityService.GetRoleAsync(request.Role.AsEnum<RoleName>());
+            var user = User.Create(request.Email.ToValueObject<Email>(), request.PhoneNumber.ToValueObject<PhoneNumber>(), company.Id);
+
+            var claims = new Dictionary<string, string>
+            {
+                { "Name", request.Name },
+            };
+
+            user.AddClaims(claims);
+            await identityService.CreateUserAsync(user, role);
+
+            company.AddDomainEvent(new UserCreatedEvent
+            {
+                UserId = user.Id,
+            });
+            return user;
+        }
+    }
+}

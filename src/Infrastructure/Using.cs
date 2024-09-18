@@ -1,0 +1,13 @@
+global using System.Text.Json;
+global using Application.Common.Abstract;
+global using Application.Common.Extensions;
+global using Domain.Common;
+global using Domain.Common.ValueObjects;
+global using Domain.Identity;
+global using Infrastructure.DependencyRegistration;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Microsoft.Extensions.Configuration;
+global using static Domain.Common.Enums;
