@@ -2,17 +2,16 @@ name: Test Suite
 
 on:
   push:
-    branches: [ "*" ]
+    branches: ["*"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   tests:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Docker Compose Up
-      run: docker compose -f docker-compose.tests.yml up -d --build
+      - name: Docker Compose Up
+        run: docker compose  --verbose -f docker-compose.tests.yml up -d --build
