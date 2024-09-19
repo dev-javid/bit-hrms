@@ -30,7 +30,7 @@
     <ItemGroup>
         <ProjectReference Include="..\Database\Database.csproj" />
         <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-        <ProjectReference Include="..\presentation.client\react.client.esproj">
+        <ProjectReference Include="..\presentation.client\react.client.esproj" Condition="'$(ReactProjectExclude)' != 'true'">
             <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
         </ProjectReference>
     </ItemGroup>

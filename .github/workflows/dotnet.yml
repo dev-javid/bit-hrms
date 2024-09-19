@@ -39,7 +39,7 @@ jobs:
           node-version: "20"
 
       - name: Restore dependencies
-        run: dotnet restore --ignore-failed-sources
+        run: dotnet restore BitHrms.sln /p:ReactProjectExclude=true
 
       - name: Build
         run: dotnet build --no-restore
