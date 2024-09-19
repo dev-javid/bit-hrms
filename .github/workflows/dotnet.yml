@@ -35,8 +35,8 @@ jobs:
 
       - name: Remove front end reference
         run: |
-          cd src\Presentation.Server
-          dotnet remove reference ..\presentation.client\react.client.esproj
+          cd src/Presentation.Server
+          dotnet remove reference ../presentation.client/react.client.esproj
           cd ../..
 
       - name: Restore dependencies
