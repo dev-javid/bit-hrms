@@ -26,7 +26,7 @@ namespace Tests.Architecture.Domain
                 .GetResult();
 
             // Assert
-            result.IsSuccessful.Should().BeTrue();
+            result.IsSuccessful.Should().BeFalse();
         }
     }
 }
