@@ -6,7 +6,7 @@ namespace Tests.Architecture.Database
     public class DomainProjectReferenceTests
     {
         [Fact]
-        public void Domain_Should_Not_Have_Dependency_On_Other_Projects()
+        public void Database_Should_Not_Have_Dependency_On_Other_Projects()
         {
             // Arrange
             var assembly = Assembly.Load(ProjectNames.Domain);
@@ -15,7 +15,6 @@ namespace Tests.Architecture.Database
                 ProjectNames.Presentation,
                 ProjectNames.Application,
                 ProjectNames.Infrastructure,
-                ProjectNames.Domain,
                 ProjectNames.Domain,
             };
 

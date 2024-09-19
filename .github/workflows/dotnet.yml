@@ -1,0 +1,60 @@
+name: .NET
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: myuser
+          POSTGRES_PASSWORD: mypassword
+          POSTGRES_DB: mydatabase
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U myuser"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # This ensures a full clone of the repository
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Remove front end project reference
+        run: |
+          cd src/Presentation.Server
+          dotnet remove reference ../presentation.client/react.client.esproj
+          cd ../..
+          dotnet sln remove src/presentation.client/react.client.esproj
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore
+
+      - name: Test
+        env:
+          ConnectionStrings__Default: "Host=localhost;Port=5432;Username=myuser;Password=mypassword;Database=mydatabase;"
+          ConnectionStrings__Jobs: "Host=localhost;Port=5432;Username=myuser;Password=mypassword;Database=mydatabase;"
+          Serilog__WriteTo__0__Args__connectionString: "Host=localhost;Port=5432;Username=myuser;Password=mypassword;Database=mydatabase;"
+          Serilog__WriteTo__0__Name: "PostgreSQL"
+          Serilog__WriteTo__0__Args__tableName: "log_table"
+
+        run: dotnet test --no-build --verbosity detailed
