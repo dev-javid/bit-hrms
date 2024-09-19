@@ -49,7 +49,7 @@ internal class DatabaseContext(DbContextOptions<DatabaseContext> options, ICurre
 
     public DbSet<Income> Incomes { get; set; }
 
-    public DbSet<Expanse> Expanses { get; set; }
+    public DbSet<Expense> Expenses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

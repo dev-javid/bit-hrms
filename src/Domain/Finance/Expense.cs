@@ -1,8 +1,8 @@
 namespace Domain.Finance
 {
-    public class Expanse : CompanyEntity<int>
+    public class Expense : CompanyEntity<int>
     {
-        private Expanse()
+        private Expense()
         {
             Documents = [];
         }
@@ -15,9 +15,9 @@ namespace Domain.Finance
 
         public FileName[] Documents { get; set; }
 
-        internal static Expanse Create(decimal amount, string? purpose, IEnumerable<FileName> documents)
+        internal static Expense Create(decimal amount, string? purpose, IEnumerable<FileName> documents)
         {
-            return new Expanse
+            return new Expense
             {
                 AmountEncrypted = amount.ToBytes(),
                 Documents = documents.ToArray(),

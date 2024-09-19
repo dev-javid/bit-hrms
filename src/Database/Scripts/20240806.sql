@@ -25,7 +25,7 @@ CREATE TABLE incomes (
   CONSTRAINT fk_incomes_company_id         FOREIGN KEY (company_id)        REFERENCES companies (id)       MATCH SIMPLE
 );
 
-CREATE TABLE expanses (
+CREATE TABLE expenses (
   id                SERIAL      PRIMARY KEY,
   company_id                    INTEGER             NOT NULL,
   amount                        BYTEA               NOT NULL,
@@ -35,5 +35,5 @@ CREATE TABLE expanses (
   created_on                    TIMESTAMPTZ         NOT NULL,
   modified_by                   INTEGER                 NULL,
   modified_on                   TIMESTAMPTZ             NULL,
-  CONSTRAINT fk_expanses_company_id         FOREIGN KEY (company_id)        REFERENCES companies (id)       MATCH SIMPLE
+  CONSTRAINT fk_expenses_company_id         FOREIGN KEY (company_id)        REFERENCES companies (id)       MATCH SIMPLE
 );

@@ -1,15 +1,15 @@
-using Application.Expanses.Commands;
+using Application.Expenses.Commands;
 
-namespace Tests.Unit.Application.Expanses.Commands;
+namespace Tests.Unit.Application.Expenses.Commands;
 
-public class AddExpanseCommandTests
+public class AddExpenseCommandTests
 {
-    private readonly AddExpanseCommand.Validator _validator = new();
+    private readonly AddExpenseCommand.Validator _validator = new();
 
     [Fact]
     public void Should_have_error_when_Amount_is_less_than_1()
     {
-        var command = new AddExpanseCommand { Amount = 0 };
+        var command = new AddExpenseCommand { Amount = 0 };
 
         var result = _validator.TestValidate(command);
 
@@ -19,7 +19,7 @@ public class AddExpanseCommandTests
     [Fact]
     public void Should_have_error_when_Documents_is_empty()
     {
-        var command = new AddExpanseCommand { Documents = [] };
+        var command = new AddExpenseCommand { Documents = [] };
 
         var result = _validator.TestValidate(command);
 
@@ -29,7 +29,7 @@ public class AddExpanseCommandTests
     [Fact]
     public void Should_have_error_when_Documents_contains_invalid_base64_string()
     {
-        var command = new AddExpanseCommand { Documents = ["invalid_base64_string"] };
+        var command = new AddExpenseCommand { Documents = ["invalid_base64_string"] };
 
         var result = _validator.TestValidate(command);
 
@@ -39,7 +39,7 @@ public class AddExpanseCommandTests
     [Fact]
     public void Should_not_have_any_errors_when_request_is_valid()
     {
-        var command = new AddExpanseCommand
+        var command = new AddExpenseCommand
         {
             Amount = 100,
             Documents = [

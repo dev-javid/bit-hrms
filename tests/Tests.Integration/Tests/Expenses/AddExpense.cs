@@ -1,15 +1,15 @@
-using Application.Expanses.Commands;
+using Application.Expenses.Commands;
 
-namespace Tests.Integration.Tests.Expanses;
+namespace Tests.Integration.Tests.Expenses;
 
-public class AddExpanse(TestWebApplicationFactory<Program> factory) : IntegrationTest(factory)
+public class AddExpense(TestWebApplicationFactory<Program> factory) : IntegrationTest(factory)
 {
     [Fact]
-    public async Task Should_add_expanse()
+    public async Task Should_add_expense()
     {
         await LoginAsCompanyAdminAsync();
 
-        var command = new AddExpanseCommand
+        var command = new AddExpenseCommand
         {
             Amount = 100,
             Purpose = "Test",
@@ -22,7 +22,7 @@ public class AddExpanse(TestWebApplicationFactory<Program> factory) : Integratio
         HttpResponseMessage response;
         using (StringContent content = new StringContent(JsonSerializer.Serialize(command), Encoding.UTF8, JsoneMediaType))
         {
-            response = await Client.PostAsync("/api/expanses", content);
+            response = await Client.PostAsync("/api/expenses", content);
         }
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
