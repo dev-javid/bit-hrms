@@ -22,7 +22,7 @@
     <None Update="Tests\Incomes\AddIncome.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\Expanses\GetExpanses.sql">
+    <None Update="Tests\Expenses\GetExpenses.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
 

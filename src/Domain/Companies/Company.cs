@@ -30,7 +30,7 @@ namespace Domain.Companies
 
         public ICollection<IncomeSource> IncomeSources { get; private set; }
 
-        public ICollection<Expanse> Expenses { get; private set; }
+        public ICollection<Expense> Expenses { get; private set; }
 
         public static Company Create(string name, Email email, PhoneNumber phoneNumber, string administratorName, FinancialMonth financialMonth)
         {
@@ -154,10 +154,10 @@ namespace Domain.Companies
             IncomeSources.Add(incomeSource);
         }
 
-        public void AddExpanse(decimal requestAmount, string requestPurpose, IEnumerable<FileName> fileNames)
+        public void AddExpense(decimal requestAmount, string requestPurpose, IEnumerable<FileName> fileNames)
         {
-            var expanse = Expanse.Create(requestAmount, requestPurpose, fileNames);
-            Expenses.Add(expanse);
+            var expense = Expense.Create(requestAmount, requestPurpose, fileNames);
+            Expenses.Add(expense);
         }
     }
 }

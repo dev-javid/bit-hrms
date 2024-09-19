@@ -1,9 +1,8 @@
 using Application.Common.Validators;
-using Domain.Finance;
 
-namespace Application.Expanses.Commands;
+namespace Application.Expenses.Commands;
 
-public class AddExpanseCommand : IAddCommand<int>
+public class AddExpenseCommand : IAddCommand<int>
 {
     public decimal Amount { get; set; }
 
@@ -11,7 +10,7 @@ public class AddExpanseCommand : IAddCommand<int>
 
     public string Purpose { get; set; } = null!;
 
-    public class Validator : AbstractValidator<AddExpanseCommand>
+    public class Validator : AbstractValidator<AddExpenseCommand>
     {
         public Validator()
         {
@@ -27,9 +26,9 @@ public class AddExpanseCommand : IAddCommand<int>
         }
     }
 
-    internal class Handler(IDbContext dbContext, IFileService fileService, ICurrentUser currentUser) : IRequestHandler<AddExpanseCommand, int>
+    internal class Handler(IDbContext dbContext, IFileService fileService, ICurrentUser currentUser) : IRequestHandler<AddExpenseCommand, int>
     {
-        public async Task<int> Handle(AddExpanseCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(AddExpenseCommand request, CancellationToken cancellationToken)
         {
             var company = await dbContext.Companies
                 .FirstOrDefaultAsync(x => x.Id == currentUser.CompanyId, cancellationToken);
@@ -37,10 +36,10 @@ public class AddExpanseCommand : IAddCommand<int>
 
             foreach (var document in request.Documents)
             {
-                fileNames.Add(await fileService.SaveBase64StringAsFileAsync(document, "expanses", cancellationToken));
+                fileNames.Add(await fileService.SaveBase64StringAsFileAsync(document, "expenses", cancellationToken));
             }
 
-            company?.AddExpanse(request.Amount, request.Purpose, fileNames);
+            company?.AddExpense(request.Amount, request.Purpose, fileNames);
             return await dbContext.SaveChangesAsync(cancellationToken);
         }
     }

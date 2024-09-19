@@ -1,4 +1,4 @@
-INSERT INTO public.expanses (id, company_id, amount, documents, purpose, created_on, created_by, modified_by, modified_on)
+INSERT INTO public.expenses (id, company_id, amount, documents, purpose, created_on, created_by, modified_by, modified_on)
 VALUES 
     (1, 999, decode('r9a0jnes21bjwubV9WWhyD471a+GfkfaSxfWvm/EipI=', 'base64'), ARRAY['test.png', 'test2.png'], null, '2024-05-03 03:51:44.770234-07', 100, null, null),
     (2, 999, decode('NCreznXjp8Mj+MhlL7E1VJCTGtJ6yHRnlMW3SslYM74=', 'base64'), ARRAY['test.png', 'test2.png'], null, '2024-05-04 03:51:44.770234-07', 100, null, null),

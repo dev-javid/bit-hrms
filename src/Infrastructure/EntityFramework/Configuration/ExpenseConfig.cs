@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.EntityFramework.Configuration
 {
-    internal class ExpanseConfig : IEntityTypeConfiguration<Expanse>
+    internal class ExpenseConfig : IEntityTypeConfiguration<Expense>
     {
-        public void Configure(EntityTypeBuilder<Expanse> builder)
+        public void Configure(EntityTypeBuilder<Expense> builder)
         {
-            builder.ToTable("expanses");
+            builder.ToTable("expenses");
 
             builder
                 .Property(x => x.AmountEncrypted)
