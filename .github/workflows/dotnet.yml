@@ -38,13 +38,8 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install .NET workloads
-        run: |
-          dotnet workload install spa-templates
-          dotnet workload restore
-
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore --ignore-failed-sources
 
       - name: Build
         run: dotnet build --no-restore
