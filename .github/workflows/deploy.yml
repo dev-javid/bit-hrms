@@ -1,0 +1,21 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Prepare:
+    runs-on: hl
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # This ensures a full clone of the repository
+
+      - name: Docker Compose Down
+        run: docker compose down
+
+      - name: Docker Compose Up
+        run: docker compose up -d --build
