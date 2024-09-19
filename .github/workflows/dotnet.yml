@@ -33,13 +33,17 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20"
+      - name: Remove front end reference
+        run: |
+          cd src\Presentation.Server
+          dotnet remove reference ..\presentation.client\react.client.esproj
+          cd ../..
+
+      - name: Restore dependencies
+        run: dotnet restore
 
       - name: Build
-        run: dotnet build /p:ReactProjectExclude=true
+        run: dotnet build --no-restore
 
       - name: Test
         env:
