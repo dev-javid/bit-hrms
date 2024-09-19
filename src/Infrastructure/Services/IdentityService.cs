@@ -118,7 +118,7 @@ internal class IdentityService(
             VerifyResult(result);
         }
 
-        User user = User.Create("dev.javid@outlook.com".ToValueObject<Email>(), "9876543210".ToValueObject<PhoneNumber>(), company.Id);
+        User user = User.Create("admin@example.com".ToValueObject<Email>(), "9876543210".ToValueObject<PhoneNumber>(), company.Id);
         var role = await GetRoleAsync(RoleName.SuperAdmin);
         await CreateUserAsync(user, role);
         var token = await GenerateAccountVerificationTokenAsync(user.Id);

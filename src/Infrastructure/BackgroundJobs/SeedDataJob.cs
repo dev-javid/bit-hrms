@@ -8,7 +8,7 @@ namespace Infrastructure.BackgroundJobs
         {
             if (!await dbContext.Companies.AnyAsync())
             {
-                var company = Company.Create("Bit-Xplorer", "dev.javid@outlook.com".ToValueObject<Email>(), "9876543210".ToValueObject<PhoneNumber>(), "Javid Ahmad", 3.ToValueObject<FinancialMonth>());
+                var company = Company.Create("Acme", "admin@example.com".ToValueObject<Email>(), "9876543210".ToValueObject<PhoneNumber>(), "Acme Admin", 3.ToValueObject<FinancialMonth>());
                 await dbContext.Companies.AddAsync(company);
                 await dbContext.SaveChangesAsync(default);
             }
