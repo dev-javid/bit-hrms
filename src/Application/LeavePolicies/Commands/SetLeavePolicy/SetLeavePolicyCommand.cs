@@ -2,9 +2,9 @@ namespace Application.LeavePolicies.Commands.SetLeavePolicy
 {
     public class SetLeavePolicyCommand : IUpdateCommand
     {
-        public required int CasualLeaves { get; set; }
+        public int CasualLeaves { get; set; }
 
-        public required double EarnedLeavesPerMonth { get; set; }
+        public double EarnedLeavesPerMonth { get; set; }
 
         public int Holidays { get; set; }
 

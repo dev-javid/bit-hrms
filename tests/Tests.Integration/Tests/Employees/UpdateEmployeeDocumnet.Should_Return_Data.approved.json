@@ -1,0 +1,26 @@
+﻿{
+    "employeeId": 3,
+    "departmentId": 3000,
+    "departmentName": "Test-Department",
+    "jobTitleId": 4000,
+    "jobTitleName": "Test-Department",
+    "firstName": "Test-First-3",
+    "lastName": "Test-Last-3",
+    "fullName": "Test-First-3 Test-Last-3",
+    "dateOfBirth": "2000-05-03",
+    "dateOfJoining": "2024-05-03",
+    "fatherName": "Test-Father-3",
+    "phoneNumber": "01234567899",
+    "companyEmail": "test3@example.com",
+    "personalEmail": "test6@example.com",
+    "address": "Test-Address",
+    "city": "Test-City",
+    "pan": "XXXXX0000X",
+    "aadhar": "000000000000",
+    "documents": [
+        {
+            "type": "PAN",
+            "url": "__IGNORED_VALUE__"
+        }
+    ]
+}

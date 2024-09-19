@@ -1,0 +1,37 @@
+﻿{
+    "page": 1,
+    "limit": 10,
+    "total": 5,
+    "items": [
+        {
+            "jobTitleId": 4000,
+            "name": "Test-Department",
+            "departmentId": 3000,
+            "departmentName": "Test-Department"
+        },
+        {
+            "jobTitleId": 4001,
+            "name": "Test-Department-2",
+            "departmentId": 3000,
+            "departmentName": "Test-Department"
+        },
+        {
+            "jobTitleId": 4002,
+            "name": "Test-Department-3",
+            "departmentId": 3000,
+            "departmentName": "Test-Department"
+        },
+        {
+            "jobTitleId": 4003,
+            "name": "Test-Department-4",
+            "departmentId": 3000,
+            "departmentName": "Test-Department"
+        },
+        {
+            "jobTitleId": 4004,
+            "name": "Test-Department-5",
+            "departmentId": 3000,
+            "departmentName": "Test-Department"
+        }
+    ]
+}

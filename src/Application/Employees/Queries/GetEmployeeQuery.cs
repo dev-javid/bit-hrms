@@ -2,7 +2,7 @@ namespace Application.Employees.Queries
 {
     public class GetEmployeeQuery : IRequest<GetEmployeeQuery.Response?>, IAuthorizeRequest
     {
-        public required int EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
 
         public Task<bool> AuthorizeAsync(ICurrentUser currentUser, IDbContext dbContext, CancellationToken cancellationToken)
         {

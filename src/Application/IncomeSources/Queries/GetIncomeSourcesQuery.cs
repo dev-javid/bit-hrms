@@ -4,11 +4,11 @@ public class GetIncomeSourcesQuery : PagedQuery<GetIncomeSourcesQuery.Response>
 {
     public class Response
     {
-        public int Id { get; set; }
+        public required int Id { get; set; }
 
-        public string Name { get; set; } = null!;
+        public required string Name { get; set; } = null!;
 
-        public string Description { get; set; } = null!;
+        public required string Description { get; set; } = null!;
     }
 
     internal class Handler(IDbContext dbContext) : IRequestHandler<GetIncomeSourcesQuery, PagedResponse<Response>>

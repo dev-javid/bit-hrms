@@ -1,0 +1,25 @@
+﻿{
+    "employeeId": 1,
+    "compensation": 1000,
+    "deductions": [
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-02",
+            "amount": 32.258064516129032258064516129
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-22",
+            "amount": 32.258064516129032258064516129
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-31",
+            "amount": 32.258064516129032258064516129
+        }
+    ],
+    "amountDeducted": 96.77419354838709677419354839,
+    "netAmount": 903.2258064516129032258064516,
+    "month": 5,
+    "year": 2024
+}

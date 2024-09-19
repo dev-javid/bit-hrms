@@ -4,17 +4,17 @@ public class GetIncomesQuery : PagedQuery<GetIncomesQuery.Response>
 {
     public class Response
     {
-        public int IncomeId { get; set; }
+        public required int IncomeId { get; set; }
 
-        public decimal Amount { get; set; }
+        public required decimal Amount { get; set; }
 
-        public string IncomeSourceName { get; set; } = null!;
+        public required string IncomeSourceName { get; set; } = null!;
 
-        public string[] Documents { get; set; } = [];
+        public required string[] Documents { get; set; } = [];
 
-        public string? Remarks { get; set; }
+        public required string? Remarks { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        public required DateTime CreatedOn { get; set; }
 
         internal FileName[] IncomeDocuments { get; set; } = [];
     }
@@ -31,7 +31,8 @@ public class GetIncomesQuery : PagedQuery<GetIncomesQuery.Response>
                     IncomeSourceName = i.IncomeSource.Name,
                     IncomeDocuments = i.Documents.ToArray(),
                     Remarks = i.Remarks,
-                    CreatedOn = i.CreatedOn
+                    CreatedOn = i.CreatedOn,
+                    Documents = Array.Empty<string>()
                 })
                 .OrderByDescending(i => i.CreatedOn)
                 .ToPagedResponseAsync(request, cancellationToken);

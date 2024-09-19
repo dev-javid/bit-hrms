@@ -1,0 +1,27 @@
+﻿{
+    "page": 1,
+    "limit": 10,
+    "total": 2,
+    "items": [
+        {
+            "salaryId": "__IGNORED_VALUE__",
+            "employeeId": 1,
+            "compensation": 0,
+            "amount": 1000,
+            "month": "__IGNORED_VALUE__",
+            "year": "__IGNORED_VALUE__",
+            "disbursedOn": "__IGNORED_VALUE__",
+            "deductions": []
+        },
+        {
+            "salaryId": "__IGNORED_VALUE__",
+            "employeeId": 2,
+            "compensation": 0,
+            "amount": 1200,
+            "month": "__IGNORED_VALUE__",
+            "year": "__IGNORED_VALUE__",
+            "disbursedOn": "__IGNORED_VALUE__",
+            "deductions": []
+        }
+    ]
+}

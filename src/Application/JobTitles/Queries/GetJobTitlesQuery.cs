@@ -6,11 +6,11 @@ namespace Application.JobTitles.Queries
 
         public class Response
         {
-            public int JobTitleId { get; set; }
+            public required int JobTitleId { get; set; }
 
             public required string Name { get; set; }
 
-            public int DepartmentId { get; set; }
+            public required int DepartmentId { get; set; }
 
             public required string DepartmentName { get; set; }
         }

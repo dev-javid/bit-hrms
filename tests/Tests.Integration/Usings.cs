@@ -1,0 +1,11 @@
+global using System.Net;
+global using System.Text;
+global using System.Text.Json;
+global using System.Threading.Tasks;
+global using ApprovalTests;
+global using ApprovalTests.Reporters;
+global using FluentAssertions;
+global using Presentation;
+global using Tests.Integration.Fixture;
+global using Xunit;
+global using static Domain.Common.Enums;

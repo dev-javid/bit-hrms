@@ -5,11 +5,11 @@ namespace Application.Holidays.Commands
         [JsonIgnore]
         public int HolidayId { get; set; }
 
-        public required string Name { get; set; }
+        public string Name { get; set; } = null!;
 
-        public required DateOnly Date { get; set; }
+        public DateOnly Date { get; set; }
 
-        public required bool Optional { get; set; }
+        public bool Optional { get; set; }
 
         public class Validator : AbstractValidator<UpdateHolidayCommand>
         {

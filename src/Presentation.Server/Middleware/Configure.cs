@@ -39,14 +39,14 @@ namespace Presentation.Middleware
             var roorDirectory = configuration.GetValue<string>("FileStorage:RootDirectory")!;
             if (!Directory.Exists(roorDirectory))
             {
-                Directory.CreateDirectory(roorDirectory);
-            }
+                var directory = Directory.CreateDirectory(roorDirectory);
 
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(roorDirectory),
-                RequestPath = new PathString("/media")
-            });
+                app.UseStaticFiles(new StaticFileOptions()
+                {
+                    FileProvider = new PhysicalFileProvider(directory.FullName),
+                    RequestPath = new PathString("/media")
+                });
+            }
         }
     }
 }

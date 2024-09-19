@@ -1,0 +1,9 @@
+﻿{
+    "departmentId": 1,
+    "name": "HR",
+    "jobTitles": [
+        {
+            "name": "Teacher"
+        }
+    ]
+}

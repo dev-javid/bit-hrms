@@ -1,12 +1,10 @@
-using Application.Departments.Commands;
-
 namespace Application.Holidays.Commands
 {
     public class AddHolidayCommand : IAddCommand<int>
     {
-        public required string Name { get; set; }
+        public string Name { get; set; } = null!;
 
-        public required DateOnly Date { get; set; }
+        public DateOnly Date { get; set; }
 
         public bool Optional { get; set; }
 

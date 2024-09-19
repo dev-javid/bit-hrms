@@ -1,0 +1,20 @@
+# Build image with the .NET SDK
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /app
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS with-node
+RUN apt-get update
+RUN apt-get install curl
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash
+RUN apt-get -y install nodejs
+
+# Copy the entire source code
+COPY ["*.sln", "*.sln"]
+COPY ["src", "src"]
+COPY ["tests", "tests"]
+
+# Build & Test
+RUN dotnet build
+
+ENTRYPOINT ["dotnet", "test", "--logger", "console;verbosity=detailed"]

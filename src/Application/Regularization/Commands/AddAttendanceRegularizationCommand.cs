@@ -1,16 +1,14 @@
-using Microsoft.Extensions.Configuration;
-
 namespace Application.Regularization.Commands
 {
     public class AddAttendanceRegularizationCommand : IAddCommand<int>
     {
-        public required TimeOnly ClockOutTime { get; set; }
+        public TimeOnly ClockOutTime { get; set; }
 
-        public required TimeOnly ClockInTime { get; set; }
+        public TimeOnly ClockInTime { get; set; }
 
-        public required DateOnly Date { get; set; }
+        public DateOnly Date { get; set; }
 
-        public required string Reason { get; set; }
+        public string Reason { get; set; } = string.Empty;
 
         public class Validator : AbstractValidator<AddAttendanceRegularizationCommand>
         {

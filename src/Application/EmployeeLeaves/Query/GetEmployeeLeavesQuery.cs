@@ -21,7 +21,7 @@ namespace Application.EmployeeLeaves.Queries
 
             public required DateOnly From { get; set; }
 
-            public DateTime CreatedOn { get; set; }
+            public required DateTime CreatedOn { get; set; }
 
             public required string Status { get; set; }
 

@@ -1,0 +1,106 @@
+﻿{
+    "page": 1,
+    "limit": 10,
+    "total": 9,
+    "items": [
+        {
+            "expanseId": 9,
+            "companyId": 999,
+            "amount": 1000,
+            "documents": [
+                "http://localhost/media/Expanses/9/test.png",
+                "http://localhost/media/Expanses/9/test2.png"
+            ],
+            "purpose": null,
+            "createdOn": "2024-05-11T10:51:44.770234Z"
+        },
+        {
+            "expanseId": 8,
+            "companyId": 999,
+            "amount": 1200,
+            "documents": [
+                "http://localhost/media/Expanses/8/test.png",
+                "http://localhost/media/Expanses/8/test2.png"
+            ],
+            "purpose": null,
+            "createdOn": "2024-05-10T10:51:44.770234Z"
+        },
+        {
+            "expanseId": 7,
+            "companyId": 999,
+            "amount": 1000,
+            "documents": [
+                "http://localhost/media/Expanses/7/test.png",
+                "http://localhost/media/Expanses/7/test2.png"
+            ],
+            "purpose": null,
+            "createdOn": "2024-05-09T10:51:44.770234Z"
+        },
+        {
+            "expanseId": 6,
+            "companyId": 999,
+            "amount": 1200,
+            "documents": [
+                "http://localhost/media/Expanses/6/test.png",
+                "http://localhost/media/Expanses/6/test2.png"
+            ],
+            "purpose": null,
+            "createdOn": "2024-05-08T10:51:44.770234Z"
+        },
+        {
+            "expanseId": 5,
+            "companyId": 999,
+            "amount": 1000,
+            "documents": [
+                "http://localhost/media/Expanses/5/test.png",
+                "http://localhost/media/Expanses/5/test2.png"
+            ],
+            "purpose": null,
+            "createdOn": "2024-05-07T10:51:44.770234Z"
+        },
+        {
+            "expanseId": 4,
+            "companyId": 999,
+            "amount": 1200,
+            "documents": [
+                "http://localhost/media/Expanses/4/test.png",
+                "http://localhost/media/Expanses/4/test2.png"
+            ],
+            "purpose": null,
+            "createdOn": "2024-05-06T10:51:44.770234Z"
+        },
+        {
+            "expanseId": 3,
+            "companyId": 999,
+            "amount": 1000,
+            "documents": [
+                "http://localhost/media/Expanses/3/test.png",
+                "http://localhost/media/Expanses/3/test2.png"
+            ],
+            "purpose": null,
+            "createdOn": "2024-05-05T10:51:44.770234Z"
+        },
+        {
+            "expanseId": 2,
+            "companyId": 999,
+            "amount": 1200,
+            "documents": [
+                "http://localhost/media/Expanses/2/test.png",
+                "http://localhost/media/Expanses/2/test2.png"
+            ],
+            "purpose": null,
+            "createdOn": "2024-05-04T10:51:44.770234Z"
+        },
+        {
+            "expanseId": 1,
+            "companyId": 999,
+            "amount": 1000,
+            "documents": [
+                "http://localhost/media/Expanses/1/test.png",
+                "http://localhost/media/Expanses/1/test2.png"
+            ],
+            "purpose": null,
+            "createdOn": "2024-05-03T10:51:44.770234Z"
+        }
+    ]
+}

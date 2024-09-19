@@ -11,6 +11,9 @@ namespace Database
         {
             var defaultConnectionString = configuration.GetConnectionString("Default")!;
 
+            Console.WriteLine("**********************");
+            Console.WriteLine(defaultConnectionString);
+
             EnsureDatabase.For.PostgresqlDatabase(defaultConnectionString);
 
             var upgrader = DeployChanges.To

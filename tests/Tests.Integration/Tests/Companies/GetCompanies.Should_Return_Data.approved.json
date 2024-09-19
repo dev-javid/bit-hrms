@@ -1,0 +1,47 @@
+﻿{
+    "page": 1,
+    "limit": 5,
+    "total": 11,
+    "items": [
+        {
+            "companyId": 1,
+            "name": "Test Company 1",
+            "phoneNumber": "1234567890",
+            "financialMonth": 1,
+            "administratorName": "Admin 1",
+            "email": "test1@company.com"
+        },
+        {
+            "companyId": 2,
+            "name": "Test Company 2",
+            "phoneNumber": "2345678901",
+            "financialMonth": 2,
+            "administratorName": "Admin 2",
+            "email": "test2@company.com"
+        },
+        {
+            "companyId": 3,
+            "name": "Test Company 3",
+            "phoneNumber": "3456789012",
+            "financialMonth": 3,
+            "administratorName": "Admin 3",
+            "email": "test3@company.com"
+        },
+        {
+            "companyId": 4,
+            "name": "Test Company 4",
+            "phoneNumber": "4567890123",
+            "financialMonth": 4,
+            "administratorName": "Admin 4",
+            "email": "test4@company.com"
+        },
+        {
+            "companyId": 5,
+            "name": "Test Company 5",
+            "phoneNumber": "5678901234",
+            "financialMonth": 5,
+            "administratorName": "Admin 5",
+            "email": "test5@company.com"
+        }
+    ]
+}

@@ -2,7 +2,7 @@ namespace Application.Departments.Commands
 {
     public class AddDepartmentCommand : IAddCommand<int>
     {
-        public required string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         public class Validator : AbstractValidator<AddDepartmentCommand>
         {

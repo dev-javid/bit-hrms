@@ -1,0 +1,10 @@
+global using System.Security.Claims;
+global using System.Threading.Tasks;
+global using FluentAssertions;
+global using MediatR;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Mvc;
+global using NSubstitute;
+global using Presentation.Controllers;
+global using Presentation.DependencyRegistration;
+global using Xunit;

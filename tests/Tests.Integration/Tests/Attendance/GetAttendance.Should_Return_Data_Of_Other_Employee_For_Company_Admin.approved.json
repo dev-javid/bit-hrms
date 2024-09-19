@@ -1,0 +1,16 @@
+﻿[
+    {
+        "clockInOutId": 7,
+        "employeeId": 2,
+        "date": "2024-07-07",
+        "clockInTime": "08:00:00",
+        "clockOutTime": "14:00:00"
+    },
+    {
+        "clockInOutId": 8,
+        "employeeId": 2,
+        "date": "2024-07-08",
+        "clockInTime": "08:00:00",
+        "clockOutTime": null
+    }
+]

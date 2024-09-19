@@ -6,19 +6,19 @@ namespace Application.Users.Commands;
 
 public class AddUserCommand : IAddCommand<int>
 {
-    public required string Name { get; init; }
+    public string Name { get; set; } = null!;
 
-    public required string Email { get; init; }
+    public string Email { get; set; } = null!;
 
-    public required string PhoneNumber { get; init; }
+    public string PhoneNumber { get; set; } = null!;
 
-    public required string Role { get; init; }
-
-    [JsonIgnore]
-    public int CompanyId { get; init; }
+    public string Role { get; set; } = null!;
 
     [JsonIgnore]
-    public bool UseTransaction { get; init; } = true;
+    internal int CompanyId { get; init; }
+
+    [JsonIgnore]
+    internal bool UseTransaction { get; init; } = true;
 
     internal class Handler(IIdentityService identityService, IDbContext dbContext, ICurrentUser currentUser) : IAddCommandHandler<AddUserCommand, int>
     {

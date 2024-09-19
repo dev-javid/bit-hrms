@@ -1,0 +1,57 @@
+﻿{
+    "page": 1,
+    "limit": 10,
+    "total": 20,
+    "items": [
+        {
+            "id": 20,
+            "name": "Income Source 20",
+            "description": "Description 20"
+        },
+        {
+            "id": 19,
+            "name": "Income Source 19",
+            "description": "Description 19"
+        },
+        {
+            "id": 18,
+            "name": "Income Source 18",
+            "description": "Description 18"
+        },
+        {
+            "id": 17,
+            "name": "Income Source 17",
+            "description": "Description 17"
+        },
+        {
+            "id": 16,
+            "name": "Income Source 16",
+            "description": "Description 16"
+        },
+        {
+            "id": 15,
+            "name": "Income Source 15",
+            "description": "Description 15"
+        },
+        {
+            "id": 14,
+            "name": "Income Source 14",
+            "description": "Description 14"
+        },
+        {
+            "id": 13,
+            "name": "Income Source 13",
+            "description": "Description 13"
+        },
+        {
+            "id": 12,
+            "name": "Income Source 12",
+            "description": "Description 12"
+        },
+        {
+            "id": 11,
+            "name": "Income Source 11",
+            "description": "Description 11"
+        }
+    ]
+}

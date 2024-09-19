@@ -4,17 +4,17 @@ public class GetExpansesQuery : PagedQuery<GetExpansesQuery.Response>
 {
     public class Response
     {
-        public int ExpanseId { get; set; }
+        public required int ExpanseId { get; set; }
 
-        public int CompanyId { get; set; }
+        public required int CompanyId { get; set; }
 
-        public decimal Amount { get; set; }
+        public required decimal Amount { get; set; }
 
-        public string[] Documents { get; set; } = [];
+        public required string[] Documents { get; set; }
 
-        public string? Purpose { get; set; }
+        public required string? Purpose { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        public required DateTime CreatedOn { get; set; }
 
         internal FileName[] ExpanseDocuments { get; set; } = [];
     }
@@ -31,7 +31,8 @@ public class GetExpansesQuery : PagedQuery<GetExpansesQuery.Response>
                     Amount = ex.Amount,
                     ExpanseDocuments = ex.Documents.ToArray(),
                     Purpose = ex.Purpose,
-                    CreatedOn = ex.CreatedOn
+                    CreatedOn = ex.CreatedOn,
+                    Documents = Array.Empty<string>()
                 })
                 .OrderByDescending(ex => ex.CreatedOn)
                 .ToPagedResponseAsync(request, cancellationToken);

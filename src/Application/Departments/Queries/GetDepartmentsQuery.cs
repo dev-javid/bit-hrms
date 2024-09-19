@@ -4,9 +4,9 @@ namespace Application.Departments.Queries
     {
         public class Response
         {
-            public int DepartmentId { get; set; }
+            public required int DepartmentId { get; set; }
 
-            public string Name { get; set; } = null!;
+            public required string Name { get; set; } = null!;
         }
 
         internal class Handler(IDbContext dbContext) : IRequestHandler<GetDepartmentsQuery, PagedResponse<Response>>

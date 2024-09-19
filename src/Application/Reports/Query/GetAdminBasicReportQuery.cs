@@ -4,13 +4,13 @@ namespace Application.Reports.Queries
     {
         public class Response
         {
-            public int Departments { get; set; }
+            public required int Departments { get; set; }
 
-            public int Companies { get; set; }
+            public required int Companies { get; set; }
 
-            public int Employees { get; set; }
+            public required int Employees { get; set; }
 
-            public int Holidays { get; set; }
+            public required int Holidays { get; set; }
         }
 
         internal class Handler(IDbContext dbContext, ICurrentUser currentUser) : IRequestHandler<GetAdminBasicReportQuery, Response>

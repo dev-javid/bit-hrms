@@ -20,7 +20,7 @@ public class AddExpanseCommand : IAddCommand<int>
 
             RuleFor(x => x.Documents)
                 .NotEmpty()
-                .ForEach(x => x.SetValidator(new Base64File.Validator()));
+                .ForEach(x => x.SetValidator(new Base64FileValidator()));
 
             RuleFor(x => x.Purpose)
                 .NotEmpty();

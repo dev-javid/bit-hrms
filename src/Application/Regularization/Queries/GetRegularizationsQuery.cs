@@ -22,17 +22,17 @@ public class GetRegularizationsQuery : PagedQuery<GetRegularizationsQuery.Respon
     {
         public required int AttendanceRegularizationId { get; set; }
 
-        public int EmployeeId { get; set; }
+        public required int EmployeeId { get; set; }
 
-        public DateOnly Date { get; set; }
+        public required DateOnly Date { get; set; }
 
-        public TimeOnly ClockInTime { get; set; }
+        public required TimeOnly ClockInTime { get; set; }
 
-        public TimeOnly ClockOutTime { get; set; }
+        public required TimeOnly ClockOutTime { get; set; }
 
-        public string Reason { get; set; } = null!;
+        public required string Reason { get; set; } = null!;
 
-        public bool Approved { get; set; }
+        public required bool Approved { get; set; }
     }
 
     internal class Handler(IDbContext dbContext, ICurrentUser currentUser) : IRequestHandler<GetRegularizationsQuery, PagedResponse<Response>>

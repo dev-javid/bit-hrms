@@ -2,9 +2,9 @@ namespace Application.JobTitles.Commands
 {
     public class UpdateJobTitleCommand : IUpdateCommand
     {
-        public required int JobTitleId { get; set; }
+        public int JobTitleId { get; set; }
 
-        public required string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         public class Validator : AbstractValidator<UpdateJobTitleCommand>
         {

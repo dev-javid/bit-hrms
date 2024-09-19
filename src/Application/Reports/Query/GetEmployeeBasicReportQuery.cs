@@ -43,9 +43,9 @@ namespace Application.Reports.Queries
 
         internal class Response
         {
-            public double LeavesAvailable { get; set; }
+            public required double LeavesAvailable { get; set; }
 
-            public int LeavesConsumed { get; set; }
+            public required int LeavesConsumed { get; set; }
         }
     }
 }

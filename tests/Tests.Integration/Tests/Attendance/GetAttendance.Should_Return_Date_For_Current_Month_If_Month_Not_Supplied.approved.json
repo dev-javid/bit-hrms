@@ -1,0 +1,58 @@
+﻿[
+    {
+        "clockInOutId": 40,
+        "employeeId": 1,
+        "date": "__IGNORED_VALUE__",
+        "clockInTime": "08:00:00",
+        "clockOutTime": "14:00:00"
+    },
+    {
+        "clockInOutId": 41,
+        "employeeId": 1,
+        "date": "__IGNORED_VALUE__",
+        "clockInTime": "08:00:00",
+        "clockOutTime": "15:00:00"
+    },
+    {
+        "clockInOutId": 42,
+        "employeeId": 1,
+        "date": "__IGNORED_VALUE__",
+        "clockInTime": "08:00:00",
+        "clockOutTime": "15:00:00"
+    },
+    {
+        "clockInOutId": 43,
+        "employeeId": 1,
+        "date": "__IGNORED_VALUE__",
+        "clockInTime": "08:00:00",
+        "clockOutTime": null
+    },
+    {
+        "clockInOutId": 44,
+        "employeeId": 1,
+        "date": "__IGNORED_VALUE__",
+        "clockInTime": "08:00:00",
+        "clockOutTime": null
+    },
+    {
+        "clockInOutId": 45,
+        "employeeId": 1,
+        "date": "__IGNORED_VALUE__",
+        "clockInTime": "08:00:00",
+        "clockOutTime": "15:00:00"
+    },
+    {
+        "clockInOutId": 46,
+        "employeeId": 1,
+        "date": "__IGNORED_VALUE__",
+        "clockInTime": "08:00:00",
+        "clockOutTime": "15:00:00"
+    },
+    {
+        "clockInOutId": 47,
+        "employeeId": 1,
+        "date": "__IGNORED_VALUE__",
+        "clockInTime": "08:00:00",
+        "clockOutTime": "15:00:00"
+    }
+]

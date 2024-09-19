@@ -6,11 +6,9 @@ namespace Application.Common.Abstract
     public abstract class PagedQuery<TResponse> : IRequest<PagedResponse<TResponse>>
     {
         [DefaultValue(1)]
-        [Required]
         public int Page { get; set; } = 1;
 
         [DefaultValue(10)]
-        [Required]
         public int Limit { get; set; } = 10;
     }
 
