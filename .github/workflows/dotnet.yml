@@ -2,13 +2,12 @@ name: .NET
 
 on:
   push:
-    branches: [ "*" ]
+    branches: ["*"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     services:
@@ -27,20 +26,24 @@ jobs:
           --health-retries=5
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      env:
-        ConnectionStrings__Default: "Host=localhost;Port=5432;Username=myuser;Password=mypassword;Database=mydatabase;"
-        ConnectionStrings__Jobs: "Host=localhost;Port=5432;Username=myuser;Password=mypassword;Database=mydatabase;"
-        Serilog__WriteTo__0__Args__connectionString: "Host=localhost;Port=5432;Username=myuser;Password=mypassword;Database=mydatabase;"
-        Serilog__WriteTo__0__Name: "PostgreSQL"
-        Serilog__WriteTo__0__Args__tableName: "log_table"
-      run: dotnet test --no-build --verbosity detailed
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Test
+        env:
+          ConnectionStrings__Default: "Host=localhost;Port=5432;Username=myuser;Password=mypassword;Database=mydatabase;"
+          ConnectionStrings__Jobs: "Host=localhost;Port=5432;Username=myuser;Password=mypassword;Database=mydatabase;"
+          Serilog__WriteTo__0__Args__connectionString: "Host=localhost;Port=5432;Username=myuser;Password=mypassword;Database=mydatabase;"
+          Serilog__WriteTo__0__Name: "PostgreSQL"
+          Serilog__WriteTo__0__Args__tableName: "log_table"
+        run: dotnet test --no-build --verbosity detailed
