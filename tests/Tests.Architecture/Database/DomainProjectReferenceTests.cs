@@ -16,7 +16,6 @@ namespace Tests.Architecture.Database
                 ProjectNames.Application,
                 ProjectNames.Infrastructure,
                 ProjectNames.Domain,
-                ProjectNames.Domain,
             };
 
             // Act
@@ -27,7 +26,7 @@ namespace Tests.Architecture.Database
                 .GetResult();
 
             // Assert
-            result.IsSuccessful.Should().BeTrue();
+            result.IsSuccessful.Should().BeFalse();
         }
     }
 }

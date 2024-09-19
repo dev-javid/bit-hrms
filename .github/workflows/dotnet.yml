@@ -14,4 +14,4 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Docker Compose Up
-        run: docker compose  --verbose -f docker-compose.tests.yml up -d --build
+        run: docker compose --verbose -f docker-compose.tests.yml up -d --build
