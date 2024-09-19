@@ -38,11 +38,8 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Restore dependencies
-        run: dotnet restore BitHrms.sln /p:ReactProjectExclude=true
-
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build /p:ReactProjectExclude=true
 
       - name: Test
         env:
