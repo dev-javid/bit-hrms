@@ -2,6 +2,7 @@ services:
   api:
     build:
       context: .
+    container_name: bit-hrms-api
     ports:
       - "8080:8080"
       - "8081:8081"
@@ -15,7 +16,7 @@ services:
 
   nginx:
     image: nginx:latest
-    container_name: nginx
+    container_name: nginx-bit-hrms
     ports:
       - "9000:80"
     volumes:
