@@ -4,7 +4,7 @@ using Serilog.Ui.Web.Extensions;
 
 namespace Presentation.Middleware
 {
-    public static class Configure
+    public static class Middleware
     {
         public static void ConfigureMiddleware(this WebApplication app)
         {
@@ -19,7 +19,10 @@ namespace Presentation.Middleware
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseAuthentication();
             app.UseAuthorization();

@@ -7,10 +7,10 @@ services:
       - "8080:8080"
       - "8081:8081"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Sandbox
+      - ASPNETCORE_ENVIRONMENT=Development
       - CONSUL_URL=http://host.docker.internal:8500
     volumes:
-      - /home/pix/bit/assets/hrms/sandbox:/var/lib/media-files
+      - /home/pix/bit/assets/hrms/development:/var/lib/media-files
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
