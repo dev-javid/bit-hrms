@@ -109,7 +109,7 @@ internal class IdentityService(
         return await userManager.IsEmailConfirmedAsync(user!);
     }
 
-    public async Task AddSeedDataAsync(Company company)
+    public async Task AddSeedDataAsync()
     {
         foreach (var roleName in (RoleName[])Enum.GetValues(typeof(RoleName)))
         {
@@ -118,7 +118,7 @@ internal class IdentityService(
             VerifyResult(result);
         }
 
-        User user = User.Create("admin@example.com".ToValueObject<Email>(), "9876543210".ToValueObject<PhoneNumber>(), company.Id);
+        User user = User.Create("admin@example.com".ToValueObject<Email>(), "9876543210".ToValueObject<PhoneNumber>());
         var role = await GetRoleAsync(RoleName.SuperAdmin);
         await CreateUserAsync(user, role);
         var token = await GenerateAccountVerificationTokenAsync(user.Id);

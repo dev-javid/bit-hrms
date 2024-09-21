@@ -128,7 +128,7 @@ public class JwtService(
             .Select(x => new
             {
                 x.Id,
-                x.CompanyId,
+                CompanyId = x.Employee != null ? x.Employee.CompanyId : 0,
             })
             .FirstAsync(x => x.Id == userId);
 

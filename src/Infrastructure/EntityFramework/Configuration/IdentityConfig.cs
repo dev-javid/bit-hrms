@@ -70,10 +70,6 @@ namespace Infrastructure.EntityFramework.Configuration
                      .WithOne()
                      .HasForeignKey(uc => uc.UserId)
                      .IsRequired();
-
-                builder
-                    .Property(x => x.CompanyId)
-                    .HasColumnName("company_id");
             }
         }
 

@@ -16,7 +16,7 @@ namespace Tests.Unit.Application.Auth.Commands
             var email = new Faker().Person.Email.ToValueObject<Email>();
 
             jwtService.ExtractEmailFromToken(Arg.Any<string>()).Returns(email);
-            identityService.GetUserAsync(Arg.Any<Email>()).Returns(User.Create(email, "9876543210".ToValueObject<PhoneNumber>(), new Faker().Random.Int(0)));
+            identityService.GetUserAsync(Arg.Any<Email>()).Returns(User.Create(email, "9876543210".ToValueObject<PhoneNumber>()));
             jwtService.ValidateRefreshTokenAsync(Arg.Any<User>(), Arg.Any<string>(), Arg.Any<CancellationToken>()).Returns(true);
         }
 

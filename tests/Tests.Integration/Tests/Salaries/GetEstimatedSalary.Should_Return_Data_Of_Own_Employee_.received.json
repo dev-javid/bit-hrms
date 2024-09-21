@@ -1,0 +1,135 @@
+﻿{
+    "employeeId": 0,
+    "compensation": 0,
+    "deductions": [
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-01",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-02",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-03",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-06",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-07",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-08",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-09",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-10",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-11",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-13",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-14",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-15",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-16",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-17",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-20",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-21",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-22",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-23",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-24",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-25",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-27",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-28",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-29",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-30",
+            "amount": 0
+        },
+        {
+            "deductionType": "Absent",
+            "deductionDate": "2024-05-31",
+            "amount": 0
+        }
+    ],
+    "amountDeducted": 0,
+    "netAmount": 0,
+    "month": 5,
+    "year": 2024
+}

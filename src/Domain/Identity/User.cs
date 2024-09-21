@@ -1,4 +1,3 @@
-using Domain.Companies;
 using Domain.Employees;
 using Microsoft.AspNetCore.Identity;
 
@@ -11,22 +10,17 @@ public class User : IdentityUser<int>
         Claims = [];
     }
 
-    public int CompanyId { get; private set; }
-
-    public Company Company { get; private set; } = null!;
-
     public Employee? Employee { get; private set; } = null!;
 
     public ICollection<IdentityUserClaim<int>> Claims { get; private set; }
 
-    public static User Create(Email email, PhoneNumber phoneNumber, int companyId)
+    public static User Create(Email email, PhoneNumber phoneNumber)
     {
         var user = new User
         {
             UserName = email.Value,
             Email = email.Value,
             PhoneNumber = phoneNumber.Value,
-            CompanyId = companyId
         };
 
         return user;
