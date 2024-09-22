@@ -26,7 +26,12 @@ namespace Presentation.Middleware
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseSerilogUi();
+
+            app.UseSerilogUi(options =>
+            {
+                options.WithAuthenticationType(Serilog.Ui.Web.Models.AuthenticationType.Basic)
+                    .WithExpandedDropdownsByDefault();
+            });
             app.MapControllers();
             app.MapFallbackToFile("/index.html");
             app.UseHealthChecks("/health");

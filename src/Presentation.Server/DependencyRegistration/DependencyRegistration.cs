@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc.Authorization;
+
 namespace Presentation.DependencyRegistration
 {
     public static class DependencyRegistration
@@ -9,7 +11,7 @@ namespace Presentation.DependencyRegistration
             builder.Services.AddSwagger();
             services.AddHttpContextAccessor();
             services.AddSerilogUI(builder.Configuration);
-            services.AddMvcWithAuthPolicy();
+            services.AddAuthPolicy();
             services.AddHealthChecks();
 
             services.AddCors(options => options.AddPolicy("CORS",
@@ -22,6 +24,11 @@ namespace Presentation.DependencyRegistration
                         .AllowAnyMethod();
                 }
             }));
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AuthorizeFilter());
+            });
 
             return services;
         }

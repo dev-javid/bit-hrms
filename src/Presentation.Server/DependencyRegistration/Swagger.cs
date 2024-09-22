@@ -27,12 +27,12 @@ namespace Presentation.DependencyRegistration
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Bit Xplorer HR",
-                    Description = "Rest API for accessing CAB Portal data",
+                    Title = "BIT-HRMS",
+                    Description = "Rest API for accessing BIT-HRMS data",
                     TermsOfService = new Uri(EXAMPLE_DOT_COM),
                     Contact = new OpenApiContact
                     {
-                        Name = "Rawae API",
+                        Name = "BIT-HRMS API",
                         Url = new Uri(EXAMPLE_DOT_COM)
                     },
                 });
