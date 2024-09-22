@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Application.Auth.Commands;
+using Domain.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 
@@ -123,31 +124,24 @@ public class JwtService(
     private async Task AddCustomClaimsAsync(List<Claim> claims, CancellationToken cancellationToken)
     {
         var userId = int.Parse(claims.Find(x => x.Type == ClaimTypes.NameIdentifier)!.Value);
-        var user = await dbContext
-            .Users
-            .Select(x => new
-            {
-                x.Id,
-                CompanyId = x.Employee != null ? x.Employee.CompanyId : 0,
-            })
-            .FirstAsync(x => x.Id == userId);
 
         var employee = await dbContext
             .Employees
             .IgnoreQueryFilters()
-            .Where(x => x.UserId == userId && x.CompanyId == user.CompanyId)
+            .Where(x => x.UserId == userId)
             .Select(x => new
             {
                 x.Id,
-                x.FullName
+                x.FullName,
+                x.CompanyId
             })
             .FirstOrDefaultAsync(cancellationToken);
 
-        claims.Add(new Claim("companyId", user.CompanyId.ToString()));
         if (employee != null)
         {
             claims.Add(new Claim("employeeId", employee.Id.ToString()!));
             claims.Add(new Claim("name", employee.FullName.ToString()!));
+            claims.Add(new Claim("companyId", employee.CompanyId.ToString()));
         }
     }
 }
