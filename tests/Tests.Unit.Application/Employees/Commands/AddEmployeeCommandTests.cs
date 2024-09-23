@@ -1,9 +1,7 @@
-using System.Threading.Channels;
 using Application.Common.Abstract;
 using Application.Employees.Commands;
 using Domain.Common.ValueObjects;
 using Domain.Identity;
-using Microsoft.EntityFrameworkCore;
 using MockQueryable.NSubstitute;
 using NSubstitute;
 
@@ -384,9 +382,9 @@ namespace Tests.Unit.Application.Employees.Commands
         private void SetupUserData()
         {
             var user = new List<User>
-        {
-            User.Create(Email.From("Test@example.com"), PhoneNumber.From("9906121212"), 1)
-        }.AsQueryable();
+            {
+                User.Create(Email.From("Test@example.com"), PhoneNumber.From("9906121212"))
+            }.AsQueryable();
 
             var dbSetData = user.BuildMockDbSet();
             dbContext.Users.Returns(dbSetData);

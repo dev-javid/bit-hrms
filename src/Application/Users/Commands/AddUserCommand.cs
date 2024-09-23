@@ -57,7 +57,7 @@ public class AddUserCommand : IAddCommand<int>
         private async Task<User> CreateIdentity(Company company, AddUserCommand request)
         {
             var role = await identityService.GetRoleAsync(request.Role.AsEnum<RoleName>());
-            var user = User.Create(request.Email.ToValueObject<Email>(), request.PhoneNumber.ToValueObject<PhoneNumber>(), company.Id);
+            var user = User.Create(request.Email.ToValueObject<Email>(), request.PhoneNumber.ToValueObject<PhoneNumber>());
 
             var claims = new Dictionary<string, string>
             {
@@ -71,6 +71,7 @@ public class AddUserCommand : IAddCommand<int>
             {
                 UserId = user.Id,
             });
+
             return user;
         }
     }

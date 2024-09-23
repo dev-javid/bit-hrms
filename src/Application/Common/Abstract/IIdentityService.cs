@@ -35,5 +35,5 @@ public interface IIdentityService
 
     Task<bool> IsEmailConfirmedAsync(int userId);
 
-    Task AddSeedDataAsync(Company company);
+    Task AddSeedDataAsync();
 }

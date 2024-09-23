@@ -8,7 +8,7 @@ namespace Infrastructure.BackgroundJobs
         {
             if (!await dbContext.Companies.AnyAsync())
             {
-                var company = Company.Create("Acme", "admin@example.com".ToValueObject<Email>(), "9876543210".ToValueObject<PhoneNumber>(), "Acme Admin", 3.ToValueObject<FinancialMonth>());
+                var company = Company.Create("Example Company", "admin@example.com".ToValueObject<Email>(), "9876543210".ToValueObject<PhoneNumber>(), "Super Admin", 3.ToValueObject<FinancialMonth>());
                 await dbContext.Companies.AddAsync(company);
                 await dbContext.SaveChangesAsync(default);
             }
@@ -18,8 +18,7 @@ namespace Infrastructure.BackgroundJobs
                 using var transaction = await dbContext.Database.BeginTransactionAsync();
                 try
                 {
-                    var company = await dbContext.Companies.FirstAsync();
-                    await identityService.AddSeedDataAsync(company);
+                    await identityService.AddSeedDataAsync();
                     await transaction.CommitAsync();
                 }
                 catch (Exception)

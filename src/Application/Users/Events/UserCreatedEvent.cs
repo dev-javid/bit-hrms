@@ -24,7 +24,7 @@ namespace Application.Users.Events
                     {
                         x.Id,
                         x.Email,
-                        CompanyName = x.Company.Name,
+                        CompanyName = x.Employee != null ? x.Employee.Company.Name : "",
                         Name = x.Employee != null ? x.Employee.FullName : "there",
                     })
                     .FirstAsync(cancellationToken);

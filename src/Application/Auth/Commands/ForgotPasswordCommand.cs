@@ -33,7 +33,6 @@ public class ForgotPasswordCommand : IUpdateCommand
                 {
                     x.Id,
                     x.Email,
-                    CompanyName = x.Company.Name,
                     Name = x.Employee != null ? x.Employee.FullName : "there",
                 })
                 .FirstAsync(cancellationToken);
@@ -43,7 +42,6 @@ public class ForgotPasswordCommand : IUpdateCommand
 
             var emailText = await staticContentReader.ReadContentAsync("email-templates/forgot-password.html");
             emailText = emailText.Replace("[User Name]", user.Name);
-            emailText = emailText.Replace("[Company Name]", user.CompanyName);
             emailText = emailText.Replace("[Year]", DateTime.Now.Year.ToString());
             emailText = emailText.Replace("[Reset Password Link]", link);
             emailService.Send(user.Email!.ToValueObject<Email>(), "Reset Your Password", emailText);
