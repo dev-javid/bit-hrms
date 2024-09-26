@@ -10,25 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Tests\Regularization\**" />
-    <EmbeddedResource Remove="Tests\Regularization\**" />
-    <None Remove="Tests\Regularization\**" />
-    <None Update="Tests\IncomeSources\GetIncomeSources.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Tests\Incomes\GetIncomes.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Tests\Incomes\AddIncome.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Tests\Expenses\GetExpenses.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-
-  </ItemGroup>
-
-  <ItemGroup>
 	<PackageReference Include="ApprovalTests" Version="6.0.0" />
 	<PackageReference Include="Bogus" Version="35.5.1" />
 	<PackageReference Include="FluentAssertions" Version="6.12.0" />
@@ -62,29 +43,26 @@
     <None Update="appsettings.Tests.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+      <None Update="Tests\Companies\DeleteCompany.sql">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Tests\IncomeSources\GetIncomeSources.sql">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Tests\Incomes\GetIncomes.sql">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Tests\Incomes\AddIncome.sql">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Tests\Expenses\GetExpenses.sql">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     <None Update="Fixture\Setup.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Tests\AttendanceRegularizations\ApproveAttendanceRegularization.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Tests\AttendanceRegularization\ApproveAttendanceRegularization.Should_Set_Data.approved.json">
-      <DependentUpon>ApproveAttendanceRegularization.cs</DependentUpon>
-    </None>
-    <None Update="Tests\Attendance\ClockOut.Should_Set_Data.approved.json">
-      <DependentUpon>ClockOut.cs</DependentUpon>
-    </None>
-    <None Update="Tests\Attendance\ClockOut.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Tests\Attendance\ClockIn.Should_Set_Data.approved.json">
-      <DependentUpon>ClockIn.cs</DependentUpon>
-    </None>
-    <None Update="Tests\AttendanceRegularizations\GetRegularizations.Should_Return_Own_Employee_Data_For_Employee.approved.json">
-      <DependentUpon>GetRegularizations.cs</DependentUpon>
-    </None>
-    <None Update="Tests\AttendanceRegularizations\GetRegularizations.Should_Return_Data_Of_Other_Employee_For_Company_Admin.approved.json">
-      <DependentUpon>GetRegularizations.cs</DependentUpon>
     </None>
     <None Update="Tests\AttendanceRegularizations\GetRegularizations.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -97,12 +75,6 @@
     </None>
     <None Update="Tests\Companies\GetCompanies.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Tests\Compensations\GetCompensations.Should_Return_Data_Of_Own_Employee.approved.json">
-      <DependentUpon>GetCompensations.cs</DependentUpon>
-    </None>
-    <None Update="Tests\Compensations\GetCompensations.Should_Return_Data_Of_Other_Employee_For_Company_Admin.approved.json">
-      <DependentUpon>GetCompensations.cs</DependentUpon>
     </None>
     <None Update="Tests\Compensations\GetCompensations.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -118,16 +90,6 @@
     </None>
     <None Update="Tests\Departments\Update.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Tests\Departments\Update.Should_Return_Data.approved.json">
-      <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
-      <ParentExtension>$(ProjectExt.Replace('proj', ''))</ParentExtension>
-      <DependentUpon>Update.cs</DependentUpon>
-    </None>
-    <None Update="Tests\Departments\GetAll.Should_Return_Data.approved.json">
-      <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
-      <ParentExtension>$(ProjectExt.Replace('proj', ''))</ParentExtension>
-      <DependentUpon>%(ParentFile)%(ParentExtension)</DependentUpon>
     </None>
     <None Update="Tests\Departments\GetAll.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -204,9 +166,6 @@
     <None Update="Tests\Reports\GetAdminBasicReports.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\Reports\GetAllAdminBasicReports.Should_Return_Data.approved.json">
-      <DependentUpon>GetAllAdminBasicReports.cs</DependentUpon>
-    </None>
     <None Update="Tests\Reports\GetAllAdminBasicReports.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -232,12 +191,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Tests\EmployeeLeaves\" />
-    <Folder Include="Tests\Holidays\" />
-    <Folder Include="Tests\LeavePolicy\" />
   </ItemGroup>
 
 </Project>

@@ -12,14 +12,21 @@ namespace Presentation.Controllers
             return Ok(await Mediator.Send(query));
         }
 
+        [HttpGet("{companyId}")]
+        [Authorize(AuthPolicy.Employee)]
+        public async Task<IActionResult> GetAsync(int companyId)
+        {
+            return Ok(await Mediator.Send(new GetCompanyQuery
+            {
+                CompanyId = companyId
+            }));
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddAsync(AddCompanyCommand command)
         {
             var id = await Mediator.Send(command);
-            return Ok(new
-            {
-                Id = id
-            });
+            return await GetAsync(id);
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Application.Companies.Queries
             public async Task<PagedResponse<Response>> Handle(GetCompaniesQuery request, CancellationToken cancellationToken)
             {
                 return await dbContext.Companies
+                   .Where(x => !x.IsDeleted)
                    .Select(x => new Response
                    {
                        CompanyId = x.Id,

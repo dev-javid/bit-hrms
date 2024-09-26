@@ -28,7 +28,7 @@ public class SigninCommand : IRequest<SigninCommand.JwtTokens>
             var email = Domain.Common.ValueObjects.Email.From(request.Email);
             var user = await identityService.GetUserAsync(email);
             await identityService.SigninAsync(user!);
-            return await jwtService.GenerateTokenAsync(httpContextAccessor.HttpContext.User, cancellationToken);
+            return await jwtService.GenerateTokenAsync(httpContextAccessor.HttpContext!.User, cancellationToken);
         }
     }
 }

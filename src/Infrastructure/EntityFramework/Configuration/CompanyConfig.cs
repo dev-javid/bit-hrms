@@ -1,4 +1,5 @@
 using Domain.Companies;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.EntityFramework.Configuration
 {
@@ -30,6 +31,18 @@ namespace Infrastructure.EntityFramework.Configuration
                 .ComplexProperty(x => x.FinancialMonth)
                 .Property(x => x.Value)
                 .HasColumnName("financial_month");
+
+            builder
+                .Property(x => x.IsDeleted)
+                .HasColumnName("is_deleted");
+
+            builder
+                .Property(x => x.WeeklyOffDays)
+                .HasColumnName("weekly_off_days")
+                .HasConversion(
+                    new ValueConverter<DayOfWeek[], string[]>(
+                        v => v.Select(x => x.ToString()).ToArray(),
+                        v => v.Select(x => Enum.Parse<DayOfWeek>(x)).ToArray()));
         }
     }
 }

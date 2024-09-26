@@ -1,34 +1,47 @@
-import { Link, useParams } from 'react-router-dom';
-import FormContainer from './form-container';
+import useFormMethods from './use-form-methods';
+import { Alert, AlertDescription, AlertTitle, Form, FormButtons, TextInput } from 'xplorer-ui';
+import { Company } from '@/lib/types';
 import useDefaultValues from './use-default-values';
-import {
-  BreadCrumbProps,
-  PageContainer,
-  PageHeader,
-  PageSkeleton,
-} from '@/lib/components';
-import { Button } from 'xplorer-ui';
+import { useState } from 'react';
 
-export default function CompanyForm() {
-  const companyId = useParams().companyId ?? 0;
-  const { defaultValues, isLoading } = useDefaultValues();
-
-  const breadCrumb: BreadCrumbProps = {
-    title: 'Companies',
-    to: './../',
-    child: { title: companyId != 0 ? 'Edit' : 'Add', to: '' },
-  };
+const CompanyForm = ({ company, onSuccess }: { company?: Company; onSuccess: () => void }) => {
+  const [added, setAdded] = useState(false);
+  const { defaultValues } = useDefaultValues(company);
+  const { form, onSubmit } = useFormMethods(defaultValues, () => (company?.companyId ? onSuccess : setAdded(true)));
 
   return (
-    <PageContainer breadCrumb={breadCrumb}>
-      <PageHeader title={companyId != 0 ? 'Edit Company' : 'Add Company'}>
-        <Link to="./../">
-          <Button>Company List</Button>
-        </Link>
-      </PageHeader>
-      <PageSkeleton isLoading={isLoading}>
-        {defaultValues && <FormContainer defaultValues={defaultValues} />}
-      </PageSkeleton>
-    </PageContainer>
+    <>
+      {added ? (
+        <Alert>
+          <AlertTitle>Company Added</AlertTitle>
+          <AlertDescription>
+            New company <strong>{form.getValues('name')}</strong> added.
+          </AlertDescription>
+          <AlertDescription>
+            An email has been sent to <i>{form.getValues('email')}</i> for further instructions.
+          </AlertDescription>
+        </Alert>
+      ) : (
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="grid gap-4 grid-cols-2">
+              <div className="col-span-1 space-y-4">
+                <TextInput control={form.control} name="name" placeholder="name" label="Name" />
+                <TextInput control={form.control} name="email" placeholder="email" label="Email" />
+              </div>
+              <div className="col-span-1 space-y-4">
+                <TextInput control={form.control} name="administratorName" placeholder="administrator name" label="Administrator Name" />
+                <TextInput control={form.control} name="phoneNumber" placeholder="phone number" label="Phone Number" />
+              </div>
+              <div className="col-span-3">
+                <FormButtons form={form} hideCancel loading={form.formState.isSubmitting} />
+              </div>
+            </div>
+          </form>
+        </Form>
+      )}
+    </>
   );
-}
+};
+
+export default CompanyForm;

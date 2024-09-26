@@ -7,7 +7,6 @@ using Domain.Finance;
 using Domain.Salaries;
 using Infrastructure.EntityFramework.Configuration;
 using Infrastructure.EntityFramework.Encryption;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Logging;
 
@@ -103,7 +102,7 @@ internal class DatabaseContext(DbContextOptions<DatabaseContext> options, ICurre
 
         void AddFilter<T>(ModelBuilder builder) where T : struct
         {
-            Expression<Func<CompanyEntity<T>, bool>> filterExpr = e => e.CompanyId == _currentUser.CompanyId;
+            Expression<Func<CompanyEntity<T>, bool>> filterExpr = e => e.CompanyId == _currentUser.CompanyId && e!.Company.IsDeleted;
 
             builder.Model.GetEntityTypes().ToList().ForEach(mutableEntityType =>
             {

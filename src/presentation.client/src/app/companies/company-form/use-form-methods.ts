@@ -1,13 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormSchema, { FormSchemaType } from './schema';
-import {
-  useAddCompanyMutation,
-  useUpdateCompanyMutation,
-} from '@/lib/rtk/rtk.comapnies';
+import { useAddCompanyMutation, useUpdateCompanyMutation } from '@/lib/rtk/rtk.comapnies';
 import { toast } from 'xplorer-ui';
 
-const useFormMethods = (defaultValues: FormSchemaType) => {
+const useFormMethods = (defaultValues: FormSchemaType, onSuccess: () => void) => {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: defaultValues,
@@ -20,11 +17,7 @@ const useFormMethods = (defaultValues: FormSchemaType) => {
     const operation = data?.companyId ? update : create;
     const response = await operation(data);
     if (!('error' in response)) {
-      form.reset({
-        companyId: 0,
-        name: '',
-      });
-
+      onSuccess();
       toast({
         title: 'Success ',
         description: 'Company details saved',

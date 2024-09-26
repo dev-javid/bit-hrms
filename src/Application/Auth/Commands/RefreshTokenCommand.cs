@@ -41,7 +41,7 @@ public class RefreshTokenCommand : IRequest<SigninCommand.JwtTokens>
             var email = jwtService.ExtractEmailFromToken(request.AccessToken);
             var user = await identityService.GetUserAsync(email);
             await identityService.SigninAsync(user!);
-            return await jwtService.GenerateTokenAsync(httpContextAccessor.HttpContext.User, cancellationToken);
+            return await jwtService.GenerateTokenAsync(httpContextAccessor.HttpContext!.User, cancellationToken);
         }
     }
 }

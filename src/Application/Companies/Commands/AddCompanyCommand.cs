@@ -13,8 +13,6 @@ namespace Application.Companies.Commands
 
         public string PhoneNumber { get; set; } = null!;
 
-        public int FinancialMonth { get; set; }
-
         public class Validator : AbstractValidator<AddCompanyCommand>
         {
             public Validator()
@@ -45,8 +43,7 @@ namespace Application.Companies.Commands
                     request.Name,
                     request.Email.ToValueObject<Email>(),
                     request.PhoneNumber.ToValueObject<PhoneNumber>(),
-                    request.AdministratorName,
-                    request.FinancialMonth.ToValueObject<FinancialMonth>());
+                    request.AdministratorName);
 
                 await dbContext.Companies.AddAsync(company, cancellationToken);
 

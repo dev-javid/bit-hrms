@@ -1,8 +1,7 @@
 ﻿
-INSERT INTO public.companies VALUES 
-(999, 'Test Company', 'company1@example.com', '9876543210', 3, 'Super Admin', -1, '2024-05-03 03:31:32.227954-07', 4, '2024-05-03 03:51:44.770234-07'),
-(998, 'Test Company', 'company2@example.com', '9876543210', 3, 'Super Admin', -1, '2024-05-03 03:31:32.227954-07', 4, '2024-05-03 03:51:44.770234-07');
-
+INSERT INTO public.companies (id, name, email, phone_number, financial_month, administrator_name, weekly_off_days, is_deleted, created_by, created_on)
+VALUES
+(999, 'Test Company', 'company1@example.com', '9876543210', 3, 'Super Admin', ARRAY['Sunday'], false, -1, '2024-05-03 03:31:32.227954-07');
 
 INSERT INTO public.roles VALUES (1, 'SuperAdmin',   'SUPERADMIN',   NULL, 0, '2024-05-03 03:31:32.227954-07', NULL, NULL);
 INSERT INTO public.roles VALUES (2, 'CompanyAdmin', 'COMPANYADMIN', NULL, 0, '2024-05-03 03:31:32.227954-07', NULL, NULL);

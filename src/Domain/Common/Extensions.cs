@@ -1,5 +1,3 @@
-using MediatR;
-
 namespace Domain.Common
 {
     public static class Extensions

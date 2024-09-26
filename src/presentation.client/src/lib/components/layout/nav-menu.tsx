@@ -1,22 +1,8 @@
 import { RoleName } from '@/lib/types';
 import useAuth from '@/lib/hooks/use-auth';
-import {
-  Home,
-  IndianRupee,
-  MonitorOff,
-  Settings,
-  Users2,
-  CalendarDays,
-  GripIcon,
-} from 'lucide-react';
+import { Home, IndianRupee, MonitorOff, Settings, Users2, CalendarDays, GripIcon } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  cn,
-  ThemeToggle,
-} from 'xplorer-ui';
+import { Tooltip, TooltipTrigger, TooltipContent, cn, ThemeToggle } from 'xplorer-ui';
 import _ from 'lodash';
 
 const navMenuItems: {
@@ -85,11 +71,8 @@ const NavMenu = () => {
     <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
       <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
         <div className="pb-3">
-          <Link
-            to="/"
-            className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
-          >
-            BX
+          <Link to="/">
+            <img src="/logo.png" alt="Bit Xplorer" />
             <span className="sr-only">Bit Xplorer</span>
           </Link>
         </div>
@@ -103,9 +86,7 @@ const NavMenu = () => {
                     to={m.link}
                     className={cn(
                       'flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8',
-                      m.isActive(pathname)
-                        ? 'bg-primary text-lg font-semibold text-primary-foreground md:text-base'
-                        : ''
+                      m.isActive(pathname) ? 'bg-primary text-lg font-semibold text-primary-foreground md:text-base' : ''
                     )}
                   >
                     {m.icon}

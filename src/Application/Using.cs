@@ -8,6 +8,7 @@ global using Application.Common.Extensions;
 global using Domain.Common;
 global using Domain.Common.ValueObjects;
 global using FluentValidation;
+global using Mapster;
 global using MediatR;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Configuration;

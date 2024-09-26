@@ -10,6 +10,7 @@ namespace Domain.Companies
             Holidays = [];
             IncomeSources = [];
             Expenses = [];
+            WeeklyOffDays = [];
         }
 
         public string Name { get; private set; } = null!;
@@ -22,6 +23,8 @@ namespace Domain.Companies
 
         public Email Email { get; private set; } = null!;
 
+        public bool IsDeleted { get; private set; }
+
         public LeavePolicy? LeavePolicy { get; private set; }
 
         public ICollection<Department> Departments { get; private set; }
@@ -32,7 +35,9 @@ namespace Domain.Companies
 
         public ICollection<Expense> Expenses { get; private set; }
 
-        public static Company Create(string name, Email email, PhoneNumber phoneNumber, string administratorName, FinancialMonth financialMonth)
+        public DayOfWeek[] WeeklyOffDays { get; private set; }
+
+        public static Company Create(string name, Email email, PhoneNumber phoneNumber, string administratorName)
         {
             return new Company
             {
@@ -40,7 +45,8 @@ namespace Domain.Companies
                 Email = email,
                 PhoneNumber = phoneNumber,
                 AdministratorName = administratorName,
-                FinancialMonth = financialMonth
+                FinancialMonth = 1.ToValueObject<FinancialMonth>(),
+                WeeklyOffDays = []
             };
         }
 
@@ -158,6 +164,11 @@ namespace Domain.Companies
         {
             var expense = Expense.Create(requestAmount, requestPurpose, fileNames);
             Expenses.Add(expense);
+        }
+
+        public void SoftDelete()
+        {
+            IsDeleted = true;
         }
     }
 }
