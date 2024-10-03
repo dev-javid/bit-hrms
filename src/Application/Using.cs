@@ -7,6 +7,7 @@ global using Application.Common.Abstract;
 global using Application.Common.Extensions;
 global using Domain.Common;
 global using Domain.Common.ValueObjects;
+global using Domain.Companies;
 global using FluentValidation;
 global using Mapster;
 global using MediatR;

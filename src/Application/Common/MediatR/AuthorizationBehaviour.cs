@@ -1,4 +1,4 @@
-namespace Application.Common.MediatRBehaviour
+namespace Application.Common.MediatR
 {
     internal class AuthorizationBehaviour<TRequest, TResponse>(ICurrentUser currentUser, IDbContext dbContext) : IPipelineBehavior<TRequest, TResponse>
          where TRequest : IRequest<TResponse>

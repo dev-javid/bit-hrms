@@ -6,6 +6,7 @@ CREATE TABLE public.companies (
 	phone_number        VARCHAR(20)     NOT NULL,
 	financial_month     INT                 NULL,
 	administrator_name  VARCHAR(100)    NOT NULL,
+	address             VARCHAR(500)    NOT NULL,
 	weekly_off_days     TEXT[]          NOT NULL,
 	is_deleted          BOOLEAN         NOT NULL,
 	created_by          INT             NOT NULL,

@@ -43,6 +43,17 @@
     <None Update="appsettings.Tests.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\Companies\GetCompany.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\Companies\GetCompany.Delete_Company.approved.json">
+      <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+      <ParentExtension>$(ProjectExt.Replace('proj', ''))</ParentExtension>
+      <DependentUpon>GetCompany.cs</DependentUpon>
+    </None>
+    <None Update="Tests\Companies\UpdateCompany.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
       <None Update="Tests\Companies\DeleteCompany.sql">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>

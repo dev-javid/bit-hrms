@@ -1,4 +1,4 @@
-﻿namespace Application.Common.MediatRBehaviour;
+﻿namespace Application.Common.MediatR;
 
 public class ValidationBehaviour<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators) : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

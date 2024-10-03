@@ -33,6 +33,10 @@ namespace Infrastructure.EntityFramework.Configuration
                 .HasColumnName("financial_month");
 
             builder
+                .Property(x => x.Address)
+                .HasColumnName("address");
+
+            builder
                 .Property(x => x.IsDeleted)
                 .HasColumnName("is_deleted");
 

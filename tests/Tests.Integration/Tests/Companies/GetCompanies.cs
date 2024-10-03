@@ -6,11 +6,11 @@ namespace Tests.Integration.Tests.Companies
 
         [Fact]
         [UseReporter(typeof(DiffReporter))]
-        public async Task Should_Return_Data()
+        public async Task Get_Companies()
         {
             await LoginAsSuperAdminAsync();
             await FeedDataAsync("Tests/Companies/GetCompanies.sql");
-            using HttpResponseMessage response = await Client.GetAsync($"{Route}?page=1&limit=5");
+            using HttpResponseMessage response = await Client.GetAsync($"{Route}?page=1&limit=20");
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             var result = await response.Content.ReadAsStringAsync();

@@ -1,3 +1,5 @@
+using Application.Common.MediatR;
+
 namespace Application.Auth.Commands;
 
 public class ResetPasswordCommand : IUpdateCommand

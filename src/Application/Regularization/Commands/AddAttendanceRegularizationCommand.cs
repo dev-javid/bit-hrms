@@ -1,3 +1,5 @@
+using Application.Common.MediatR;
+
 namespace Application.Regularization.Commands
 {
     public class AddAttendanceRegularizationCommand : IAddCommand<int>

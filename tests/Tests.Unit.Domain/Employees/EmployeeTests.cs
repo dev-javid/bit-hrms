@@ -32,7 +32,7 @@ namespace Tests.Unit.Domain.Employees
                 _faker.Internet.Email().ToValueObject<Email>(),
                 "1234567890".ToValueObject<PhoneNumber>(),
                 _faker.Name.FullName(),
-                1.ToValueObject<FinancialMonth>());
+                _faker.Address.FullAddress());
         }
 
         [Fact]

@@ -14,7 +14,7 @@ public class Email : ValueObject
 
     private Email(string value)
     {
-        Value = value;
+        Value = value.ToLower();
     }
 
     public string Value { get; } = null!;

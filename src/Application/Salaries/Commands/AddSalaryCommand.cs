@@ -1,3 +1,4 @@
+using Application.Common.MediatR;
 using Application.Salaries.Queries;
 using Domain.Salaries;
 

@@ -1,6 +1,8 @@
+using Application.Common.MediatR;
+
 namespace Application.Companies.Commands
 {
-    public class DeleteCompanyCommand : IDeleteCommand
+    public class DeleteCompanyCommand : IMediatRCommand
     {
         public int CompanyId { get; set; }
 
@@ -9,15 +11,16 @@ namespace Application.Companies.Commands
             public Validator()
             {
                 RuleFor(x => x.CompanyId)
-                    .NotEmpty();
+                    .GreaterThan(0);
             }
         }
 
-        internal class Handler(IDbContext dbContext) : IDeleteCommandHandler<DeleteCompanyCommand>
+        internal class Handler(IDbContext dbContext) : IMediatRCommandHandler<DeleteCompanyCommand>
         {
-            public async Task<bool> Handle(DeleteCompanyCommand request, CancellationToken cancellationToken)
+            public async Task<MediatRResponse> Handle(DeleteCompanyCommand request, CancellationToken cancellationToken)
             {
                 var company = await dbContext.Companies
+                    .Where(x => !x.IsDeleted)
                     .FirstOrDefaultAsync(x => x.Id == request.CompanyId, cancellationToken);
 
                 if (company != null)
@@ -25,7 +28,12 @@ namespace Application.Companies.Commands
                     company.SoftDelete();
                 }
 
-                return await dbContext.SaveChangesAsync(cancellationToken) > 0;
+                if (await dbContext.SaveChangesAsync(cancellationToken) > 0)
+                {
+                    return MediatRResponse.Success();
+                }
+
+                return MediatRResponse.Failed("Company not deleted.");
             }
         }
     }

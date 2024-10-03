@@ -13,20 +13,41 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("{companyId}")]
-        [Authorize(AuthPolicy.Employee)]
+        [Authorize(AuthPolicy.AllRoles)]
         public async Task<IActionResult> GetAsync(int companyId)
         {
-            return Ok(await Mediator.Send(new GetCompanyQuery
+            var company = await Mediator.Send(new GetCompanyQuery
             {
                 CompanyId = companyId
-            }));
+            });
+
+            return company != null ? Ok(company) : NotFound();
         }
 
         [HttpPost]
         public async Task<IActionResult> AddAsync(AddCompanyCommand command)
         {
-            var id = await Mediator.Send(command);
-            return await GetAsync(id);
+            var response = await Mediator.Send(command);
+            return await GetAsync(response.Value);
+        }
+
+        [HttpPut("{companyId}")]
+        public async Task<IActionResult> UpdateAsync(int companyId, UpdateCompanyCommand command)
+        {
+            command.CompanyId = companyId;
+            var response = await Mediator.Send(command);
+            return await GetAsync(response.Value);
+        }
+
+        [HttpDelete("{companyId}")]
+        public async Task<IActionResult> DeleteAsync(int companyId)
+        {
+            await Mediator.Send(new DeleteCompanyCommand
+            {
+                CompanyId = companyId
+            });
+
+            return Ok();
         }
     }
 }

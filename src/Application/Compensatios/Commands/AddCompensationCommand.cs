@@ -1,3 +1,5 @@
+using Application.Common.MediatR;
+
 namespace Application.Compensatios.Commands
 {
     public class AddCompensationCommand : IAddCommand<int>

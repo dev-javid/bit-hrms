@@ -6,16 +6,17 @@ namespace Tests.Integration.Tests.Companies
 
         [Fact]
         [UseReporter(typeof(DiffReporter))]
-        public async Task Post_Company()
+        public async Task Add_Company()
         {
             await LoginAsSuperAdminAsync();
 
             var command = new
             {
-                Name = Faker.Random.String(3, 100),
-                AdministratorName = Faker.Random.String(3, 100),
-                Faker.Person.Email,
-                PhoneNumber = Faker.Random.Number(10000000, 999999999).ToString(),
+                Name = "Company Name",
+                AdministratorName = "Administrator Name",
+                Address = "Some Random Place on the Planet Earth",
+                Email = "company@example.com",
+                PhoneNumber = "0123456789",
             };
 
             HttpResponseMessage response;
@@ -26,7 +27,7 @@ namespace Tests.Integration.Tests.Companies
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             var result = await response.Content.ReadAsStringAsync();
-            Approvals.VerifyJson(result.Ignore("*"));
+            Approvals.VerifyJson(result.Ignore("$.companyId"));
         }
     }
 }

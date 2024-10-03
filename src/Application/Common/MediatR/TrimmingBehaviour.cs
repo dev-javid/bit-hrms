@@ -1,4 +1,4 @@
-namespace Application.Common.MediatRBehaviour;
+namespace Application.Common.MediatR;
 
 public class TrimmingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>

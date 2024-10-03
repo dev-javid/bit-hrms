@@ -1,3 +1,5 @@
+using Application.Common.MediatR;
+
 namespace Application.Holidays.Commands
 {
     public class UpdateHolidayCommand : IUpdateCommand

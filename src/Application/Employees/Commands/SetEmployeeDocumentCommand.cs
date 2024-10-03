@@ -1,4 +1,5 @@
 using Application.Common.Events;
+using Application.Common.MediatR;
 
 namespace Application.Employees.Commands
 {

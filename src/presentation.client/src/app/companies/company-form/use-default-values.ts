@@ -8,6 +8,7 @@ const useDefaultValues = (company?: Company) => {
     email: company?.email ?? '',
     administratorName: company?.administratorName ?? '',
     phoneNumber: company?.phoneNumber ?? '',
+    address: company?.address ?? '',
   } as never as FormSchemaType;
 
   return {

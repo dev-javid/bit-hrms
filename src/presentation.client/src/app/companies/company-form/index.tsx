@@ -27,11 +27,14 @@ const CompanyForm = ({ company, onSuccess }: { company?: Company; onSuccess: () 
             <div className="grid gap-4 grid-cols-2">
               <div className="col-span-1 space-y-4">
                 <TextInput control={form.control} name="name" placeholder="name" label="Name" />
-                <TextInput control={form.control} name="email" placeholder="email" label="Email" />
+                <TextInput control={form.control} name="email" placeholder="email" label="Email" disabled={!!company?.companyId} />
               </div>
               <div className="col-span-1 space-y-4">
                 <TextInput control={form.control} name="administratorName" placeholder="administrator name" label="Administrator Name" />
                 <TextInput control={form.control} name="phoneNumber" placeholder="phone number" label="Phone Number" />
+              </div>
+              <div className="col-span-2 space-y-4">
+                <TextInput control={form.control} name="address" placeholder="address" label="Address" />
               </div>
               <div className="col-span-3">
                 <FormButtons form={form} hideCancel loading={form.formState.isSubmitting} />

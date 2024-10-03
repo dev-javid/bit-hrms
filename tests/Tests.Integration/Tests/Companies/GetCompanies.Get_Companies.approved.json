@@ -1,0 +1,97 @@
+﻿{
+    "page": 1,
+    "limit": 20,
+    "total": 10,
+    "items": [
+        {
+            "companyId": 1,
+            "name": "Test Company 1",
+            "phoneNumber": "1234567890",
+            "financialMonth": 1,
+            "administratorName": "Admin 1",
+            "email": "test1@company.com",
+            "address": "Test Address 1"
+        },
+        {
+            "companyId": 2,
+            "name": "Test Company 2",
+            "phoneNumber": "2345678901",
+            "financialMonth": 2,
+            "administratorName": "Admin 2",
+            "email": "test2@company.com",
+            "address": "Test Address 2"
+        },
+        {
+            "companyId": 3,
+            "name": "Test Company 3",
+            "phoneNumber": "3456789012",
+            "financialMonth": 3,
+            "administratorName": "Admin 3",
+            "email": "test3@company.com",
+            "address": "Test Address 3"
+        },
+        {
+            "companyId": 4,
+            "name": "Test Company 4",
+            "phoneNumber": "4567890123",
+            "financialMonth": 4,
+            "administratorName": "Admin 4",
+            "email": "test4@company.com",
+            "address": "Test Address 4"
+        },
+        {
+            "companyId": 5,
+            "name": "Test Company 5",
+            "phoneNumber": "5678901234",
+            "financialMonth": 5,
+            "administratorName": "Admin 5",
+            "email": "test5@company.com",
+            "address": "Test Address 5"
+        },
+        {
+            "companyId": 6,
+            "name": "Test Company 6",
+            "phoneNumber": "6789012345",
+            "financialMonth": 6,
+            "administratorName": "Admin 6",
+            "email": "test6@company.com",
+            "address": "Test Address 6"
+        },
+        {
+            "companyId": 7,
+            "name": "Test Company 7",
+            "phoneNumber": "7890123456",
+            "financialMonth": 7,
+            "administratorName": "Admin 7",
+            "email": "test7@company.com",
+            "address": "Test Address 7"
+        },
+        {
+            "companyId": 8,
+            "name": "Test Company 8",
+            "phoneNumber": "8901234567",
+            "financialMonth": 8,
+            "administratorName": "Admin 8",
+            "email": "test8@company.com",
+            "address": "Test Address 8"
+        },
+        {
+            "companyId": 9,
+            "name": "Test Company 9",
+            "phoneNumber": "9012345678",
+            "financialMonth": 9,
+            "administratorName": "Admin 9",
+            "email": "test9@company.com",
+            "address": "Test Address 9"
+        },
+        {
+            "companyId": 999,
+            "name": "Test Company",
+            "phoneNumber": "9876543210",
+            "financialMonth": 3,
+            "administratorName": "Super Admin",
+            "email": "company1@example.com",
+            "address": "Test Address"
+        }
+    ]
+}

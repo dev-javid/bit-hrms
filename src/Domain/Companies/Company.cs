@@ -1,3 +1,5 @@
+using Domain.Common.ValueObjects;
+using Domain.Employees;
 using Domain.Finance;
 
 namespace Domain.Companies
@@ -6,6 +8,7 @@ namespace Domain.Companies
     {
         private Company()
         {
+            Employees = [];
             Departments = [];
             Holidays = [];
             IncomeSources = [];
@@ -23,9 +26,13 @@ namespace Domain.Companies
 
         public Email Email { get; private set; } = null!;
 
+        public string Address { get; private set; } = null!;
+
         public bool IsDeleted { get; private set; }
 
         public LeavePolicy? LeavePolicy { get; private set; }
+
+        public ICollection<Employee> Employees { get; private set; }
 
         public ICollection<Department> Departments { get; private set; }
 
@@ -37,7 +44,7 @@ namespace Domain.Companies
 
         public DayOfWeek[] WeeklyOffDays { get; private set; }
 
-        public static Company Create(string name, Email email, PhoneNumber phoneNumber, string administratorName)
+        public static Company Create(string name, Email email, PhoneNumber phoneNumber, string administratorName, string address)
         {
             return new Company
             {
@@ -45,9 +52,18 @@ namespace Domain.Companies
                 Email = email,
                 PhoneNumber = phoneNumber,
                 AdministratorName = administratorName,
+                Address = address,
                 FinancialMonth = 1.ToValueObject<FinancialMonth>(),
                 WeeklyOffDays = []
             };
+        }
+
+        public void Update(string name, string administratorName, PhoneNumber phoneNumber, string address)
+        {
+            Name = name;
+            Address = address;
+            PhoneNumber = phoneNumber;
+            AdministratorName = administratorName;
         }
 
         public void SetLeavePolicy(int casualLeaves, double earnedLeavesPrMonth, int holidays)

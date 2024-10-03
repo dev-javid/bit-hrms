@@ -1,0 +1,10 @@
+﻿{
+    "weeklyOffDays": [],
+    "companyId": "__IGNORED_VALUE__",
+    "name": "Company Name",
+    "phoneNumber": "0123456789",
+    "financialMonth": 1,
+    "administratorName": "Administrator Name",
+    "email": "company@example.com",
+    "address": "Some Random Place on the Planet Earth"
+}

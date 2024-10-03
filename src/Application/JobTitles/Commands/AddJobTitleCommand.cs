@@ -1,3 +1,5 @@
+using Application.Common.MediatR;
+
 namespace Application.JobTitles.Commands
 {
     public class AddJobTitleCommand : IAddCommand<int>

@@ -1,3 +1,5 @@
+using Application.Common.MediatR;
+
 namespace Application.Attendance.Commands
 {
     public class ClockOutCommand : IUpdateCommand

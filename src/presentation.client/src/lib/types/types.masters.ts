@@ -17,6 +17,7 @@ export interface Company {
   email: string;
   financialMonth: string;
   administratorName: string;
+  address: string;
 }
 
 export interface JobTitle {

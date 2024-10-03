@@ -1,3 +1,5 @@
+using Application.Common.MediatR;
+
 namespace Application.Departments.Commands
 {
     public class AddDepartmentCommand : IAddCommand<int>

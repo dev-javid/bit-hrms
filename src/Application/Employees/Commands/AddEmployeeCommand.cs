@@ -1,3 +1,4 @@
+using Application.Common.MediatR;
 using Application.Users.Commands;
 using Domain.Employees;
 

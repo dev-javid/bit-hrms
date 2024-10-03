@@ -1,4 +1,5 @@
 using System.Web;
+using Application.Common.MediatR;
 
 namespace Application.Auth.Commands;
 

@@ -1,4 +1,6 @@
-﻿namespace Application.EmployeeLeaves.Command
+﻿using Application.Common.MediatR;
+
+namespace Application.EmployeeLeaves.Command
 {
     public class DeclineLeaveCommand : IUpdateCommand
     {

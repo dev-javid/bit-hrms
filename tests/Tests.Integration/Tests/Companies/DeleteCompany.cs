@@ -2,7 +2,7 @@ namespace Tests.Integration.Tests.Companies
 {
     public class DeleteCompany(TestWebApplicationFactory<Program> factory) : IntegrationTest(factory)
     {
-        private const string Route = "/api/companies";
+        private const string Route = "/api/companies/1";
 
         [Fact]
         [UseReporter(typeof(DiffReporter))]
@@ -11,15 +11,14 @@ namespace Tests.Integration.Tests.Companies
             await LoginAsSuperAdminAsync();
             await FeedDataAsync("Tests/Companies/DeleteCompany.sql");
 
-            using (HttpResponseMessage response = await Client.DeleteAsync($"{Route}/1"))
+            using (HttpResponseMessage response = await Client.DeleteAsync(Route))
             {
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
             }
 
-            using (HttpResponseMessage response = await Client.GetAsync($"{Route}?page=1&limit=5"))
+            using (HttpResponseMessage response = await Client.GetAsync(Route))
             {
-                var result = await response.Content.ReadAsStringAsync();
-                Approvals.VerifyJson(result);
+                response.StatusCode.Should().Be(HttpStatusCode.NotFound);
             }
         }
     }

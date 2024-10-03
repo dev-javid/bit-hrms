@@ -1,60 +1,80 @@
+using Application.Common.MediatR;
 using Application.Companies.Events;
-using Domain.Companies;
+using Application.Users.Commands;
 
 namespace Application.Companies.Commands
 {
-    public class AddCompanyCommand : IAddCommand<int>
+    public class AddCompanyCommand : AddUpdateCommand
     {
-        public string Name { get; set; } = null!;
-
         public string Email { get; set; } = null!;
 
-        public string AdministratorName { get; set; } = null!;
-
-        public string PhoneNumber { get; set; } = null!;
-
-        public class Validator : AbstractValidator<AddCompanyCommand>
+        public new class Validator : AbstractValidator<AddCompanyCommand>
         {
-            public Validator()
+            public Validator(IDbContext dbContext)
             {
-                RuleFor(x => x.Name)
-                    .NotEmpty()
-                    .MinimumLength(3)
-                    .MaximumLength(100);
+                RuleFor(x => x)
+                    .SetValidator(new AddUpdateCommand.Validator());
 
                 RuleFor(x => x.Email)
-                    .NotEmpty();
-
-                RuleFor(x => x.PhoneNumber)
-                    .NotEmpty();
-
-                RuleFor(x => x.AdministratorName)
+                    .Cascade(CascadeMode.Stop)
                     .NotEmpty()
-                    .MinimumLength(3)
-                    .MaximumLength(100);
+                    .CustomAsync(async (email, context, cancellationToken) =>
+                    {
+                        var exists = await dbContext.Users
+                            .AnyAsync(x => x.Email == email.ToLower(), cancellationToken);
+
+                        if (exists)
+                        {
+                            context.AddFailure($"Email '${email}' is already in use.");
+                        }
+                    });
             }
         }
 
-        internal class Handler(IDbContext dbContext) : IAddCommandHandler<AddCompanyCommand, int>
+        internal class Handler(IDbContext dbContext, IMediator mediator) : IMediatRCommandHandler<AddCompanyCommand, int>
         {
-            public async Task<int> Handle(AddCompanyCommand request, CancellationToken cancellationToken)
+            public async Task<MediatRResponse<int>> Handle(AddCompanyCommand request, CancellationToken cancellationToken)
             {
-                var company = Company.Create(
-                    request.Name,
-                    request.Email.ToValueObject<Email>(),
-                    request.PhoneNumber.ToValueObject<PhoneNumber>(),
-                    request.AdministratorName);
+                using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
 
-                await dbContext.Companies.AddAsync(company, cancellationToken);
-
-                company.AddDomainEvent(new CompanyCreatedEvent
+                try
                 {
-                    Email = company.Email.Value,
-                });
+                    var company = Company.Create(
+                        request.Name,
+                        request.Email.ToValueObject<Email>(),
+                        request.PhoneNumber.ToValueObject<PhoneNumber>(),
+                        request.AdministratorName,
+                        request.Address);
 
-                await dbContext.SaveChangesAsync(cancellationToken);
+                    await dbContext.Companies.AddAsync(company, cancellationToken);
 
-                return company.Id;
+                    await dbContext.SaveChangesAsync(cancellationToken);
+
+                    var userId = await mediator.Send(new AddUserCommand
+                    {
+                        Email = request.Email,
+                        Name = company.AdministratorName,
+                        PhoneNumber = company.PhoneNumber.Value,
+                        Role = RoleName.CompanyAdmin.ToString(),
+                        CompanyId = company.Id,
+                        UseTransaction = false,
+                    },
+                    cancellationToken);
+
+                    company.AddDomainEvent(new CompanyCreatedEvent
+                    {
+                        UserId = userId
+                    });
+
+                    await transaction.CommitAsync(cancellationToken);
+
+                    return MediatRResponse<int>.Success(company.Id);
+                }
+                catch (Exception)
+                {
+                    await transaction.RollbackAsync(cancellationToken);
+                    throw;
+                }
             }
         }
     }

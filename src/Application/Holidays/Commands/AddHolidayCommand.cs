@@ -1,3 +1,5 @@
+using Application.Common.MediatR;
+
 namespace Application.Holidays.Commands
 {
     public class AddHolidayCommand : IAddCommand<int>

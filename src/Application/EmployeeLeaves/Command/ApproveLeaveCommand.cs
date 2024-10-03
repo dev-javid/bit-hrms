@@ -1,3 +1,4 @@
+using Application.Common.MediatR;
 using Application.EmployeeLeaves.Events;
 
 namespace Application.EmployeeLeaves.Command

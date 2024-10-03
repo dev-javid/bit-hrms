@@ -41,7 +41,11 @@ export const useColumns = (onEditClick: (company: Company) => void, onDeleteClic
       },
     },
     {
-      accessorKey: 'city',
+      accessorKey: 'address',
+      header: 'Address',
+    },
+    {
+      accessorKey: 'actions',
       header: ({ column }) => <DataTableColumnHeader className="flex justify-end" column={column} title="Actions" />,
       enableSorting: false,
       cell: ({ row }) => (

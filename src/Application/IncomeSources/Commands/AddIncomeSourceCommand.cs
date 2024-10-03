@@ -1,3 +1,4 @@
+using Application.Common.MediatR;
 using Domain.Finance;
 
 namespace Application.IncomeSources.Commands;

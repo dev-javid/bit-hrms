@@ -1,3 +1,5 @@
+using Application.Common.MediatR;
+
 namespace Application.LeavePolicies.Commands.SetLeavePolicy
 {
     public class SetLeavePolicyCommand : IUpdateCommand

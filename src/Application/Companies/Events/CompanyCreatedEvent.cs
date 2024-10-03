@@ -1,37 +1,44 @@
-using Application.Users.Commands;
+using System.Web;
 using Domain.Common.Abstractions;
 
 namespace Application.Companies.Events
 {
     internal class CompanyCreatedEvent : IDomainEvent
     {
-        public string Email { get; set; } = null!;
+        public required int UserId { get; set; }
 
-        public bool RetryOnError => false;
+        public bool RetryOnError => true;
 
-        internal class Handler(IEmailService emailService, IDbContext dbContext, IMediator mediator, IStaticContentReader staticContentReader) : INotificationHandler<CompanyCreatedEvent>
+        internal class Handler(
+            IEmailService emailService,
+            IDbContext dbContext,
+            IIdentityService identityService,
+            IStaticContentReader staticContentReader,
+            IConfiguration configuration) : INotificationHandler<CompanyCreatedEvent>
         {
             public async Task Handle(CompanyCreatedEvent notification, CancellationToken cancellationToken)
             {
-                var company = await dbContext
-                            .Companies
-                            .FirstAsync(x => x.Email.Value == notification.Email, cancellationToken);
+                var user = await dbContext.Users
+                    .Where(x => x.Id == notification.UserId)
+                    .Select(x => new
+                    {
+                        x.Email,
+                    })
+                    .FirstAsync(cancellationToken);
 
-                var emailText = await staticContentReader.ReadContentAsync("email-templates/company-created.html");
-                emailText = emailText.Replace("[User Name]", company.AdministratorName);
-                emailText = emailText.Replace("[Company Name]", "Bit Xplorer");
-                emailText = emailText.Replace("[Year]", DateTime.Now.Year.ToString());
-                emailService.Send(company.Email, "Company registration", emailText);
+                var message = @$"Welcome to BIT HRMS, an account has been created for you. Please click the button to set your password.";
+                var token = await identityService.GenerateAccountVerificationTokenAsync(notification.UserId);
+                var link = $"{configuration.GetValue<string>("FrontEnd:Url")}/set-password/{notification.UserId}?token={HttpUtility.UrlEncode(token)}";
 
-                await mediator.Send(new AddUserCommand
-                {
-                    Email = notification.Email,
-                    Name = company.AdministratorName,
-                    PhoneNumber = company.PhoneNumber.Value,
-                    Role = RoleName.CompanyAdmin.ToString(),
-                    CompanyId = company.Id
-                },
-                cancellationToken);
+                var emailText = await staticContentReader.ReadContentAsync("email-template.html");
+
+                emailText = emailText.Replace("[NAME]", user.Email);
+                emailText = emailText.Replace("[MESSAGE]", message);
+                emailText = emailText.Replace("[BUTTON TEXT]", "Get Started");
+                emailText = emailText.Replace("[FROM]", "BIT HRMS");
+                emailText = emailText.Replace("[LINK]", link);
+                emailText = emailText.Replace("[FOOTER]", $"BIT HRMS ({DateTime.UtcNow.Year})");
+                emailService.Send(user.Email!.ToValueObject<Email>(), "Account Created", emailText);
             }
         }
     }

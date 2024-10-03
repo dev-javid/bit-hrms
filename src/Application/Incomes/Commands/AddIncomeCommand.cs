@@ -1,3 +1,4 @@
+using Application.Common.MediatR;
 using Application.Common.Validators;
 
 namespace Application.Incomes.Commands;

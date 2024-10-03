@@ -1,3 +1,5 @@
+using Application.Common.MediatR;
+
 namespace Application.EmployeeLeaves.Command
 {
     public class DeleteLeaveCommand : IUpdateCommand, IAuthorizeRequest
