@@ -10,9 +10,7 @@ import { SessionRestoreLoader } from '@/lib/components';
 function App() {
   const { toast } = useToast();
   const dispatch = useAppDispatch();
-  const { errorMessage, refreshingToken } = useAppSelector(
-    (state) => state.slice
-  );
+  const { errorMessage, refreshingToken } = useAppSelector((state) => state.slice);
 
   useEffect(() => {
     if (errorMessage) {
@@ -26,7 +24,7 @@ function App() {
   }, [errorMessage, dispatch, toast]);
 
   const { user } = useAuth();
-  const pages = useRoutes(routes(!!user.id, user));
+  const pages = useRoutes(routes(!!user.id));
   return <>{refreshingToken ? <SessionRestoreLoader /> : pages}</>;
 }
 

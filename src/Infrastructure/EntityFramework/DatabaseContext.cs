@@ -7,12 +7,13 @@ using Domain.Finance;
 using Domain.Salaries;
 using Infrastructure.EntityFramework.Configuration;
 using Infrastructure.EntityFramework.Encryption;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 
 namespace Infrastructure.EntityFramework;
 
-internal class DatabaseContext(DbContextOptions<DatabaseContext> options, ICurrentUser currentUser, IEncryptionProvider encryptionProvider) : IdentityDbContext<User, IdentityRole<int>, int>(options), IDbContext
+internal class DatabaseContext(DbContextOptions<DatabaseContext> options, ICurrentUser currentUser, IEncryptionProvider encryptionProvider, IWebHostEnvironment environment) : IdentityDbContext<User, IdentityRole<int>, int>(options), IDbContext
 {
     private readonly ICurrentUser _currentUser = currentUser;
 
@@ -62,8 +63,8 @@ internal class DatabaseContext(DbContextOptions<DatabaseContext> options, ICurre
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.EnableSensitiveDataLogging();
-        optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
+        optionsBuilder.EnableSensitiveDataLogging(environment.IsDevelopment());
+        optionsBuilder.LogTo(Serilog.Log.Debug);
     }
 
     private static void ConfigureShadowProperties(ModelBuilder builder)
@@ -102,7 +103,7 @@ internal class DatabaseContext(DbContextOptions<DatabaseContext> options, ICurre
 
         void AddFilter<T>(ModelBuilder builder) where T : struct
         {
-            Expression<Func<CompanyEntity<T>, bool>> filterExpr = e => e.CompanyId == _currentUser.CompanyId && e!.Company.IsDeleted;
+            Expression<Func<CompanyEntity<T>, bool>> filterExpr = e => e.CompanyId == _currentUser.CompanyId;
 
             builder.Model.GetEntityTypes().ToList().ForEach(mutableEntityType =>
             {

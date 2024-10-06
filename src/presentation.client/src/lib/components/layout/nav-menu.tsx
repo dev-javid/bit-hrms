@@ -31,7 +31,7 @@ const navMenuItems: {
     link: '/app/employees',
     icon: <Users2 className="h-5 w-5" />,
     authorized: ['CompanyAdmin'],
-    isActive: (pathName) => /^\/app\/employees(?:\/\d+)?$/.test(pathName),
+    isActive: (pathName) => pathName.includes('/app/employees'),
   },
   {
     title: 'Leaves',
@@ -50,7 +50,7 @@ const navMenuItems: {
   {
     title: 'Company Options',
     link: '/app/company-options',
-    icon: <Settings className="h-5 w-5" />,
+    icon: <GripIcon className="h-5 w-5" />,
     authorized: ['CompanyAdmin'],
     isActive: (pathName) => pathName.includes('/app/company-options'),
   },

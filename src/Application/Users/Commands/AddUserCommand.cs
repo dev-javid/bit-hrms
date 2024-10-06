@@ -14,9 +14,6 @@ public class AddUserCommand : IAddCommand<int>
     public string Role { get; set; } = null!;
 
     [JsonIgnore]
-    internal int CompanyId { get; init; }
-
-    [JsonIgnore]
     internal bool UseTransaction { get; init; } = true;
 
     internal class Handler(IIdentityService identityService, IDbContext dbContext) : IAddCommandHandler<AddUserCommand, int>

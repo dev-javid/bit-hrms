@@ -1,14 +1,8 @@
-import { BreadCrumbProps, PageContainer, PageHeader } from '@/lib/components';
+import { AddButton, BackButton, BreadCrumbProps, PageContainer, PageHeader } from '@/lib/components';
 import { columns } from './columns';
 import { Holiday } from '@/lib/types';
 import { Link } from 'react-router-dom';
-import {
-  CardContent,
-  Card,
-  Button,
-  ClientSideDataTable,
-  useSimpleModal,
-} from 'xplorer-ui';
+import { CardContent, Card, Button, ClientSideDataTable, useSimpleModal } from 'xplorer-ui';
 import { useGetHolidaysQuery } from '@/lib/rtk/rtk.holidays';
 import HolidayForm from '../holiday-form';
 
@@ -27,32 +21,17 @@ const HolidayList = () => {
   };
 
   const onEditClick = (holiday: Holiday) => {
-    showModal(
-      'Edit Holiday',
-      <HolidayForm holiday={holiday} onSuccess={hideModal} />
-    );
+    showModal('Edit Holiday', <HolidayForm holiday={holiday} onSuccess={hideModal} />);
   };
 
   return (
     <PageContainer breadCrumb={breadCrumb}>
       <PageHeader title="Holidays">
-        <Link to="./../leave-policy">
-          <Button variant="link">Leave Policy</Button>
-        </Link>
-        <Button onClick={onAddNewClick} variant="outline">
-          Add new
-        </Button>
+        <BackButton to="./../" text="Company Options" />
+        <AddButton onClick={onAddNewClick} tooltip="Add new holiday" />
       </PageHeader>
       <Card>
-        <CardContent>
-          {data && (
-            <ClientSideDataTable
-              data={data?.items}
-              columns={columns}
-              onEdit={onEditClick}
-            />
-          )}
-        </CardContent>
+        <CardContent>{data && <ClientSideDataTable data={data?.items} columns={columns} onEdit={onEditClick} />}</CardContent>
       </Card>
     </PageContainer>
   );

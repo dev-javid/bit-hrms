@@ -1,4 +1,4 @@
-import MonthlyAttendance from '@/app/attendance/monthly-attendance';
+import MonthlyAttendance from '@/app/attendance';
 import RegularizationList from '@/app/attendance/regularization/regularization-list';
 
 const routes = [

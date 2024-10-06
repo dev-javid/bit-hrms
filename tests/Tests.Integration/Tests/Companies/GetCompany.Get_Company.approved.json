@@ -1,0 +1,12 @@
+﻿{
+    "weeklyOffDays": [
+        "Sunday"
+    ],
+    "companyId": 999,
+    "name": "Test Company",
+    "phoneNumber": "9876543210",
+    "financialMonth": 3,
+    "administratorName": "Super Admin",
+    "email": "company1@example.com",
+    "address": "Test Address"
+}

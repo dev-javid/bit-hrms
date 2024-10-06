@@ -1,25 +1,9 @@
-import {
-  BreadCrumbProps,
-  EmployeeDropdown,
-  PageContainer,
-  PageHeader,
-  PageSkeleton,
-} from '@/lib/components';
+import { BackButton, BreadCrumbProps, EmployeeDropdown, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
 import { getColumns } from './columns';
 import { AttendanceRegularization, Employee } from '@/lib/types';
 import { Link, useLocation } from 'react-router-dom';
-import {
-  CardContent,
-  Card,
-  Button,
-  ClientSideDataTable,
-  useSimpleConfirm,
-  toast,
-} from 'xplorer-ui';
-import {
-  useApproveRegularizationMutation,
-  useGetRegularizationsQuery,
-} from '@/lib/rtk/rtk.attendance';
+import { CardContent, Card, Button, ClientSideDataTable, useSimpleConfirm, toast } from 'xplorer-ui';
+import { useApproveRegularizationMutation, useGetRegularizationsQuery } from '@/lib/rtk/rtk.attendance';
 import { useState } from 'react';
 import useAuth from '@/lib/hooks/use-auth';
 
@@ -27,9 +11,7 @@ const RegularizationList = () => {
   const { user } = useAuth();
   const { showConfirm } = useSimpleConfirm();
   const [approve] = useApproveRegularizationMutation();
-  const [employee, setEmployee] = useState(
-    ((useLocation().state ?? {}) as { employee: Employee }).employee
-  );
+  const [employee, setEmployee] = useState(((useLocation().state ?? {}) as { employee: Employee }).employee);
   const { data, isLoading, isFetching } = useGetRegularizationsQuery({
     employeeId: employee?.employeeId,
   });
@@ -58,9 +40,7 @@ const RegularizationList = () => {
 
   const onApproveClick = async (regularization: AttendanceRegularization) => {
     const ok = await showConfirm(
-      `Approve Regularization: ${regularization.date
-        .asDateOnly()
-        .toDayString()}`,
+      `Approve Regularization: ${regularization.date.asDateOnly().toDayString()}`,
       'Are you sure you want to approve this regularization?'
     );
 
@@ -82,27 +62,13 @@ const RegularizationList = () => {
   return (
     <PageContainer breadCrumb={breadCrumb}>
       <PageHeader title="Regularizations">
-        <Button asChild variant="link">
-          <Link to="./../" state={{ employee }}>
-            Attendance
-          </Link>
-        </Button>
-        {user.isCompanyAdmin && (
-          <EmployeeDropdown
-            onEmployeeSelect={(e) => setEmployee(e)}
-            selectedEmployeeId={employee?.employeeId}
-          />
-        )}
+        <BackButton to="./../" text="Attendance" state={{ employee }} />
+        {user.isCompanyAdmin && <EmployeeDropdown onEmployeeSelect={(e) => setEmployee(e)} selectedEmployeeId={employee?.employeeId} />}
       </PageHeader>
       <Card>
         <CardContent>
           <PageSkeleton isLoading={isLoading || isFetching} rows={30}>
-            {data && (
-              <ClientSideDataTable
-                data={data?.items}
-                columns={getColumns(onApproveClick, user)}
-              />
-            )}
+            {data && <ClientSideDataTable data={data?.items} columns={getColumns(onApproveClick, user)} />}
           </PageSkeleton>
         </CardContent>
       </Card>

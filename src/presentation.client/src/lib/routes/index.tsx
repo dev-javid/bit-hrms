@@ -8,15 +8,17 @@ import { compensationRoutes, salaryRoutes } from './financials';
 import attendance from './attendance';
 import SetPassword from '@/app/auth/set-password';
 import ForgotPassword from '@/app/auth/forgot-password';
-import { User } from '../types';
-import getHomeRoutes from './home';
+import Home from '@/app/home';
 
-const routes = (isLoggedIn: boolean, user: User) => [
+const routes = (isLoggedIn: boolean) => [
   {
     path: '/app',
     element: isLoggedIn ? <SidebarLayout /> : <Navigate to="/auth/sign-in" />,
     children: [
-      ...getHomeRoutes(user),
+      {
+        path: '',
+        element: <Home />,
+      },
       ...companyOptions,
       ...employees,
       ...leaves,

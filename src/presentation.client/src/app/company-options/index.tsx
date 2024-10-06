@@ -1,11 +1,4 @@
-import {
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  CreditCard,
-  MoreVertical,
-  Truck,
-} from 'lucide-react';
+import { ChevronLeft, ChevronRight, Copy, CreditCard, MoreVertical, Truck } from 'lucide-react';
 import {
   Button,
   DropdownMenu,
@@ -23,17 +16,21 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
+  useSimpleModal,
 } from 'xplorer-ui';
 import { BreadCrumbProps, PageContainer, PageSkeleton } from '@/lib/components';
 import { Link } from 'react-router-dom';
 import { useGetBasicAdminReportQuery } from '@/lib/rtk/rtk.reports';
+import LeavePolicyForm from './leave-policy';
 
 const breadCrumb: BreadCrumbProps = {
-  title: 'Administration',
+  title: 'Company Options',
   to: '',
 };
+
 export default function CompanyOptions() {
   const { data, isFetching } = useGetBasicAdminReportQuery(null);
+  const { showModal } = useSimpleModal();
 
   return (
     <PageContainer breadCrumb={breadCrumb}>
@@ -47,40 +44,30 @@ export default function CompanyOptions() {
                   <CardTitle className="text-4xl">{data?.holidays}</CardTitle>
                 </CardHeader>
                 <CardFooter className="grid auto-rows-max items-start gap-2">
-                  <Link to="leave-policy">
-                    <Button variant="outline" className="w-full">
-                      Leave Policy
-                    </Button>
-                  </Link>
+                  <Button
+                    className="w-full"
+                    onClick={() => {
+                      showModal('Leave Policy', <LeavePolicyForm />);
+                    }}
+                  >
+                    Leave Policy
+                  </Button>
                   <Link to="holidays">
-                    <Button variant="outline" className="w-full">
-                      Holidays
-                    </Button>
+                    <Button className="w-full">Holidays</Button>
                   </Link>
                 </CardFooter>
               </Card>
               <Card className="col-span-2">
                 <CardHeader className="pb-2">
                   <CardDescription>Departments</CardDescription>
-                  <CardTitle className="text-4xl">
-                    {data?.departments}
-                  </CardTitle>
+                  <CardTitle className="text-4xl">{data?.departments}</CardTitle>
                 </CardHeader>
                 <CardFooter className="grid auto-rows-max items-start gap-2">
                   <Link to="departments">
-                    <Button variant="outline" className="w-full">
-                      View Departments
-                    </Button>
-                  </Link>
-                  <Link to="departments/0">
-                    <Button variant="outline" className="w-full">
-                      Create New Department
-                    </Button>
+                    <Button className="w-full">View Departments</Button>
                   </Link>
                   <Link to="job-titles">
-                    <Button variant="outline" className="w-full">
-                      Job Titles
-                    </Button>
+                    <Button className="w-full">Job Titles</Button>
                   </Link>
                 </CardFooter>
               </Card>
@@ -90,9 +77,7 @@ export default function CompanyOptions() {
                 </CardHeader>
                 <CardFooter className="grid auto-rows-max items-start gap-2">
                   <Link to="income-sources">
-                    <Button variant="outline" className="w-full">
-                      Income Sources
-                    </Button>
+                    <Button className="w-full">Income Sources</Button>
                   </Link>
                 </CardFooter>
               </Card>
@@ -104,10 +89,7 @@ export default function CompanyOptions() {
                 <div className="grid gap-0.5">
                   <CardTitle className="group flex items-center gap-2 text-lg">
                     Order Oe31b70H
-                    <Button
-                      size="icon"
-                      className="h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100"
-                    >
+                    <Button size="icon" className="h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100">
                       <Copy className="h-3 w-3" />
                       <span className="sr-only">Copy Order ID</span>
                     </Button>
@@ -117,9 +99,7 @@ export default function CompanyOptions() {
                 <div className="ml-auto flex items-center gap-1">
                   <Button size="sm" className="h-8 gap-1">
                     <Truck className="h-3.5 w-3.5" />
-                    <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
-                      Track Order
-                    </span>
+                    <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">Track Order</span>
                   </Button>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -186,9 +166,7 @@ export default function CompanyOptions() {
                   </div>
                   <div className="grid auto-rows-max gap-3">
                     <div className="font-semibold">Billing Information</div>
-                    <div className="text-muted-foreground">
-                      Same as shipping address
-                    </div>
+                    <div className="text-muted-foreground">Same as shipping address</div>
                   </div>
                 </div>
                 <Separator className="my-4" />

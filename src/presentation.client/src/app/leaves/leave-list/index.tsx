@@ -1,23 +1,7 @@
-import {
-  useApproveEamployeeLeaveMutation,
-  useDeleteEmployeeLeaveMutation,
-  useGetEmployeeLeavesQuery,
-} from '@/lib/rtk/rtk.employee-leaves';
-import {
-  BreadCrumbProps,
-  PageContainer,
-  PageHeader,
-  PageSkeleton,
-} from '@/lib/components';
+import { useApproveEamployeeLeaveMutation, useDeleteEmployeeLeaveMutation, useGetEmployeeLeavesQuery } from '@/lib/rtk/rtk.employee-leaves';
+import { ActionButton, BreadCrumbProps, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
 import { columns } from './columns';
-import {
-  Button,
-  Card,
-  CardContent,
-  ClientSideDataTable,
-  useSimpleModal,
-  useSimpleConfirm,
-} from 'xplorer-ui';
+import { Button, Card, CardContent, ClientSideDataTable, useSimpleModal, useSimpleConfirm } from 'xplorer-ui';
 import { EmployeeLeave } from '@/lib/types';
 import { toast } from 'xplorer-ui';
 import { useState } from 'react';
@@ -43,10 +27,7 @@ const EmployeeLeaveList = () => {
   };
 
   const onDeleteClick = async (data: EmployeeLeave) => {
-    const confirmed = await showConfirm(
-      'Delete Leave',
-      'Are you sure you want to delete this leave?'
-    );
+    const confirmed = await showConfirm('Delete Leave', 'Are you sure you want to delete this leave?');
 
     if (confirmed) {
       const response = await deleteLeave({
@@ -64,9 +45,7 @@ const EmployeeLeaveList = () => {
   };
 
   const onSummaryClick = (employee: EmployeeLeave) => {
-    const summary = (
-      <LeaveSummary employeeId={employee.employeeId} hideActions />
-    );
+    const summary = <LeaveSummary employeeId={employee.employeeId} hideActions />;
     showModal(`Leave Summary (${employee.employeeName})`, summary);
   };
 
@@ -76,10 +55,7 @@ const EmployeeLeaveList = () => {
   };
 
   const onApproveClick = async (data: EmployeeLeave) => {
-    const confirmed = await showConfirm(
-      'Approve Leave',
-      'Are you sure you want to approve this leave?'
-    );
+    const confirmed = await showConfirm('Approve Leave', 'Are you sure you want to approve this leave?');
 
     if (confirmed) {
       const response = await approve({
@@ -99,16 +75,9 @@ const EmployeeLeaveList = () => {
   return (
     <PageContainer breadCrumb={breadCrumb}>
       <PageHeader title="Leave History">
-        <Button onClick={onApplyLeaveClick} variant="outline">
-          Apply Leave
-        </Button>
+        <ActionButton onClick={onApplyLeaveClick} tooltip="Apply Leave" text="Apply Leave"></ActionButton>
       </PageHeader>
-      {decline && (
-        <DeclineLeaveForm
-          leave={decline}
-          onCancelDecline={() => setDecline(undefined)}
-        />
-      )}
+      {decline && <DeclineLeaveForm leave={decline} onCancelDecline={() => setDecline(undefined)} />}
       <PageSkeleton isLoading={isLoading || isFetching}>
         <Card>
           <CardContent>
@@ -117,21 +86,17 @@ const EmployeeLeaveList = () => {
                 data={data?.items}
                 columns={columns}
                 onDelete={onDeleteClick}
-                isDeleteDisabled={(data) =>
-                  data.status != 'Pending' || user.isCompanyAdmin
-                }
+                isDeleteDisabled={(data) => data.status != 'Pending' || user.isCompanyAdmin}
                 otherActions={[
                   {
                     action: 'Approve',
                     onAction: (data) => onApproveClick(data),
-                    hidden: (data) =>
-                      data.status != 'Pending' || !user.isCompanyAdmin,
+                    hidden: (data) => data.status != 'Pending' || !user.isCompanyAdmin,
                   },
                   {
                     action: 'Decline',
                     onAction: (data) => setDecline(data),
-                    hidden: (data) =>
-                      data.status != 'Pending' || !user.isCompanyAdmin,
+                    hidden: (data) => data.status != 'Pending' || !user.isCompanyAdmin,
                   },
                   {
                     action: 'Leave Summary',

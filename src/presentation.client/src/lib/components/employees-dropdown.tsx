@@ -1,10 +1,4 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from 'xplorer-ui';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from 'xplorer-ui';
 
 import { useGetEmployeesQuery } from '@/lib/rtk/rtk.employees';
 import { PageSkeleton } from '@/lib/components';
@@ -23,11 +17,7 @@ const EmployeeDropdown = ({
     <PageSkeleton isLoading={isLoading || isFetching} rows={1}>
       {data && (
         <Select
-          onValueChange={(employeeId) =>
-            onEmployeeSelect(
-              data!.items.find((e) => e.employeeId == Number(employeeId))!
-            )
-          }
+          onValueChange={(employeeId) => onEmployeeSelect(data!.items.find((e) => e.employeeId == Number(employeeId))!)}
           value={selectedEmployeeId?.toString()}
         >
           <SelectTrigger className="w-[160px]">
@@ -35,10 +25,7 @@ const EmployeeDropdown = ({
           </SelectTrigger>
           <SelectContent>
             {data!.items.map((employee) => (
-              <SelectItem
-                key={employee.employeeId}
-                value={employee.employeeId.toString()}
-              >
+              <SelectItem key={employee.employeeId} value={employee.employeeId.toString()}>
                 {employee.fullName}
               </SelectItem>
             ))}

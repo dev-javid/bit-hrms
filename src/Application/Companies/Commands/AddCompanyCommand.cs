@@ -39,7 +39,18 @@ namespace Application.Companies.Commands
 
                 try
                 {
+                    var userId = await mediator.Send(new AddUserCommand
+                    {
+                        Email = request.Email,
+                        Name = request.AdministratorName,
+                        PhoneNumber = request.PhoneNumber.ToValueObject<PhoneNumber>().Value,
+                        Role = RoleName.CompanyAdmin.ToString(),
+                        UseTransaction = false,
+                    },
+                    cancellationToken);
+
                     var company = Company.Create(
+                        userId,
                         request.Name,
                         request.Email.ToValueObject<Email>(),
                         request.PhoneNumber.ToValueObject<PhoneNumber>(),
@@ -48,24 +59,12 @@ namespace Application.Companies.Commands
 
                     await dbContext.Companies.AddAsync(company, cancellationToken);
 
-                    await dbContext.SaveChangesAsync(cancellationToken);
-
-                    var userId = await mediator.Send(new AddUserCommand
-                    {
-                        Email = request.Email,
-                        Name = company.AdministratorName,
-                        PhoneNumber = company.PhoneNumber.Value,
-                        Role = RoleName.CompanyAdmin.ToString(),
-                        CompanyId = company.Id,
-                        UseTransaction = false,
-                    },
-                    cancellationToken);
-
                     company.AddDomainEvent(new CompanyCreatedEvent
                     {
                         UserId = userId
                     });
 
+                    await dbContext.SaveChangesAsync(cancellationToken);
                     await transaction.CommitAsync(cancellationToken);
 
                     return MediatRResponse<int>.Success(company.Id);

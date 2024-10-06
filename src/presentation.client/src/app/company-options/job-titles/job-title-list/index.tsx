@@ -1,19 +1,8 @@
-import {
-  BreadCrumbProps,
-  PageContainer,
-  PageHeader,
-  PageSkeleton,
-} from '@/lib/components';
+import { AddButton, BackButton, BreadCrumbProps, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
 import { columns } from './columns';
 import { JobTitle } from '@/lib/types';
 import { useParams } from 'react-router-dom';
-import {
-  Button,
-  Card,
-  CardContent,
-  ClientSideDataTable,
-  useSimpleModal,
-} from 'xplorer-ui';
+import { Button, Card, CardContent, ClientSideDataTable, useSimpleModal } from 'xplorer-ui';
 import { useGetJobTitlesQuery } from '@/lib/rtk/rtk.job-titles';
 import JobTitleForm from '../job-title-form';
 
@@ -35,30 +24,18 @@ const JobTitleList = () => {
   };
 
   const onEditClick = (jobTitle: JobTitle) => {
-    showModal(
-      'Edit Job Title',
-      <JobTitleForm jobTitle={jobTitle} onSuccess={hideModal} />
-    );
+    showModal('Edit Job Title', <JobTitleForm jobTitle={jobTitle} onSuccess={hideModal} />);
   };
 
   return (
     <PageContainer breadCrumb={breadCrumb}>
       <PageHeader title="Job Titles">
-        <Button variant="outline" onClick={onAddNewClick}>
-          Add new
-        </Button>
+        <BackButton to="./../" text="Company Options" />
+        <AddButton onClick={onAddNewClick} tooltip="Add new job title" />
       </PageHeader>
       <PageSkeleton isLoading={isLoading || isFetching}>
         <Card>
-          <CardContent>
-            {data && (
-              <ClientSideDataTable
-                data={data?.items}
-                columns={columns}
-                onEdit={onEditClick}
-              />
-            )}
-          </CardContent>
+          <CardContent>{data && <ClientSideDataTable data={data?.items} columns={columns} onEdit={onEditClick} />}</CardContent>
         </Card>
       </PageSkeleton>
     </PageContainer>

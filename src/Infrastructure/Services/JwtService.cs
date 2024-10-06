@@ -133,7 +133,8 @@ public class JwtService(
             {
                 x.Id,
                 x.FullName,
-                x.CompanyId
+                x.CompanyId,
+                x.DateOfJoining
             })
             .FirstOrDefaultAsync(cancellationToken);
 
@@ -142,6 +143,19 @@ public class JwtService(
             claims.Add(new Claim("employeeId", employee.Id.ToString()!));
             claims.Add(new Claim("name", employee.FullName.ToString()!));
             claims.Add(new Claim("companyId", employee.CompanyId.ToString()));
+            claims.Add(new Claim("dateOfJoining", employee.DateOfJoining.ToString()));
+        }
+        else
+        {
+            var companyId = (await dbContext.Companies
+                .Where(x => x.OwnerUserId == userId)
+                .FirstOrDefaultAsync(cancellationToken))
+                 ?.Id;
+
+            if (companyId != null)
+            {
+                claims.Add(new Claim("companyId", companyId.Value.ToString()));
+            }
         }
     }
 }

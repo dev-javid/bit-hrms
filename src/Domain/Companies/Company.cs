@@ -1,4 +1,3 @@
-using Domain.Common.ValueObjects;
 using Domain.Employees;
 using Domain.Finance;
 
@@ -15,6 +14,8 @@ namespace Domain.Companies
             Expenses = [];
             WeeklyOffDays = [];
         }
+
+        public int OwnerUserId { get; private set; }
 
         public string Name { get; private set; } = null!;
 
@@ -44,10 +45,11 @@ namespace Domain.Companies
 
         public DayOfWeek[] WeeklyOffDays { get; private set; }
 
-        public static Company Create(string name, Email email, PhoneNumber phoneNumber, string administratorName, string address)
+        public static Company Create(int ownerUserId, string name, Email email, PhoneNumber phoneNumber, string administratorName, string address)
         {
             return new Company
             {
+                OwnerUserId = ownerUserId,
                 Name = name,
                 Email = email,
                 PhoneNumber = phoneNumber,

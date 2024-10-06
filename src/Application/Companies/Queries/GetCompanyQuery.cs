@@ -19,7 +19,7 @@ namespace Application.Companies.Queries
             public async Task<Response?> Handle(GetCompanyQuery request, CancellationToken cancellationToken)
             {
                 var company = await dbContext.Companies
-                   .Where(x => !x.IsDeleted)
+                   .Where(x => x.Id == request.CompanyId && !x.IsDeleted)
                    .Select(x => new
                    {
                        CompanyId = x.Id,
@@ -32,7 +32,7 @@ namespace Application.Companies.Queries
                        x.Address
                    })
                    .OrderBy(x => x.Name)
-                   .FirstOrDefaultAsync(x => x.CompanyId == request.CompanyId, cancellationToken);
+                   .FirstOrDefaultAsync(cancellationToken);
 
                 return company.Adapt<Response>();
             }

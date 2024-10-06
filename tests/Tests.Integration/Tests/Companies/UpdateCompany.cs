@@ -2,15 +2,13 @@ namespace Tests.Integration.Tests.Companies
 {
     public class UpdateCompany(TestWebApplicationFactory<Program> factory) : IntegrationTest(factory)
     {
-        private const string Route = "/api/companies/1";
+        private const string Route = "/api/companies/999";
 
         [Fact]
         [UseReporter(typeof(DiffReporter))]
         public async Task Update_Company()
         {
             await LoginAsSuperAdminAsync();
-            await FeedDataAsync("Tests/Companies/UpdateCompany.sql");
-
             var command = new
             {
                 Name = "New Company Name",

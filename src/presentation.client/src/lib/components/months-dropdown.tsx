@@ -1,23 +1,17 @@
-import { parseISO, startOfMonth, subMonths } from 'date-fns';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from 'xplorer-ui';
+import { addMonths, differenceInMonths } from 'date-fns';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from 'xplorer-ui';
 import { DateOnly } from '../types';
 
-function getPast12Months(): DateOnly[] {
+function getMonths(referenceDate: DateOnly): DateOnly[] {
   const result: DateOnly[] = [];
   const now = new Date();
+  let months = differenceInMonths(now, referenceDate.toDate()) + 1;
 
-  for (let i = 0; i < 12; i++) {
-    const pastDate = subMonths(startOfMonth(now), i);
-    const dateOnly = DateOnly.fromDate(pastDate);
-    if (dateOnly.toDate() > parseISO('2024-06-01')) {
-      result.push(dateOnly);
-    }
+  while (months > 0) {
+    const year = addMonths(now, -months).getFullYear();
+    const month = addMonths(now, -months + 1).getMonth() + 1;
+    result.push(DateOnly.fromParts(year, month, 1));
+    months -= 1;
   }
 
   return result;
@@ -26,25 +20,21 @@ function getPast12Months(): DateOnly[] {
 const MonthsDropdown = ({
   onMonthChange,
   defaultValue,
+  referenceDate,
 }: {
   onMonthChange: (date: DateOnly) => void;
   defaultValue: DateOnly;
+  referenceDate: DateOnly;
 }) => {
-  const months = getPast12Months();
+  const months = getMonths(referenceDate);
   return (
-    <Select
-      defaultValue={defaultValue.toDateOnlyISOString()}
-      onValueChange={(date) => onMonthChange(date.asDateOnly())}
-    >
+    <Select defaultValue={defaultValue.toDateOnlyISOString()} onValueChange={(date) => onMonthChange(date.asDateOnly())}>
       <SelectTrigger className="w-[150px]">
         <SelectValue placeholder="Select Month" />
       </SelectTrigger>
       <SelectContent>
         {months.map((dateOnly) => (
-          <SelectItem
-            key={dateOnly.toDateOnlyISOString()}
-            value={dateOnly.toDateOnlyISOString()}
-          >
+          <SelectItem key={dateOnly.toDateOnlyISOString()} value={dateOnly.toDateOnlyISOString()}>
             {dateOnly.toMonthString()}
           </SelectItem>
         ))}

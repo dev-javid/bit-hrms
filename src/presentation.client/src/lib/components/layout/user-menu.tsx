@@ -1,17 +1,9 @@
 import ChangePasswordForm from '@/app/auth/change-password-form';
 import { useSignOutMutation } from '@/lib/rtk/rtk.auth';
 import { deleteAauthTokens } from '@/lib/types';
-import { CircleUser } from 'lucide-react';
+import { User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Button,
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-  useSimpleModal,
-} from 'xplorer-ui';
+import { Button, DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuSeparator, DropdownMenuItem, useSimpleModal } from 'xplorer-ui';
 
 const UserMenu = () => {
   const navigateTo = useNavigate();
@@ -34,7 +26,7 @@ const UserMenu = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button size="icon" className="overflow-hidden rounded-full">
-          <CircleUser />
+          <User />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

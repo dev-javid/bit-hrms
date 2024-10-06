@@ -10,6 +10,10 @@ namespace Infrastructure.EntityFramework.Configuration
             builder.ToTable("companies");
 
             builder
+                .Property(x => x.OwnerUserId)
+                .HasColumnName("owner_user_id");
+
+            builder
                 .Property(x => x.Name)
                 .HasColumnName("name");
 

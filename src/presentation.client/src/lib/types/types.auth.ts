@@ -1,3 +1,5 @@
+import { DateOnly } from './types.date-only';
+
 const key: string = 'auth-tokens';
 const device_id_key: string = 'device-id';
 export interface AuthTokens {
@@ -11,6 +13,7 @@ export interface User {
   roles: RoleName[];
   email: string;
   name: string;
+  dateOfJoining?: DateOnly;
   isCompanyAdmin: boolean;
   isSuperAdmin: boolean;
 }
@@ -29,23 +32,18 @@ export function deleteAauthTokens() {
 }
 
 export function getAuthTokens(): AuthTokens | undefined {
-  return localStorage.getItem(key)
-    ? JSON.parse(localStorage.getItem(key)!)
-    : undefined;
+  return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)!) : undefined;
 }
 
 export function getDeviceId(): string {
   let deviceId = localStorage.getItem(device_id_key);
   if (!deviceId) {
     {
-      deviceId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
-        /[xy]/g,
-        function (c) {
-          const r = (Math.random() * 16) | 0,
-            v = c == 'x' ? r : (r & 0x3) | 0x8;
-          return v.toString(16);
-        }
-      );
+      deviceId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        const r = (Math.random() * 16) | 0,
+          v = c == 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      });
       localStorage.setItem(device_id_key, deviceId);
     }
   }

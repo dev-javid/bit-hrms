@@ -8,16 +8,10 @@ const getDisplayName = (user: User) => {
   if (user.isSuperAdmin) {
     return 'Super Admin';
   }
-  return user.name;
+  return user.name ?? user.email;
 };
 
-const PageContainer = ({
-  breadCrumb,
-  children,
-}: {
-  children: React.ReactNode;
-  breadCrumb: BreadCrumbProps;
-}) => {
+const PageContainer = ({ breadCrumb, children }: { children: React.ReactNode; breadCrumb: BreadCrumbProps }) => {
   const { user } = useAuth();
   return (
     <>

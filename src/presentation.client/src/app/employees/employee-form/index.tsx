@@ -1,8 +1,7 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import FormContainer from './form-container';
 import useDefaultValues from './use-default-values';
-import { BreadCrumbProps, PageContainer, PageHeader } from '@/lib/components';
-import { Button } from 'xplorer-ui';
+import { BackButton, BreadCrumbProps, PageContainer, PageHeader } from '@/lib/components';
 
 export default function EmployeeForm() {
   const employeeId = useParams().employeeId ?? 0;
@@ -17,18 +16,9 @@ export default function EmployeeForm() {
   return (
     <PageContainer breadCrumb={breadCrumb}>
       <PageHeader title={employeeId != 0 ? 'Edit Employee' : 'Add Employee'}>
-        <Link to="./../">
-          <Button variant="link">Employee List</Button>
-        </Link>
+        <BackButton to="./../" text="Employee List" />
       </PageHeader>
-      <>
-        {defaultValues && (
-          <FormContainer
-            defaultValues={defaultValues}
-            departments={departments}
-          />
-        )}
-      </>
+      <>{defaultValues && <FormContainer defaultValues={defaultValues} departments={departments} />}</>
     </PageContainer>
   );
 }

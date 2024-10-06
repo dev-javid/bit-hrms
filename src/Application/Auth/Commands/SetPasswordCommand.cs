@@ -2,7 +2,7 @@ using Application.Common.MediatR;
 
 namespace Application.Auth.Commands;
 
-public class SetPasswordCommand : IUpdateCommand
+public class SetPasswordCommand : IMediatRCommand
 {
     public int UserId { get; init; }
 
@@ -10,12 +10,12 @@ public class SetPasswordCommand : IUpdateCommand
 
     public string Password { get; init; } = null!;
 
-    internal class Handler(IIdentityService identityService) : IUpdateCommandHandler<SetPasswordCommand>
+    internal class Handler(IIdentityService identityService) : IMediatRCommandHandler<SetPasswordCommand>
     {
-        public async Task<bool> Handle(SetPasswordCommand request, CancellationToken cancellationToken)
+        public async Task<MediatRResponse> Handle(SetPasswordCommand request, CancellationToken cancellationToken)
         {
             await identityService.VerifyAccountAsync(request.UserId, request.Token, request.Password);
-            return true;
+            return MediatRResponse.Success();
         }
     }
 }
