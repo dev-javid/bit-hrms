@@ -9,6 +9,8 @@ import EmployeeDropdown from './employees-dropdown';
 import AddButton from './buttons/add-button';
 import BackButton from './buttons/back-button';
 import ActionButton from './buttons/action-button';
+import ActionCell from './table/action-cell';
+import { ActionColumn } from './table/action-column';
 
 export {
   SidebarLayout,
@@ -21,5 +23,7 @@ export {
   AddButton,
   BackButton,
   ActionButton,
+  ActionCell,
+  ActionColumn,
 };
 export type { BreadCrumbProps };

@@ -1,9 +1,9 @@
 import { BreadCrumbProps, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
-import { useColumns } from './useColumns';
 import { Company } from '@/lib/types';
 import { CardContent, Card, Button, ClientSideDataTable, useSimpleModal, useSimpleConfirm, toast } from 'xplorer-ui';
 import { useDeleteCompanyMutation, useGetCompaniesQuery } from '@/lib/rtk/rtk.comapnies';
 import CompanyForm from '../company-form';
+import { getColumns } from './columns';
 
 const CompanyList = () => {
   const { hideModal, showModal } = useSimpleModal();
@@ -43,8 +43,6 @@ const CompanyList = () => {
     to: './',
   };
 
-  const columns = useColumns(onEditClick, onDeleteClick);
-
   return (
     <PageContainer breadCrumb={breadCrumb}>
       <PageHeader title="Companies">
@@ -54,7 +52,7 @@ const CompanyList = () => {
       </PageHeader>
       <PageSkeleton isLoading={isLoading || isFetching}>
         <Card>
-          <CardContent>{data && <ClientSideDataTable data={data?.items} columns={columns} />}</CardContent>
+          <CardContent>{data && <ClientSideDataTable data={data?.items} columns={getColumns(onEditClick, onDeleteClick)} />}</CardContent>
         </Card>
       </PageSkeleton>
     </PageContainer>
