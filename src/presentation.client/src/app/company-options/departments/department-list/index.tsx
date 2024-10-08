@@ -1,9 +1,9 @@
 import { useGetDepartmentsQuery } from '@/lib/rtk/rtk.departments';
 import { AddButton, BackButton, BreadCrumbProps, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
-import { columns } from './columns';
 import { Department } from '@/lib/types';
 import { Card, CardContent, ClientSideDataTable, useSimpleModal } from 'xplorer-ui';
 import DepartmentForm from '../department-form';
+import { getColumns } from './columns';
 
 const DepartmentList = () => {
   const { hideModal, showModal } = useSimpleModal();
@@ -19,7 +19,7 @@ const DepartmentList = () => {
     showModal('Add New Department', <DepartmentForm onSuccess={hideModal} />);
   };
 
-  const onEditNewClick = (department: Department) => {
+  const onEditClick = (department: Department) => {
     showModal('Edit Department', <DepartmentForm department={department} onSuccess={hideModal} />);
   };
 
@@ -31,7 +31,7 @@ const DepartmentList = () => {
       </PageHeader>
       <PageSkeleton isLoading={isLoading || isFetching}>
         <Card>
-          <CardContent>{data && <ClientSideDataTable data={data?.items} columns={columns} onEdit={onEditNewClick} />}</CardContent>
+          <CardContent>{data && <ClientSideDataTable data={data?.items} columns={getColumns(onEditClick)} />}</CardContent>
         </Card>
       </PageSkeleton>
     </PageContainer>
