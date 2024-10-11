@@ -1,8 +1,7 @@
 import { AddButton, BackButton, BreadCrumbProps, PageContainer, PageHeader } from '@/lib/components';
-import { columns } from './columns';
+import { getColumns } from './columns';
 import { Holiday } from '@/lib/types';
-import { Link } from 'react-router-dom';
-import { CardContent, Card, Button, ClientSideDataTable, useSimpleModal } from 'xplorer-ui';
+import { CardContent, Card, ClientSideDataTable, useSimpleModal } from 'xplorer-ui';
 import { useGetHolidaysQuery } from '@/lib/rtk/rtk.holidays';
 import HolidayForm from '../holiday-form';
 
@@ -31,7 +30,7 @@ const HolidayList = () => {
         <AddButton onClick={onAddNewClick} tooltip="Add new holiday" />
       </PageHeader>
       <Card>
-        <CardContent>{data && <ClientSideDataTable data={data?.items} columns={columns} onEdit={onEditClick} />}</CardContent>
+        <CardContent>{data && <ClientSideDataTable data={data?.items} columns={getColumns(onEditClick)} />}</CardContent>
       </Card>
     </PageContainer>
   );

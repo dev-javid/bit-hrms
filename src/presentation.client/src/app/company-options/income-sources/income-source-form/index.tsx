@@ -9,24 +9,12 @@ const IncomeSourceForm = ({ onSuccess }: { onSuccess: () => void }) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-4">
           <div className="flex flex-col gap-5">
-            <TextInput
-              type="text"
-              control={form.control}
-              label="Name"
-              name="name"
-              placeholder="Name"
-            />
-            <TextInput
-              type="text"
-              control={form.control}
-              label="Description"
-              name="description"
-              placeholder="Description"
-            />
+            <TextInput type="text" control={form.control} label="Name" name="name" placeholder="Name" />
+            <TextInput type="text" control={form.control} label="Description" name="description" placeholder="Description" />
           </div>
         </div>
 
-        <FormButtons form={form} hideCancel />
+        <FormButtons form={form} hideCancel loading={form.formState.isSubmitting} />
       </form>
     </Form>
   );
