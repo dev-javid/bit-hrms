@@ -9,7 +9,7 @@ const IncomeSourceList = () => {
   const { data, isLoading, isFetching } = useGetIncomeSourcesQuery(null);
 
   const breadCrumb: BreadCrumbProps = {
-    title: 'Administration',
+    title: 'Company Options',
     to: './../',
     child: { title: 'Income Sources', to: '' },
   };

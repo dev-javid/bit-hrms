@@ -111,20 +111,31 @@ namespace Domain.Companies
 
         public Holiday UpdateHoliday(int holidayId, string name, DateOnly date, bool optional)
         {
+            if (LeavePolicy is null)
+            {
+                throw CustomException.WithBadRequest("Please setup a leave policy before adding holiday.");
+            }
+
+            var existingHolodays = Holidays.Count(x => x.Id != holidayId && !x.Optional) + (Holidays.Any(x => x.Optional) ? 1 : 0);
+            if (!optional && existingHolodays >= LeavePolicy.Holidays)
+            {
+                throw CustomException.WithBadRequest($"Maximum number of holidays already reached. As per your leave policy you can have only {LeavePolicy.Holidays} holidays.");
+            }
+
             var holiday = Holidays.FirstOrDefault(x => x.Id == holidayId);
             if (holiday == null)
             {
-                throw CustomException.WithNotFound("Holiday not found");
+                throw CustomException.WithNotFound("Holiday not found.");
             }
 
             if (Holidays.Any(x => x.Id != holidayId && x.Date.Equals(date)))
             {
-                throw CustomException.WithBadRequest("Another holiday on same date already exists");
+                throw CustomException.WithBadRequest("Another holiday on same date already exists.");
             }
 
             if (Holidays.Any(x => x.Id != holidayId && x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase)))
             {
-                throw CustomException.WithBadRequest("Another holiday on same name already exists");
+                throw CustomException.WithBadRequest("Another holiday with same name already exists.");
             }
 
             holiday.Update(name, date, optional);
@@ -133,14 +144,25 @@ namespace Domain.Companies
 
         public Holiday AddHoliday(string name, DateOnly date, bool optional)
         {
+            if (LeavePolicy is null)
+            {
+                throw CustomException.WithBadRequest("Please setup a leave policy before adding holiday.");
+            }
+
+            var existingHolodays = Holidays.Count(x => !x.Optional) + (Holidays.Any(x => x.Optional) ? 1 : 0);
+            if (!optional && existingHolodays >= LeavePolicy.Holidays)
+            {
+                throw CustomException.WithBadRequest($"Maximum number of holidays already reached. As per your leave policy you can have only {LeavePolicy.Holidays} holidays.");
+            }
+
             if (Holidays.Any(x => x.Date == date))
             {
-                throw CustomException.WithBadRequest("Holiday already exists for this date");
+                throw CustomException.WithBadRequest("Holiday already exists for this date.");
             }
 
             if (Holidays.Any(x => x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase) && x.Date.Year == date.Year))
             {
-                throw CustomException.WithBadRequest("Holiday already exists for this year");
+                throw CustomException.WithBadRequest($"Same holiday(${name}) already exists for this year.");
             }
 
             var holiday = Holiday.Create(name, date, optional);
@@ -153,7 +175,7 @@ namespace Domain.Companies
             var department = Departments.FirstOrDefault(x => x.Id == departmentId);
             if (department == null)
             {
-                throw CustomException.WithNotFound("Department not found");
+                throw CustomException.WithNotFound("Department not found.");
             }
 
             return department.AddJobTitle(name);
@@ -166,7 +188,7 @@ namespace Domain.Companies
 
             if (department is null)
             {
-                throw CustomException.WithNotFound("Department not found");
+                throw CustomException.WithNotFound("Department not found.");
             }
 
             return department.UpdateJobTitle(jobTitleId, name);

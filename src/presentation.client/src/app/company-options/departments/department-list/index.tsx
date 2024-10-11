@@ -10,7 +10,7 @@ const DepartmentList = () => {
   const { data, isLoading, isFetching } = useGetDepartmentsQuery(null);
 
   const breadCrumb: BreadCrumbProps = {
-    title: 'Administration',
+    title: 'Company Options',
     to: './../',
     child: { title: 'Departments', to: '' },
   };

@@ -14,7 +14,7 @@ const JobTitleList = () => {
   });
 
   const breadCrumb: BreadCrumbProps = {
-    title: 'Administration',
+    title: 'Company Options',
     to: './../',
     child: { title: 'Job Titles', to: '' },
   };

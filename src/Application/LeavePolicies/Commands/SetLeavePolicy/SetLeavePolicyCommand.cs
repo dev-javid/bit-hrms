@@ -15,13 +15,16 @@ namespace Application.LeavePolicies.Commands.SetLeavePolicy
             public Validator()
             {
                 RuleFor(x => x.CasualLeaves)
-                    .GreaterThan(0);
+                    .GreaterThanOrEqualTo(0)
+                    .LessThanOrEqualTo(100);
 
                 RuleFor(x => x.EarnedLeavesPerMonth)
-                    .GreaterThan(0);
+                    .GreaterThanOrEqualTo(0)
+                    .LessThanOrEqualTo(10);
 
                 RuleFor(x => x.Holidays)
-                    .GreaterThan(0);
+                    .GreaterThanOrEqualTo(0)
+                    .LessThanOrEqualTo(100);
             }
         }
 

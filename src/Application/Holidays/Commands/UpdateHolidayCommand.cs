@@ -33,6 +33,7 @@ namespace Application.Holidays.Commands
                 var company = await dbContext
                     .Companies
                     .Include(x => x.Holidays)
+                    .Include(x => x.LeavePolicy)
                     .FirstAsync(x => x.Id == currentUser.CompanyId, cancellationToken);
 
                 company.UpdateHoliday(request.HolidayId, request.Name, request.Date, request.Optional);

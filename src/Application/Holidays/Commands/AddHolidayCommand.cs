@@ -27,6 +27,7 @@ namespace Application.Holidays.Commands
                 var company = await dbContext
                     .Companies
                     .Include(x => x.Holidays)
+                    .Include(x => x.LeavePolicy)
                     .FirstAsync(x => x.Id == currentUser.CompanyId, cancellationToken);
 
                 var holiday = company.AddHoliday(request.Name, request.Date, request.Optional);

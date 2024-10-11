@@ -14,22 +14,20 @@ export default function JobTitleForm({ jobTitle, onSuccess }: { jobTitle?: JobTi
       {defaultValues && (
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div>
-              <TextInput control={form.control} label="Name" name="name" placeholder="Job title name" />
-            </div>
-            <div className="my-4">
-              <SimpleSelect
-                control={form.control}
-                label="Department"
-                name="departmentId"
-                options={departments.map((x) => ({
-                  label: x.name,
-                  value: x.departmentId.toString(),
-                }))}
-                defaultValue={defaultValues.departmentId ? defaultValues.departmentId?.toString() : ''}
-                disabled={defaultValues.jobTitleId !== 0}
-              />
-            </div>
+            <TextInput control={form.control} label="Name" name="name" placeholder="Job title name" />
+            <SimpleSelect
+              className="pt-4"
+              control={form.control}
+              label="Department"
+              placeholder="Select department"
+              name="departmentId"
+              options={departments.map((x) => ({
+                label: x.name,
+                value: x.departmentId.toString(),
+              }))}
+              defaultValue={defaultValues.departmentId ? defaultValues.departmentId?.toString() : ''}
+              disabled={defaultValues.jobTitleId !== 0}
+            />
             <FormButtons form={form} hideCancel loading={form.formState.isSubmitting} />
           </form>
         </Form>
