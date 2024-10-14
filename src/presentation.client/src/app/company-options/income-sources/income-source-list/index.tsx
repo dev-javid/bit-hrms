@@ -1,8 +1,9 @@
 import { AddButton, BackButton, BreadCrumbProps, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
-import { columns } from './columns';
+import { useColumns } from './columns';
 import { Card, CardContent, ClientSideDataTable, useSimpleModal } from 'xplorer-ui';
 import { useGetIncomeSourcesQuery } from '@/lib/rtk/rtk.income-sources';
 import IncomeSourceForm from '../income-source-form';
+import { IncomeSource } from '@/lib/types';
 
 const IncomeSourceList = () => {
   const { showModal, hideModal } = useSimpleModal();
@@ -18,6 +19,13 @@ const IncomeSourceList = () => {
     const form = <IncomeSourceForm onSuccess={hideModal} />;
     showModal(`Add Income Source `, form);
   };
+
+  const onEditClick = (incomeSource: IncomeSource) => {
+    const form = <IncomeSourceForm onSuccess={hideModal} incomeSource={incomeSource} />;
+    showModal(`Edit Income Source `, form);
+  };
+
+  const columns = useColumns(onEditClick);
 
   return (
     <PageContainer breadCrumb={breadCrumb}>

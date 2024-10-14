@@ -1,8 +1,17 @@
+import { IncomeSource } from '@/lib/types';
 import useFormMethods from './use-form-methods';
 import { Form, FormButtons, TextInput } from 'xplorer-ui';
 
-const IncomeSourceForm = ({ onSuccess }: { onSuccess: () => void }) => {
-  const { form, onSubmit } = useFormMethods(onSuccess);
+const IncomeSourceForm = ({ incomeSource, onSuccess }: { incomeSource?: IncomeSource; onSuccess: () => void }) => {
+  debugger;
+  const { form, onSubmit } = useFormMethods(
+    {
+      incomeSourceId: incomeSource?.incomeSourceId || 0,
+      name: incomeSource?.name || '',
+      description: incomeSource?.description || '',
+    },
+    onSuccess
+  );
 
   return (
     <Form {...form}>

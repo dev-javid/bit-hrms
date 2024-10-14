@@ -10,10 +10,10 @@ public class IncomeSourcesController : ApiBaseController
     [Authorize(AuthPolicy.CompanyAdmin)]
     public async Task<IActionResult> AddAsync(AddIncomeSourceCommand command)
     {
-        var id = await Mediator.Send(command);
+        var response = await Mediator.Send(command);
         return Ok(new
         {
-            Id = id
+            Id = response.Value
         });
     }
 
@@ -23,5 +23,15 @@ public class IncomeSourcesController : ApiBaseController
     {
         var incomeSources = await Mediator.Send(query);
         return Ok(incomeSources);
+    }
+
+    [HttpPut("{incomeSourceId}")]
+    [Authorize(AuthPolicy.CompanyAdmin)]
+    [ProducesResponseType<GetIncomeSourcesQuery.Response>(StatusCodes.Status200OK)]
+    public async Task<IActionResult> UpdateAsync(int incomeSourceId, UpdateIncomeSourceCommand command)
+    {
+        command.IncomeSourceId = incomeSourceId;
+        await Mediator.Send(command);
+        return Ok();
     }
 }

@@ -1,9 +1,8 @@
 using Application.Common.MediatR;
-using Domain.Finance;
 
 namespace Application.IncomeSources.Commands;
 
-public class AddIncomeSourceCommand : IAddCommand<int>
+public class AddIncomeSourceCommand : IMediatRCommand<int>
 {
     public string Name { get; set; } = null!;
 
@@ -22,15 +21,21 @@ public class AddIncomeSourceCommand : IAddCommand<int>
         }
     }
 
-    internal class Handler(IDbContext dbContext, ICurrentUser currentUser) : IAddCommandHandler<AddIncomeSourceCommand, int>
+    internal class Handler(IDbContext dbContext, ICurrentUser currentUser) : IMediatRCommandHandler<AddIncomeSourceCommand, int>
     {
-        public async Task<int> Handle(AddIncomeSourceCommand request, CancellationToken cancellationToken)
+        public async Task<MediatRResponse<int>> Handle(AddIncomeSourceCommand request, CancellationToken cancellationToken)
         {
-            var company = await dbContext.Companies.FirstOrDefaultAsync(c => c.Id == currentUser.CompanyId, cancellationToken);
+            var company = await dbContext.Companies
+                .Include(x => x.IncomeSources)
+                .SingleAsync(c => c.Id == currentUser.CompanyId, cancellationToken);
 
-            company?.AddIncomeSource(request.Name, request.Description);
+            var incomeSource = company.AddIncomeSource(request.Name, request.Description);
 
-            return await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
+
+            return incomeSource.Id > 0 ?
+                MediatRResponse<int>.Success(incomeSource.Id) :
+                MediatRResponse<int>.Failed("Couldn't add income source");
         }
     }
 }

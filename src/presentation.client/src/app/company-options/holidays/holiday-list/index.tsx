@@ -30,7 +30,7 @@ const HolidayList = () => {
         <AddButton onClick={onAddNewClick} tooltip="Add new holiday" />
       </PageHeader>
       <Card>
-        <CardContent>{data && <ClientSideDataTable data={data?.items} onEdit={onEditClick} columns={getColumns(onEditClick)} />}</CardContent>
+        <CardContent>{data && <ClientSideDataTable data={data?.items} columns={getColumns(onEditClick)} />}</CardContent>
       </Card>
     </PageContainer>
   );

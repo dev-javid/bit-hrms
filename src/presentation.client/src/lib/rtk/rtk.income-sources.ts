@@ -25,7 +25,21 @@ const api = baseApi.injectEndpoints({
       transformErrorResponse: transformErrorResponse,
       invalidatesTags: ['Income-Sources'],
     }),
+
+    updateIncomeSource: build.mutation<object, object>({
+      query: (
+        body: object & {
+          incomeSourceId: number;
+        }
+      ) => ({
+        url: `income-sources/${body.incomeSourceId}`,
+        method: 'PUT',
+        body: body,
+      }),
+      transformErrorResponse: transformErrorResponse,
+      invalidatesTags: ['Income-Sources'],
+    }),
   }),
 });
 
-export const { useGetIncomeSourcesQuery, useAddIncomeSourceMutation } = api;
+export const { useGetIncomeSourcesQuery, useAddIncomeSourceMutation, useUpdateIncomeSourceMutation } = api;

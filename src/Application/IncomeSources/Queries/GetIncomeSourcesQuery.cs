@@ -4,7 +4,7 @@ public class GetIncomeSourcesQuery : PagedQuery<GetIncomeSourcesQuery.Response>
 {
     public class Response
     {
-        public required int Id { get; set; }
+        public required int IncomeSourceId { get; set; }
 
         public required string Name { get; set; } = null!;
 
@@ -18,11 +18,11 @@ public class GetIncomeSourcesQuery : PagedQuery<GetIncomeSourcesQuery.Response>
             return await dbContext.IncomeSources
                 .Select(x => new Response
                 {
-                    Id = x.Id,
+                    IncomeSourceId = x.Id,
                     Name = x.Name,
                     Description = x.Description
                 })
-                .OrderByDescending(x => x.Id)
+                .OrderByDescending(x => x.IncomeSourceId)
                 .ToPagedResponseAsync(request, cancellationToken);
         }
     }

@@ -13,7 +13,12 @@ namespace Domain.Finance
 
         public ICollection<Income> Incomes { get; set; }
 
-        public static IncomeSource Create(string name, string description)
+        public void AddIncome(decimal amount, IEnumerable<FileName> documents, string? remarks)
+        {
+            Incomes.Add(Income.Create(amount, documents, remarks));
+        }
+
+        internal static IncomeSource Create(string name, string description)
         {
             return new IncomeSource()
             {
@@ -22,9 +27,10 @@ namespace Domain.Finance
             };
         }
 
-        public void AddIncome(decimal amount, IEnumerable<FileName> documents, string? remarks)
+        internal void Update(string name, string description)
         {
-            Incomes.Add(Income.Create(amount, documents, remarks));
+            Name = name;
+            Description = description;
         }
     }
 }

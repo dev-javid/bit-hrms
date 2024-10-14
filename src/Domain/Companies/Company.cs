@@ -194,10 +194,34 @@ namespace Domain.Companies
             return department.UpdateJobTitle(jobTitleId, name);
         }
 
-        public void AddIncomeSource(string name, string description)
+        public IncomeSource AddIncomeSource(string name, string description)
         {
+            if (IncomeSources.Any(x => x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase)))
+            {
+                throw CustomException.WithBadRequest("Income source with same name already exists.");
+            }
+
             var incomeSource = IncomeSource.Create(name, description);
             IncomeSources.Add(incomeSource);
+            return incomeSource;
+        }
+
+        public void UpdateIncomeSource(int incomeSourceId, string name, string description)
+        {
+            var incomeSource = IncomeSources
+                .FirstOrDefault(x => x.Id == incomeSourceId);
+
+            if (incomeSource is null)
+            {
+                throw CustomException.WithNotFound("Income source not found.");
+            }
+
+            if (IncomeSources.Any(x => x.Id != incomeSourceId && x.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase)))
+            {
+                throw CustomException.WithBadRequest("Another income source with same name already exists.");
+            }
+
+            incomeSource.Update(name, description);
         }
 
         public void AddExpense(decimal requestAmount, string requestPurpose, IEnumerable<FileName> fileNames)
