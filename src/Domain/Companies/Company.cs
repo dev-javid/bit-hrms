@@ -39,6 +39,8 @@ namespace Domain.Companies
 
         public ICollection<Holiday> Holidays { get; private set; }
 
+        public int CurrentUtilizableHolidays => Holidays.Count(x => !x.Optional) + (Holidays.Any(x => x.Optional) ? 1 : 0);
+
         public ICollection<IncomeSource> IncomeSources { get; private set; }
 
         public ICollection<Expense> Expenses { get; private set; }
@@ -116,16 +118,15 @@ namespace Domain.Companies
                 throw CustomException.WithBadRequest("Please setup a leave policy before adding holiday.");
             }
 
-            var existingHolodays = Holidays.Count(x => x.Id != holidayId && !x.Optional) + (Holidays.Any(x => x.Optional) ? 1 : 0);
-            if (!optional && existingHolodays >= LeavePolicy.Holidays)
-            {
-                throw CustomException.WithBadRequest($"Maximum number of holidays already reached. As per your leave policy you can have only {LeavePolicy.Holidays} holidays.");
-            }
-
             var holiday = Holidays.FirstOrDefault(x => x.Id == holidayId);
             if (holiday == null)
             {
                 throw CustomException.WithNotFound("Holiday not found.");
+            }
+
+            if (holiday.Optional && !optional && CurrentUtilizableHolidays >= LeavePolicy.Holidays)
+            {
+                throw CustomException.WithBadRequest($"Maximum holiday limit reached. According to your leave policy, you are allowed a total of {LeavePolicy.Holidays} holidays.");
             }
 
             if (Holidays.Any(x => x.Id != holidayId && x.Date.Equals(date)))
@@ -149,10 +150,9 @@ namespace Domain.Companies
                 throw CustomException.WithBadRequest("Please setup a leave policy before adding holiday.");
             }
 
-            var existingHolodays = Holidays.Count(x => !x.Optional) + (Holidays.Any(x => x.Optional) ? 1 : 0);
-            if (!optional && existingHolodays >= LeavePolicy.Holidays)
+            if (!optional && CurrentUtilizableHolidays >= LeavePolicy.Holidays)
             {
-                throw CustomException.WithBadRequest($"Maximum number of holidays already reached. As per your leave policy you can have only {LeavePolicy.Holidays} holidays.");
+                throw CustomException.WithBadRequest($"Maximum holiday limit reached. According to your leave policy, you are allowed a total of {LeavePolicy.Holidays} holidays.");
             }
 
             if (Holidays.Any(x => x.Date == date))

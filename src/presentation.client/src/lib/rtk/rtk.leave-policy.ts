@@ -18,7 +18,7 @@ const api = baseApi.injectEndpoints({
         method: 'PUT',
         body: body,
       }),
-      invalidatesTags: ['Leave-Policy'],
+      invalidatesTags: ['Leave-Policy', 'Holidays'],
     }),
   }),
 });

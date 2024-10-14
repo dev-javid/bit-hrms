@@ -1,64 +1,71 @@
 import useFormMethods from './use-form-methods';
 import { Alert, AlertDescription, DatePicker, Form, FormButtons, SwitchInput, TextInput } from 'xplorer-ui';
-import { Holiday, LeavePolicy } from '@/lib/types';
+import { Holiday } from '@/lib/types';
 import useDefaultValues from './use-default-values';
 import { startOfYear, addMonths, endOfYear } from 'date-fns';
 import { AlertCircle } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
+import { PageSkeleton } from '@/lib/components';
 
-const HolidayForm = ({
-  holiday,
-  leavePolicy,
-  existingHolidaysCount,
-  onSuccess,
-}: {
-  holiday?: Holiday;
-  leavePolicy?: LeavePolicy;
-  existingHolidaysCount: number;
-  onSuccess: () => void;
-}) => {
+const HolidayForm = ({ holiday, onSuccess }: { holiday?: Holiday; onSuccess: () => void }) => {
   const [error, setError] = useState({ leavePolicy: '', exceeded: '' });
-  const defaultValues = useDefaultValues(holiday);
-  const { form, onSubmit } = useFormMethods(defaultValues, onSuccess);
+  const { formDefaultValues, isLoading, leavePolicy, currentUtilizableHolidays } = useDefaultValues(holiday);
+  const { form, onSubmit } = useFormMethods(formDefaultValues, onSuccess);
 
   const checkIfExceeded = useCallback(
     (optional: boolean | undefined) => {
-      if (!holiday && leavePolicy && !optional) {
-        if (existingHolidaysCount >= leavePolicy.holidays) {
-          setError((x) => ({
-            ...x,
-            exceeded: `Maximum number of holidays reached. As per your leave policy you can have only ${leavePolicy.holidays} holidays. You can add optional holiday though.`,
-          }));
+      if (leavePolicy && !optional) {
+        if (!holiday) {
+          if (currentUtilizableHolidays >= leavePolicy.holidays) {
+            setError((x) => ({
+              ...x,
+              exceeded: `Maximum holiday limit reached. According to your leave policy, you are allowed a total of ${leavePolicy.holidays} holidays. However, you can still add optional holidays.`,
+            }));
+          }
+        } else {
+          if (holiday.optional && currentUtilizableHolidays >= leavePolicy.holidays) {
+            setError((x) => ({
+              ...x,
+              exceeded: `Maximum holiday limit reached. According to your leave policy, you are allowed a total of ${leavePolicy.holidays} holidays. However, you can still add optional holidays.`,
+            }));
+          }
         }
       } else {
         setError((x) => ({ ...x, exceeded: '' }));
       }
     },
-    [leavePolicy, existingHolidaysCount, holiday]
+    [leavePolicy, currentUtilizableHolidays, holiday]
   );
 
   useEffect(() => {
-    if (!leavePolicy) {
+    if (!isLoading && !leavePolicy) {
       setError((x) => ({
         ...x,
         leavePolicy: 'Leave policy is required before you start adding/updating holidays. Please configure leave policy first.',
       }));
+    } else {
+      setError((x) => ({ ...x, leavePolicy: '' }));
     }
-  }, [leavePolicy]);
+  }, [leavePolicy, isLoading]);
 
-  useEffect(() => checkIfExceeded(undefined), [checkIfExceeded]);
+  useEffect(() => {
+    if (!holiday) {
+      checkIfExceeded(undefined);
+    }
+  }, [checkIfExceeded, holiday, leavePolicy]);
+
   form.watch(({ optional }) => checkIfExceeded(optional));
 
   return (
-    <>
+    <PageSkeleton isLoading={isLoading}>
       {error.leavePolicy && (
-        <Alert variant="destructive" className="mb-4">
+        <Alert className="mb-4 bg-destructive">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>{error.leavePolicy}</AlertDescription>
         </Alert>
       )}
       {error.exceeded && (
-        <Alert variant="destructive" className="mb-4">
+        <Alert className="mb-4 bg-destructive">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>{error.exceeded}</AlertDescription>
         </Alert>
@@ -85,7 +92,7 @@ const HolidayForm = ({
           <FormButtons form={form} hideCancel loading={form.formState.isSubmitting} />
         </form>
       </Form>
-    </>
+    </PageSkeleton>
   );
 };
 
