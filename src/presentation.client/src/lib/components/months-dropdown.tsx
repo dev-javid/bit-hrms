@@ -1,6 +1,7 @@
 import { addMonths, differenceInMonths } from 'date-fns';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from 'xplorer-ui';
 import { DateOnly } from '../types';
+import _ from 'lodash';
 
 function getMonths(referenceDate: DateOnly): DateOnly[] {
   const result: DateOnly[] = [];
@@ -14,7 +15,7 @@ function getMonths(referenceDate: DateOnly): DateOnly[] {
     months -= 1;
   }
 
-  return result;
+  return _.reverse(result);
 }
 
 const MonthsDropdown = ({

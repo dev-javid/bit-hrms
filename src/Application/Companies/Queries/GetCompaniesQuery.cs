@@ -17,6 +17,8 @@ namespace Application.Companies.Queries
             public required string Email { get; set; }
 
             public required string Address { get; set; }
+
+            public required DateOnly CreatedOn { get; set; }
         }
 
         internal class Handler(IDbContext dbContext) : IRequestHandler<GetCompaniesQuery, PagedResponse<Response>>
@@ -33,7 +35,8 @@ namespace Application.Companies.Queries
                        Email = x.Email.Value,
                        FinancialMonth = x.FinancialMonth.Value,
                        PhoneNumber = x.PhoneNumber.Value,
-                       Address = x.Address
+                       Address = x.Address,
+                       CreatedOn = x.CreatedOn.ToDateOnly(),
                    })
                    .OrderBy(x => x.CompanyId)
                    .ToPagedResponseAsync(request, cancellationToken);

@@ -1,4 +1,4 @@
-import { DataTableColumnHeader, Switch } from 'xplorer-ui';
+import { Badge, DataTableColumnHeader } from 'xplorer-ui';
 import { Holiday } from '@/lib/types';
 import { ColumnDef } from '@tanstack/react-table';
 import { ActionColumn } from '@/lib/components';
@@ -31,10 +31,12 @@ export const getColumns = (onEditClick: (value: Holiday) => void): ColumnDef<Hol
       accessorKey: 'optional',
       header: ({ column }) => <DataTableColumnHeader column={column} title="Optional" />,
       cell: ({ row }) => {
-        return (
-          <div className="flex space-x-2">
-            <Switch checked={row.getValue('optional')} disabled />
-          </div>
+        return row.original.optional ? (
+          <Badge variant="outline" className="text-green-600 hover:text-green-400">
+            Yes
+          </Badge>
+        ) : (
+          <Badge variant="outline">No</Badge>
         );
       },
     },

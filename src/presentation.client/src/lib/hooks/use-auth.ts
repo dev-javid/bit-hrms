@@ -31,8 +31,10 @@ const useAuth = () => {
     name: parsed?.name,
     dateOfJoining: parsed?.dateOfJoining ? String(parsed?.dateOfJoining)?.asDateOnly() : undefined,
     employeeId: parsed?.employeeId,
+    companyId: parsed?.companyId,
     isCompanyAdmin: roles.includes('CompanyAdmin'),
     isSuperAdmin: roles.includes('SuperAdmin'),
+    isEmployee: !!parsed?.employeeId,
   };
 
   return { user };

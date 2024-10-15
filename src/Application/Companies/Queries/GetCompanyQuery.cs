@@ -29,7 +29,8 @@ namespace Application.Companies.Queries
                        FinancialMonth = x.FinancialMonth.Value,
                        PhoneNumber = x.PhoneNumber.Value,
                        x.WeeklyOffDays,
-                       x.Address
+                       x.Address,
+                       CreatedOn = x.CreatedOn.ToDateOnly(),
                    })
                    .OrderBy(x => x.Name)
                    .FirstOrDefaultAsync(cancellationToken);

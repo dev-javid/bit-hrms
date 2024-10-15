@@ -3,13 +3,7 @@ import useFormMethods from './use-form-methods';
 import { Form, FormLabel } from 'xplorer-ui';
 import { FileUploadInput, FormButtons, SimpleSelect } from 'xplorer-ui';
 
-const DocumentForm = ({
-  employee,
-  document,
-}: {
-  employee: Employee;
-  document?: EmployeeDocument;
-}) => {
+const DocumentForm = ({ employee, document }: { employee: Employee; document?: EmployeeDocument }) => {
   const { form, onSubmit } = useFormMethods({
     employeeId: employee.employeeId,
     document: document?.url ?? '',
@@ -22,6 +16,7 @@ const DocumentForm = ({
         <div className="grid gap-4 gap-x-8 grid-cols-1 lg:grid-cols-2">
           <div className="lg: col-span-1 space-y-6">
             <SimpleSelect
+              placeholder="Select Document Type"
               control={form.control}
               label="Document Type"
               name="type"
@@ -32,22 +27,13 @@ const DocumentForm = ({
                 value: x,
               }))}
             />
-            <FileUploadInput
-              control={form.control}
-              label="Document"
-              name="document"
-              placeholder="Document"
-            />
+            <FileUploadInput control={form.control} label="Document" name="document" placeholder="Document" />
           </div>
           <div className="lg:col-span-1">
             {document && (
               <div className="space-y-6">
                 <FormLabel>Existing Document</FormLabel>
-                <img
-                  src={document.url}
-                  alt="Image"
-                  className="rounded-md object-cover"
-                />
+                <img src={document.url} alt="Image" className="rounded-md object-cover" />
               </div>
             )}
           </div>

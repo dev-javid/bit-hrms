@@ -1,13 +1,12 @@
+import useAuth from '@/lib/hooks/use-auth';
+import { useGetCompanyQuery } from '@/lib/rtk/rtk.comapnies';
 import { useGetEmployeesQuery } from '@/lib/rtk/rtk.employees';
 import { useGetSalariesQuery } from '@/lib/rtk/rtk.salary';
 import { DateOnly, Salary } from '@/lib/types';
 
 export default function useLoadData(date: DateOnly) {
-  const {
-    data: data1,
-    isLoading: isLoading1,
-    isFetching: isFetching1,
-  } = useGetEmployeesQuery(null);
+  const { user } = useAuth();
+  const { data: data1, isLoading: isLoading1, isFetching: isFetching1 } = useGetEmployeesQuery(null);
 
   const {
     data: data2,
@@ -18,13 +17,13 @@ export default function useLoadData(date: DateOnly) {
     year: date.year,
   });
 
+  const { data: data3, isLoading: isLoading3, isFetching: isFetching3 } = useGetCompanyQuery(user.companyId!);
+
   const data: Salary[] = [];
 
   if (data1?.items) {
     for (const employee of data1.items) {
-      const salary = data2?.items?.find(
-        (salary) => salary.employeeId === employee.employeeId
-      );
+      const salary = data2?.items?.find((salary) => salary.employeeId === employee.employeeId);
 
       data.push({
         salaryId: salary?.salaryId ?? 0,
@@ -42,6 +41,7 @@ export default function useLoadData(date: DateOnly) {
 
   return {
     data: data,
-    isLoading: isLoading1 || isLoading2 || isFetching1 || isFetching2,
+    company: data3,
+    isLoading: isLoading1 || isLoading2 || isLoading3 || isFetching1 || isFetching2 || isFetching3,
   };
 }

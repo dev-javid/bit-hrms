@@ -10,12 +10,14 @@ export interface AuthTokens {
 export interface User {
   id: number;
   employeeId: number;
+  companyId?: number;
   roles: RoleName[];
   email: string;
   name: string;
   dateOfJoining?: DateOnly;
   isCompanyAdmin: boolean;
   isSuperAdmin: boolean;
+  isEmployee: boolean;
 }
 
 export interface Credentials {

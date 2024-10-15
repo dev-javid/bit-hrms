@@ -1,6 +1,6 @@
 import { RoleName } from '@/lib/types';
 import useAuth from '@/lib/hooks/use-auth';
-import { Home, IndianRupee, MonitorOff, Settings, Users2, CalendarDays, GripIcon } from 'lucide-react';
+import { Home, IndianRupee, MonitorOff, Users2, CalendarDays, GripIcon } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Tooltip, TooltipTrigger, TooltipContent, cn, ThemeToggle } from 'xplorer-ui';
 import _ from 'lodash';

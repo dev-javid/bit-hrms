@@ -1,7 +1,7 @@
 import { useApproveEamployeeLeaveMutation, useDeleteEmployeeLeaveMutation, useGetEmployeeLeavesQuery } from '@/lib/rtk/rtk.employee-leaves';
 import { ActionButton, BreadCrumbProps, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
 import { columns } from './columns';
-import { Button, Card, CardContent, ClientSideDataTable, useSimpleModal, useSimpleConfirm } from 'xplorer-ui';
+import { Card, CardContent, ClientSideDataTable, useSimpleModal, useSimpleConfirm } from 'xplorer-ui';
 import { EmployeeLeave } from '@/lib/types';
 import { toast } from 'xplorer-ui';
 import { useState } from 'react';
@@ -75,7 +75,7 @@ const EmployeeLeaveList = () => {
   return (
     <PageContainer breadCrumb={breadCrumb}>
       <PageHeader title="Leave History">
-        <ActionButton onClick={onApplyLeaveClick} tooltip="Apply Leave" text="Apply Leave"></ActionButton>
+        {user.isEmployee && <ActionButton onClick={onApplyLeaveClick} tooltip="Apply Leave" text="Apply Leave"></ActionButton>}
       </PageHeader>
       {decline && <DeclineLeaveForm leave={decline} onCancelDecline={() => setDecline(undefined)} />}
       <PageSkeleton isLoading={isLoading || isFetching}>

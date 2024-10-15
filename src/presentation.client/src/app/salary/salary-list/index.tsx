@@ -1,10 +1,4 @@
-import {
-  BreadCrumbProps,
-  MonthsDropdown,
-  PageContainer,
-  PageHeader,
-  PageSkeleton,
-} from '@/lib/components';
+import { BreadCrumbProps, MonthsDropdown, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
 import { columns } from './columns';
 import { Card, CardContent, ClientSideDataTable } from 'xplorer-ui';
 import useLoadData from './useLoadData';
@@ -14,7 +8,7 @@ import { DateOnly } from '@/lib/types';
 const SalaryList = () => {
   const [date, setDate] = useState(DateOnly.firstDayOfCurrentMonth());
 
-  const { data, isLoading } = useLoadData(date);
+  const { data, company, isLoading } = useLoadData(date);
 
   const breadCrumb: BreadCrumbProps = {
     title: 'Salary Management',
@@ -24,7 +18,9 @@ const SalaryList = () => {
   return (
     <PageContainer breadCrumb={breadCrumb}>
       <PageHeader title={date.toMonthString()}>
-        <MonthsDropdown onMonthChange={setDate} defaultValue={date} />
+        {company && (
+          <MonthsDropdown onMonthChange={setDate} defaultValue={DateOnly.firstDayOfCurrentMonth()} referenceDate={company.createdOn.asDateOnly()} />
+        )}
       </PageHeader>
       <PageSkeleton isLoading={isLoading}>
         <Card>

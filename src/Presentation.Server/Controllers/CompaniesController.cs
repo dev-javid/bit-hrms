@@ -3,10 +3,10 @@ using Application.Companies.Queries;
 
 namespace Presentation.Controllers
 {
-    [Authorize(AuthPolicy.SuperAdmin)]
     public class CompaniesController : ApiBaseController
     {
         [HttpGet]
+        [Authorize(AuthPolicy.SuperAdmin)]
         public async Task<IActionResult> GetAllAsync([FromQuery] GetCompaniesQuery query)
         {
             return Ok(await Mediator.Send(query));
@@ -25,6 +25,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
+        [Authorize(AuthPolicy.SuperAdmin)]
         public async Task<IActionResult> AddAsync(AddCompanyCommand command)
         {
             var response = await Mediator.Send(command);
@@ -32,6 +33,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPut("{companyId}")]
+        [Authorize(AuthPolicy.SuperAdmin)]
         public async Task<IActionResult> UpdateAsync(int companyId, UpdateCompanyCommand command)
         {
             command.CompanyId = companyId;
@@ -40,6 +42,7 @@ namespace Presentation.Controllers
         }
 
         [HttpDelete("{companyId}")]
+        [Authorize(AuthPolicy.SuperAdmin)]
         public async Task<IActionResult> DeleteAsync(int companyId)
         {
             await Mediator.Send(new DeleteCompanyCommand

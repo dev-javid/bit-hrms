@@ -13,6 +13,14 @@ const api = baseApi.injectEndpoints({
       transformErrorResponse: transformErrorResponse,
       providesTags: ['Companies'],
     }),
+    getCompany: build.query<Company, number>({
+      query: (companyId) => ({
+        url: `/companies/${companyId}`,
+        method: 'GET',
+      }),
+      transformErrorResponse: transformErrorResponse,
+      providesTags: ['Companies'],
+    }),
     addCompany: build.mutation<Company, object>({
       query: (body: object) => ({
         url: 'companies',
@@ -43,4 +51,4 @@ const api = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetCompaniesQuery, useAddCompanyMutation, useUpdateCompanyMutation, useDeleteCompanyMutation } = api;
+export const { useGetCompaniesQuery, useGetCompanyQuery, useAddCompanyMutation, useUpdateCompanyMutation, useDeleteCompanyMutation } = api;

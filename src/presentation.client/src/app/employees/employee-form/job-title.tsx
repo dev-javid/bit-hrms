@@ -3,13 +3,7 @@ import { FormSchemaType } from './schema';
 import { useGetJobTitlesQuery } from '@/lib/rtk/rtk.job-titles';
 import { SimpleSelect } from 'xplorer-ui';
 
-const JobTitle = ({
-  form,
-  defaultValue,
-}: {
-  form: UseFormReturn<FormSchemaType>;
-  defaultValue: number;
-}) => {
+const JobTitle = ({ form, defaultValue }: { form: UseFormReturn<FormSchemaType>; defaultValue: number }) => {
   const departmentId = form.watch('departmentId');
 
   const { data, isLoading, isFetching } = useGetJobTitlesQuery({
@@ -27,6 +21,7 @@ const JobTitle = ({
         label: x.name,
         value: x.jobTitleId.toString(),
       }))}
+      placeholder="Select Job Title"
     />
   );
 };

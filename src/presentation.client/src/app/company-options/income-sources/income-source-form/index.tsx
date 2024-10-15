@@ -3,7 +3,6 @@ import useFormMethods from './use-form-methods';
 import { Form, FormButtons, TextInput } from 'xplorer-ui';
 
 const IncomeSourceForm = ({ incomeSource, onSuccess }: { incomeSource?: IncomeSource; onSuccess: () => void }) => {
-  debugger;
   const { form, onSubmit } = useFormMethods(
     {
       incomeSourceId: incomeSource?.incomeSourceId || 0,

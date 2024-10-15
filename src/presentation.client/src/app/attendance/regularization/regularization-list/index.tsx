@@ -1,8 +1,8 @@
 import { BackButton, BreadCrumbProps, EmployeeDropdown, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
 import { getColumns } from './columns';
 import { AttendanceRegularization, Employee } from '@/lib/types';
-import { Link, useLocation } from 'react-router-dom';
-import { CardContent, Card, Button, ClientSideDataTable, useSimpleConfirm, toast } from 'xplorer-ui';
+import { useLocation } from 'react-router-dom';
+import { CardContent, Card, ClientSideDataTable, useSimpleConfirm, toast } from 'xplorer-ui';
 import { useApproveRegularizationMutation, useGetRegularizationsQuery } from '@/lib/rtk/rtk.attendance';
 import { useState } from 'react';
 import useAuth from '@/lib/hooks/use-auth';
