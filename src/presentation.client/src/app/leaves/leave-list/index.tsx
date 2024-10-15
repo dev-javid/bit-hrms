@@ -75,7 +75,7 @@ const EmployeeLeaveList = () => {
   return (
     <PageContainer breadCrumb={breadCrumb}>
       <PageHeader title="Leave History">
-        {user.isEmployee && <ActionButton onClick={onApplyLeaveClick} tooltip="Apply Leave" text="Apply Leave"></ActionButton>}
+        {user.isEmployee && <ActionButton onClick={onApplyLeaveClick} tooltip="Apply Leave" text="Apply Leave" />}
       </PageHeader>
       {decline && <DeclineLeaveForm leave={decline} onCancelDecline={() => setDecline(undefined)} />}
       <PageSkeleton isLoading={isLoading || isFetching}>
