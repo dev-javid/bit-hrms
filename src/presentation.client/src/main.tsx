@@ -4,13 +4,7 @@ import App from './app/App.tsx';
 import 'xplorer-ui/dist/style.css';
 import './lib/types/string-extensions.ts';
 
-import {
-  SimpleModalContextProvider,
-  SimpleConfirmProvider,
-  ThemeProvider,
-  Toaster,
-  TooltipProvider,
-} from 'xplorer-ui';
+import { SimpleModalContextProvider, SimpleConfirmProvider, ThemeProvider, Toaster, TooltipProvider } from 'xplorer-ui';
 import './index.css';
 import { Provider } from 'react-redux';
 import { store } from './lib/store/index.tsx';
@@ -32,5 +26,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </Router>
       </Provider>
     </ThemeProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

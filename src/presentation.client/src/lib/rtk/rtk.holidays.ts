@@ -17,7 +17,7 @@ const api = baseApi.injectEndpoints({
       query: (
         body: object & {
           date: string;
-        }
+        },
       ) => ({
         url: 'holidays',
         method: 'POST',
@@ -33,7 +33,7 @@ const api = baseApi.injectEndpoints({
         body: object & {
           holidayId: number;
           date: string;
-        }
+        },
       ) => ({
         url: `holidays/${body.holidayId}`,
         method: 'PUT',
@@ -47,8 +47,4 @@ const api = baseApi.injectEndpoints({
   }),
 });
 
-export const {
-  useGetHolidaysQuery,
-  useAddHolidayMutation,
-  useUpdateHolidayMutation,
-} = api;
+export const { useGetHolidaysQuery, useAddHolidayMutation, useUpdateHolidayMutation } = api;

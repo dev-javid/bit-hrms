@@ -3,10 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import FormSchema, { FormSchemaType } from './schema';
 import { useAddRegularizationMutation } from '@/lib/rtk/rtk.attendance';
 
-const useFormMethods = (
-  defaultValues: FormSchemaType,
-  onSuccess: () => void
-) => {
+const useFormMethods = (defaultValues: FormSchemaType, onSuccess: () => void) => {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: defaultValues,

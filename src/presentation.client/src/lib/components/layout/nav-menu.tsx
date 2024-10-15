@@ -86,7 +86,7 @@ const NavMenu = () => {
                     to={m.link}
                     className={cn(
                       'flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8',
-                      m.isActive(pathname) ? 'bg-primary text-lg font-semibold text-primary-foreground md:text-base' : ''
+                      m.isActive(pathname) ? 'bg-primary text-lg font-semibold text-primary-foreground md:text-base' : '',
                     )}
                   >
                     {m.icon}

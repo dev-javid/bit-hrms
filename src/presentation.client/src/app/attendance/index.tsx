@@ -19,7 +19,7 @@ const MonthlyAttendance = () => {
   const { showModal } = useSimpleModal();
   const attendance = useMemo(
     () => (employee ? getMonthData(data, holidays, leaves, date, employee.employeeId, regularizations) : []),
-    [data, holidays, leaves, employee, date, regularizations]
+    [data, holidays, leaves, employee, date, regularizations],
   );
 
   const onRegularizeClick = (inoutTiming: InOutTiming) => {
@@ -67,7 +67,7 @@ const getMonthData = (
   leaves: EmployeeLeave[],
   dateOnly: DateOnly,
   employeeId: number,
-  regularizations: AttendanceRegularization[]
+  regularizations: AttendanceRegularization[],
 ): InOutTiming[] => {
   const now = new Date();
   const year = dateOnly.year;

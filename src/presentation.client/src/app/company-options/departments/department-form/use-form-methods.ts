@@ -1,16 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormSchema, { FormSchemaType } from './schema';
-import {
-  useAddDepartmentMutation,
-  useUpdateDepartmentMutation,
-} from '@/lib/rtk/rtk.departments';
+import { useAddDepartmentMutation, useUpdateDepartmentMutation } from '@/lib/rtk/rtk.departments';
 import { toast } from 'xplorer-ui';
 
-const useFormMethods = (
-  onSuccess: () => void,
-  defaultValues?: FormSchemaType
-) => {
+const useFormMethods = (onSuccess: () => void, defaultValues?: FormSchemaType) => {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: defaultValues,

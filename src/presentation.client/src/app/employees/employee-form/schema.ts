@@ -11,22 +11,10 @@ export const FormSchema = z.object({
   lastName: z.string().min(1, { message: 'Last Name is required' }).max(50),
   dateOfBirth: z.coerce.date(),
   dateOfJoining: z.date(),
-  fatherName: z
-    .string()
-    .min(1, { message: "Father's Name is required" })
-    .max(50),
-  phoneNumber: z
-    .string()
-    .min(1, { message: 'Phone Number is required' })
-    .max(50),
-  companyEmail: z
-    .string()
-    .min(1, { message: 'Company Email is required' })
-    .max(50),
-  personalEmail: z
-    .string()
-    .min(1, { message: 'Personal Email is required' })
-    .max(50),
+  fatherName: z.string().min(1, { message: "Father's Name is required" }).max(50),
+  phoneNumber: z.string().min(1, { message: 'Phone Number is required' }).max(50),
+  companyEmail: z.string().min(1, { message: 'Company Email is required' }).max(50),
+  personalEmail: z.string().min(1, { message: 'Personal Email is required' }).max(50),
   address: z.string().min(1, { message: 'Address is required' }).max(50),
   city: z.string().min(1, { message: 'City is required' }).max(50),
   pan: z

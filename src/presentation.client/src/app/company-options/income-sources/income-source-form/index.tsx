@@ -9,7 +9,7 @@ const IncomeSourceForm = ({ incomeSource, onSuccess }: { incomeSource?: IncomeSo
       name: incomeSource?.name || '',
       description: incomeSource?.description || '',
     },
-    onSuccess
+    onSuccess,
   );
 
   return (

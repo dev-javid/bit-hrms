@@ -24,7 +24,7 @@ const CompanyList = () => {
       'Delete Company',
       <div>
         Are you sure you want to delete the company - <strong>{company.name}</strong>?
-      </div>
+      </div>,
     );
     if (ok) {
       const response = await deleteCompany(company.companyId);

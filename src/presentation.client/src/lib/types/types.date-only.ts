@@ -56,11 +56,7 @@ export class DateOnly {
   public static firstDayOfCurrentMonth(): DateOnly {
     const now = new Date();
     const firstDay = startOfMonth(now);
-    return DateOnly.fromParts(
-      firstDay.getFullYear(),
-      firstDay.getMonth() + 1,
-      firstDay.getDate()
-    );
+    return DateOnly.fromParts(firstDay.getFullYear(), firstDay.getMonth() + 1, firstDay.getDate());
   }
 
   toDate(): Date {

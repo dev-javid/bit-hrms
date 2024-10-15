@@ -2,17 +2,8 @@ import { FormSchemaType } from './schema';
 import useFormMethods from './use-form-methods';
 import { Form, FormButtons, TextInput } from 'xplorer-ui';
 
-const FormContainer = ({
-  defaultValues,
-  onSuccess,
-}: {
-  defaultValues: FormSchemaType;
-  onSuccess: () => void;
-}) => {
-  const { form, onSubmit, isLoading } = useFormMethods(
-    defaultValues,
-    onSuccess
-  );
+const FormContainer = ({ defaultValues, onSuccess }: { defaultValues: FormSchemaType; onSuccess: () => void }) => {
+  const { form, onSubmit, isLoading } = useFormMethods(defaultValues, onSuccess);
 
   return (
     <Form {...form}>
@@ -27,20 +18,9 @@ const FormContainer = ({
               name="clockInTime"
               placeholder="Clock In Time"
             />
-            <TextInput
-              type="time"
-              control={form.control}
-              label="Clock Out Time"
-              name="clockOutTime"
-              placeholder="Clock Out Time"
-            />
+            <TextInput type="time" control={form.control} label="Clock Out Time" name="clockOutTime" placeholder="Clock Out Time" />
           </div>
-          <TextInput
-            control={form.control}
-            label="Reason"
-            name="reason"
-            placeholder="Reason"
-          />
+          <TextInput control={form.control} label="Reason" name="reason" placeholder="Reason" />
         </div>
 
         <FormButtons form={form} hideCancel loading={isLoading} />

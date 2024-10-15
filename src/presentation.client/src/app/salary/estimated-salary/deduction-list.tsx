@@ -5,28 +5,18 @@ import { DataTableColumnHeader, ClientSideDataTable } from 'xplorer-ui';
 const columns: ColumnDef<SalaryDudection>[] = [
   {
     accessorKey: 'deductionType',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Deduction Type" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Deduction Type" />,
   },
   {
     accessorKey: 'deductionDate',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Deduction Date" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Deduction Date" />,
     cell: ({ row }) => {
-      return (
-        <div className="">
-          {row.original.deductionDate.asDateOnly().toDayString()}
-        </div>
-      );
+      return <div className="">{row.original.deductionDate.asDateOnly().toDayString()}</div>;
     },
   },
   {
     accessorKey: 'amount',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Amount" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Amount" />,
     cell: ({ row }) => {
       return <div className="">{row.original.amount.toFixed(2)}</div>;
     },

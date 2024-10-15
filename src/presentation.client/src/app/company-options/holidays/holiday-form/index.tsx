@@ -34,7 +34,7 @@ const HolidayForm = ({ holiday, onSuccess }: { holiday?: Holiday; onSuccess: () 
         setError((x) => ({ ...x, exceeded: '' }));
       }
     },
-    [leavePolicy, currentUtilizableHolidays, holiday]
+    [leavePolicy, currentUtilizableHolidays, holiday],
   );
 
   useEffect(() => {

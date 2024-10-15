@@ -30,7 +30,7 @@ const api = baseApi.injectEndpoints({
       query: (
         body: object & {
           incomeSourceId: number;
-        }
+        },
       ) => ({
         url: `income-sources/${body.incomeSourceId}`,
         method: 'PUT',

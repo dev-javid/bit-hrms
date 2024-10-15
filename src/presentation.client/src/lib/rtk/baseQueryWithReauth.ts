@@ -48,7 +48,7 @@ export function transformErrorResponse(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   meta: any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  arg: any
+  arg: any,
 ) {
   console.log(meta);
   console.log(arg);
@@ -95,7 +95,7 @@ const refreshingToken = async (api: any, extraOptions: any) => {
         method: 'POST',
       },
       api,
-      extraOptions
+      extraOptions,
     );
     api.dispatch(setRefreshingToken(false));
     if (refreshResult.data) {

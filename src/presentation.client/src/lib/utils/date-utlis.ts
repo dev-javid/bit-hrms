@@ -1,23 +1,10 @@
-import {
-  differenceInMinutes,
-  isSaturday,
-  addDays,
-  differenceInDays,
-  isWithinInterval,
-  parseISO,
-  format,
-  toDate,
-} from 'date-fns';
+import { differenceInMinutes, isSaturday, addDays, differenceInDays, isWithinInterval, parseISO, format, toDate } from 'date-fns';
 import { DateOnly } from '../types';
 
 const regex = /^(\d{2}:\d{2})/;
 const refOffSaturday = '2024-04-21';
 
-export const isWithinDateRange = (
-  from: string,
-  to: string,
-  value: string
-): boolean => {
+export const isWithinDateRange = (from: string, to: string, value: string): boolean => {
   const dateFrom = parseISO(from);
   const dateTo = parseISO(to);
   const dateValue = parseISO(value);

@@ -1,7 +1,4 @@
-import {
-  useGetAttendanceQuery,
-  useGetRegularizationsQuery,
-} from '@/lib/rtk/rtk.attendance';
+import { useGetAttendanceQuery, useGetRegularizationsQuery } from '@/lib/rtk/rtk.attendance';
 import { useGetEmployeeLeavesQuery } from '@/lib/rtk/rtk.employee-leaves';
 import { useGetHolidaysQuery } from '@/lib/rtk/rtk.holidays';
 import { DateOnly } from '@/lib/types';
@@ -17,11 +14,7 @@ export default function useLoadData(date: DateOnly, employeeId?: number) {
     employeeId: employeeId,
   });
 
-  const {
-    data: data2,
-    isLoading: isLoading2,
-    isFetching: isFetching2,
-  } = useGetHolidaysQuery(null);
+  const { data: data2, isLoading: isLoading2, isFetching: isFetching2 } = useGetHolidaysQuery(null);
   const {
     data: data3,
     isLoading: isLoading3,
@@ -30,23 +23,11 @@ export default function useLoadData(date: DateOnly, employeeId?: number) {
     employeeId: employeeId ? employeeId : undefined,
   });
 
-  const {
-    data: data4,
-    isLoading: isLoading4,
-    isFetching: isFetching4,
-  } = useGetRegularizationsQuery({ employeeId });
+  const { data: data4, isLoading: isLoading4, isFetching: isFetching4 } = useGetRegularizationsQuery({ employeeId });
 
   return {
     data: data1 ?? [],
-    isLoading:
-      isLoading1 ||
-      isLoading2 ||
-      isLoading3 ||
-      isLoading4 ||
-      isFetching1 ||
-      isFetching2 ||
-      isFetching3 ||
-      isFetching4,
+    isLoading: isLoading1 || isLoading2 || isLoading3 || isLoading4 || isFetching1 || isFetching2 || isFetching3 || isFetching4,
     holidays: data2?.items ?? [],
     leaves: data3?.items ?? [],
     regularizations: data4?.items ?? [],

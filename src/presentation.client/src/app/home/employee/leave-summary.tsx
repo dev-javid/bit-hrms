@@ -1,22 +1,9 @@
 import { useGetBasicEmployeeReportQuery } from '@/lib/rtk/rtk.reports';
 import { PageSkeleton } from '@/lib/components';
 import { Link } from 'react-router-dom';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  Button,
-} from 'xplorer-ui';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, Button } from 'xplorer-ui';
 
-const LeaveSummary = ({
-  employeeId,
-  hideActions,
-}: {
-  employeeId?: number;
-  hideActions: boolean;
-}) => {
+const LeaveSummary = ({ employeeId, hideActions }: { employeeId?: number; hideActions: boolean }) => {
   const { data, isFetching } = useGetBasicEmployeeReportQuery({ employeeId });
 
   return (

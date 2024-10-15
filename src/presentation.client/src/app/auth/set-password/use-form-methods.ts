@@ -1,8 +1,5 @@
 import { useForm } from 'react-hook-form';
-import {
-  useResetPasswordMutation,
-  useSetPasswordMutation,
-} from '@/lib/rtk/rtk.auth';
+import { useResetPasswordMutation, useSetPasswordMutation } from '@/lib/rtk/rtk.auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 import FormSchema, { FormSchemaType } from './schema';
@@ -25,8 +22,7 @@ const useSubmitForm = (defaultValues: FormSchemaType, reset: boolean) => {
       toast({
         variant: 'primary',
         title: 'Success ',
-        description:
-          'Password set successfully, you can now sign-in to your account.',
+        description: 'Password set successfully, you can now sign-in to your account.',
       });
       navigateTo('/app');
     }

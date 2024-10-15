@@ -36,8 +36,4 @@ const api = baseApi.injectEndpoints({
   }),
 });
 
-export const {
-  useGetDepartmentsQuery,
-  useAddDepartmentMutation,
-  useUpdateDepartmentMutation,
-} = api;
+export const { useGetDepartmentsQuery, useAddDepartmentMutation, useUpdateDepartmentMutation } = api;

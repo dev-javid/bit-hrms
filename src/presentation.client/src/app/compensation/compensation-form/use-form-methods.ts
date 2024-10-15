@@ -18,9 +18,7 @@ const useFormMethods = (employee: Employee, onSuccess: () => void) => {
   async function onSubmit(data: FormSchemaType) {
     const response = await addCompensation({
       ...data,
-      effectiveFrom: DateOnly.fromDate(
-        data.effectiveFrom
-      ).toDateOnlyISOString(),
+      effectiveFrom: DateOnly.fromDate(data.effectiveFrom).toDateOnlyISOString(),
     });
 
     if (!('error' in response)) {

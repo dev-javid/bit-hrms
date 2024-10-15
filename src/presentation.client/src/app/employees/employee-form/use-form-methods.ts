@@ -2,10 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'xplorer-ui';
 import { useNavigate } from 'react-router-dom';
-import {
-  useAddEmployeeMutation,
-  useUpdateEmployeeMutation,
-} from '@/lib/rtk/rtk.employees';
+import { useAddEmployeeMutation, useUpdateEmployeeMutation } from '@/lib/rtk/rtk.employees';
 import { FormSchema, FormSchemaType } from './schema';
 import { DateOnly } from '@/lib/types';
 
@@ -24,9 +21,7 @@ const useFormMethods = (defaultValues: FormSchemaType) => {
     const response = await operation({
       ...data,
       dateOfBirth: DateOnly.fromDate(data.dateOfBirth).toDateOnlyISOString(),
-      dateOfJoining: DateOnly.fromDate(
-        data.dateOfJoining
-      ).toDateOnlyISOString(),
+      dateOfJoining: DateOnly.fromDate(data.dateOfJoining).toDateOnlyISOString(),
     });
 
     if (!('error' in response)) {

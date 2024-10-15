@@ -41,7 +41,7 @@ const RegularizationList = () => {
   const onApproveClick = async (regularization: AttendanceRegularization) => {
     const ok = await showConfirm(
       `Approve Regularization: ${regularization.date.asDateOnly().toDayString()}`,
-      'Are you sure you want to approve this regularization?'
+      'Are you sure you want to approve this regularization?',
     );
 
     if (ok) {

@@ -9,10 +9,7 @@ const ClockIn = ({ inOutTining }: { inOutTining?: InOutTiming }) => {
   const { showConfirm } = useSimpleConfirm();
 
   const onClockInClick = async () => {
-    const confirmed = await showConfirm(
-      'Clock in',
-      'Are you sure you want to clock in for the day?'
-    );
+    const confirmed = await showConfirm('Clock in', 'Are you sure you want to clock in for the day?');
 
     if (confirmed) {
       const response = await clockIn(null);
@@ -28,12 +25,7 @@ const ClockIn = ({ inOutTining }: { inOutTining?: InOutTiming }) => {
   };
   return (
     <div className="flex items-center gap-5">
-      <Button
-        variant="outline"
-        disabled={!!inOutTining}
-        className="w-auto"
-        onClick={onClockInClick}
-      >
+      <Button variant="outline" disabled={!!inOutTining} className="w-auto" onClick={onClockInClick}>
         <ClockIcon className="mr-2 h-4 w-4" />
         Clock In
       </Button>

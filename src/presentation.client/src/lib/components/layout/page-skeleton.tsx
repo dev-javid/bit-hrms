@@ -37,12 +37,7 @@ type SkeeletonProps = {
   children: React.ReactNode;
 };
 
-export function PageSkeleton({
-  isLoading,
-  form = false,
-  rows = 5,
-  children,
-}: SkeeletonProps) {
+export function PageSkeleton({ isLoading, form = false, rows = 5, children }: SkeeletonProps) {
   return (
     <>
       {isLoading && <>{form ? getFormSkeleton(rows) : getListSkeleton(rows)}</>}

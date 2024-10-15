@@ -33,7 +33,7 @@ const api = baseApi.injectEndpoints({
       query: (
         body: object & {
           companyId: number;
-        }
+        },
       ) => ({
         url: `companies/${body.companyId}`,
         method: 'PUT',

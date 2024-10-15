@@ -4,10 +4,7 @@ import { getAllParams, transformErrorResponse } from './baseQueryWithReauth';
 
 const api = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getJobTitles: build.query<
-      PagedResponse<JobTitle>,
-      { departmentId?: number }
-    >({
+    getJobTitles: build.query<PagedResponse<JobTitle>, { departmentId?: number }>({
       query: ({ departmentId }) => ({
         url: `/job-titles`,
         method: 'GET',
@@ -40,8 +37,4 @@ const api = baseApi.injectEndpoints({
   }),
 });
 
-export const {
-  useGetJobTitlesQuery,
-  useAddJobTitleMutation,
-  useUpdateJobTitleMutation,
-} = api;
+export const { useGetJobTitlesQuery, useAddJobTitleMutation, useUpdateJobTitleMutation } = api;

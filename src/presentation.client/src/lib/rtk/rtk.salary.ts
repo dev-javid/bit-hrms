@@ -4,10 +4,7 @@ import { getAllParams, transformErrorResponse } from './baseQueryWithReauth';
 
 const api = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getCompensation: build.query<
-      Compensation[],
-      { employeeId: number | undefined }
-    >({
+    getCompensation: build.query<Compensation[], { employeeId: number | undefined }>({
       query: (params) => ({
         url: '/compensations',
         method: 'GET',
@@ -21,7 +18,7 @@ const api = baseApi.injectEndpoints({
       query: (
         body: object & {
           effectiveFrom: string;
-        }
+        },
       ) => ({
         url: 'compensations',
         method: 'POST',
@@ -33,10 +30,7 @@ const api = baseApi.injectEndpoints({
       invalidatesTags: ['Compensation'],
     }),
 
-    getSalaries: build.query<
-      PagedResponse<Salary>,
-      { month: number; year: number }
-    >({
+    getSalaries: build.query<PagedResponse<Salary>, { month: number; year: number }>({
       query: (data: { month: number; year: number }) => ({
         url: '/salaries',
         method: 'GET',
@@ -50,10 +44,7 @@ const api = baseApi.injectEndpoints({
       providesTags: ['Salaries'],
     }),
 
-    getEstimatedSalary: build.query<
-      EstimatedSalary,
-      { employeeId: number; month: number; year: number }
-    >({
+    getEstimatedSalary: build.query<EstimatedSalary, { employeeId: number; month: number; year: number }>({
       query: (data: { employeeId: number; month: number; year: number }) => ({
         url: '/salaries/estimated-salary',
         method: 'GET',
@@ -78,10 +69,4 @@ const api = baseApi.injectEndpoints({
   }),
 });
 
-export const {
-  useGetCompensationQuery,
-  useAddCompensationMutation,
-  useGetSalariesQuery,
-  useGetEstimatedSalaryQuery,
-  useAddSalaryMutation,
-} = api;
+export const { useGetCompensationQuery, useAddCompensationMutation, useGetSalariesQuery, useGetEstimatedSalaryQuery, useAddSalaryMutation } = api;

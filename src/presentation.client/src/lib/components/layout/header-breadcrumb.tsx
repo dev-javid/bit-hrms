@@ -1,11 +1,5 @@
 import { Link } from 'react-router-dom';
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-} from 'xplorer-ui';
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from 'xplorer-ui';
 
 export interface BreadCrumbProps {
   title: string;
@@ -28,13 +22,11 @@ const getBreadcrumb = (breadCrumb: BreadCrumbProps): JSX.Element[] => {
           <span>{breadCrumb.title}</span>
         )}
       </BreadcrumbLink>
-    </BreadcrumbItem>
+    </BreadcrumbItem>,
   );
 
   if (breadCrumb.child) {
-    elements.push(
-      <BreadcrumbSeparator key={`${breadCrumb.title}-separator`} />
-    );
+    elements.push(<BreadcrumbSeparator key={`${breadCrumb.title}-separator`} />);
     elements.push(...getBreadcrumb(breadCrumb.child));
   }
 
@@ -44,9 +36,7 @@ const getBreadcrumb = (breadCrumb: BreadCrumbProps): JSX.Element[] => {
 const HeaderBreadcrumb = ({ breadCrumb }: { breadCrumb: BreadCrumbProps }) => {
   return (
     <Breadcrumb className="flex">
-      <BreadcrumbList>
-        {getBreadcrumb(breadCrumb ?? { title: 'Bit Xplorer', to: '/' })}
-      </BreadcrumbList>
+      <BreadcrumbList>{getBreadcrumb(breadCrumb ?? { title: 'Bit Xplorer', to: '/' })}</BreadcrumbList>
     </Breadcrumb>
   );
 };

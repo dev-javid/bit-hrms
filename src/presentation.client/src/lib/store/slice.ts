@@ -33,16 +33,12 @@ const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(
-      authApi.endpoints.signIn.matchFulfilled,
-      (state, action) => {
-        saveAuthTokens(action.payload);
-        state.sessionActive = true;
-      }
-    );
+    builder.addMatcher(authApi.endpoints.signIn.matchFulfilled, (state, action) => {
+      saveAuthTokens(action.payload);
+      state.sessionActive = true;
+    });
   },
 });
 
-export const { setError, clearError, setRefreshingToken, setUser } =
-  slice.actions;
+export const { setError, clearError, setRefreshingToken, setUser } = slice.actions;
 export default slice.reducer;

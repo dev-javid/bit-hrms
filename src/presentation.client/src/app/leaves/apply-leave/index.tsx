@@ -37,11 +37,7 @@ export default function ApplyLeave({ onSuccess }: { onSuccess: () => void }) {
     <div className="space-y-4">
       <div>Duration</div>
       <DateRangePicker onChange={setDate} />
-      <div>
-        {date?.to &&
-          date.from &&
-          `${differenceInDays(date?.to, date?.from) + 1} day(s) selected`}
-      </div>
+      <div>{date?.to && date.from && `${differenceInDays(date?.to, date?.from) + 1} day(s) selected`}</div>
       {error && <div className="text-red-700">{error}</div>}
       <Button onClick={onApplyClick}>Apply</Button>
     </div>

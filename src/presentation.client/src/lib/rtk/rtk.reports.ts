@@ -29,5 +29,4 @@ const api = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetBasicAdminReportQuery, useGetBasicEmployeeReportQuery } =
-  api;
+export const { useGetBasicAdminReportQuery, useGetBasicEmployeeReportQuery } = api;

@@ -1,27 +1,9 @@
-import {
-  DataTableColumnHeader,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-  useSimpleModal,
-} from 'xplorer-ui';
+import { DataTableColumnHeader, Tooltip, TooltipContent, TooltipTrigger, useSimpleModal } from 'xplorer-ui';
 import { Employee } from '@/lib/types';
 import { ColumnDef, Row } from '@tanstack/react-table';
-import {
-  CalendarDays,
-  FileIcon,
-  IndianRupee,
-  MonitorOff,
-  UploadIcon,
-} from 'lucide-react';
+import { CalendarDays, FileIcon, IndianRupee, MonitorOff, UploadIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  Button,
-  DropdownMenuContent,
-  DropdownMenuCheckboxItem,
-} from 'xplorer-ui';
+import { DropdownMenu, DropdownMenuTrigger, Button, DropdownMenuContent, DropdownMenuCheckboxItem } from 'xplorer-ui';
 import DocumentForm from '../document-form';
 
 const DocumentsCell = ({ row }: { row: Row<Employee> }) => {
@@ -31,22 +13,11 @@ const DocumentsCell = ({ row }: { row: Row<Employee> }) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm">
-          {row.original.documents.length == 2 ? (
-            <FileIcon size={20} />
-          ) : (
-            <UploadIcon size={20} />
-          )}
+          {row.original.documents.length == 2 ? <FileIcon size={20} /> : <UploadIcon size={20} />}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuCheckboxItem
-          onClick={() =>
-            showModal(
-              'Upload Document',
-              <DocumentForm employee={row.original} />
-            )
-          }
-        >
+        <DropdownMenuCheckboxItem onClick={() => showModal('Upload Document', <DocumentForm employee={row.original} />)}>
           Upload new
         </DropdownMenuCheckboxItem>
         {row.original.documents.map((d) => (
@@ -54,10 +25,7 @@ const DocumentsCell = ({ row }: { row: Row<Employee> }) => {
             checked
             key={d.type}
             onClick={() => {
-              showModal(
-                'Upload Document',
-                <DocumentForm employee={row.original} document={d} />
-              );
+              showModal('Upload Document', <DocumentForm employee={row.original} document={d} />);
             }}
           >
             {d.type}
@@ -71,16 +39,12 @@ const DocumentsCell = ({ row }: { row: Row<Employee> }) => {
 export const columns: ColumnDef<Employee>[] = [
   {
     accessorKey: 'employeeId',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="ID" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="ID" />,
     enableSorting: false,
   },
   {
     accessorKey: 'name',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Name" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
@@ -91,16 +55,12 @@ export const columns: ColumnDef<Employee>[] = [
   },
   {
     accessorKey: 'jobTitleName',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Job Title" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Job Title" />,
     enableSorting: false,
   },
   {
     accessorKey: 'companyEmail',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Email" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Email" />,
     enableSorting: false,
   },
   {
@@ -110,21 +70,13 @@ export const columns: ColumnDef<Employee>[] = [
   },
   {
     accessorKey: 'dateOfJoining',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Joined On" />
-    ),
-    cell: ({ row }) => (
-      <div className="w-[80px]">
-        {row.original['dateOfJoining'].asDateOnly().toDayString()}
-      </div>
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Joined On" />,
+    cell: ({ row }) => <div className="w-[80px]">{row.original['dateOfJoining'].asDateOnly().toDayString()}</div>,
     enableSorting: false,
   },
   {
     accessorKey: 'city',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Go to" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Go to" />,
     enableSorting: false,
     cell: ({ row }) => (
       <div className="flex gap-2">

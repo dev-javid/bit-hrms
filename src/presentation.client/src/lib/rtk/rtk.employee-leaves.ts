@@ -21,7 +21,7 @@ const api = baseApi.injectEndpoints({
         data: object & {
           from: string;
           to: string;
-        }
+        },
       ) => ({
         url: 'employee-leaves',
         method: 'POST',
@@ -37,7 +37,7 @@ const api = baseApi.injectEndpoints({
       query: (
         data: object & {
           employeeLeaveId: number;
-        }
+        },
       ) => ({
         url: `employee-leaves/${data.employeeLeaveId}`,
         method: 'DELETE',
@@ -48,7 +48,7 @@ const api = baseApi.injectEndpoints({
       query: (
         data: object & {
           employeeLeaveId: number;
-        }
+        },
       ) => ({
         url: `employee-leaves/${data.employeeLeaveId}/approve`,
         method: 'PUT',
@@ -61,7 +61,7 @@ const api = baseApi.injectEndpoints({
         data: object & {
           employeeLeaveId: number;
           remarks: string;
-        }
+        },
       ) => ({
         url: `employee-leaves/${data.employeeLeaveId}/decline`,
         method: 'PUT',

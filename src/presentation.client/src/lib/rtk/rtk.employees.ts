@@ -26,7 +26,7 @@ const api = baseApi.injectEndpoints({
         data: object & {
           dateOfBirth: string;
           dateOfJoining: string;
-        }
+        },
       ) => ({
         url: 'employees',
         method: 'POST',
@@ -44,7 +44,7 @@ const api = baseApi.injectEndpoints({
           employeeId: number;
           dateOfBirth: string;
           dateOfJoining: string;
-        }
+        },
       ) => ({
         url: `employees/${data.employeeId}`,
         method: 'PUT',
@@ -60,7 +60,7 @@ const api = baseApi.injectEndpoints({
       query: (
         data: object & {
           employeeId: number;
-        }
+        },
       ) => ({
         url: `employees/${data.employeeId}/documents`,
         method: 'PUT',
@@ -71,10 +71,4 @@ const api = baseApi.injectEndpoints({
   }),
 });
 
-export const {
-  useGetEmployeeQuery,
-  useGetEmployeesQuery,
-  useAddEmployeeMutation,
-  useUpdateEmployeeMutation,
-  useSetEmployeeDocumentMutation,
-} = api;
+export const { useGetEmployeeQuery, useGetEmployeesQuery, useAddEmployeeMutation, useUpdateEmployeeMutation, useSetEmployeeDocumentMutation } = api;

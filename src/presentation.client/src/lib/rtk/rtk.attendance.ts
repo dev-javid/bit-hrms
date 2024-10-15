@@ -44,10 +44,7 @@ const api = baseApi.injectEndpoints({
       transformErrorResponse: transformErrorResponse,
       invalidatesTags: ['Attendance'],
     }),
-    getRegularizations: build.query<
-      PagedResponse<AttendanceRegularization>,
-      { employeeId?: number }
-    >({
+    getRegularizations: build.query<PagedResponse<AttendanceRegularization>, { employeeId?: number }>({
       query: (params: { employeeId?: number }) => ({
         url: '/attendance-regularizations',
         method: 'GET',
@@ -68,10 +65,7 @@ const api = baseApi.injectEndpoints({
       transformErrorResponse: transformErrorResponse,
       invalidatesTags: ['Attendance'],
     }),
-    approveRegularization: build.mutation<
-      null,
-      { attendanceRegularizationId: number }
-    >({
+    approveRegularization: build.mutation<null, { attendanceRegularizationId: number }>({
       query: (data: { attendanceRegularizationId: number }) => ({
         url: `/attendance-regularizations/${data.attendanceRegularizationId}/approve`,
         method: 'PUT',

@@ -1,15 +1,7 @@
 import { useGetEmployeeQuery } from '@/lib/rtk/rtk.employees';
 import { PageSkeleton } from '@/lib/components';
 import useAuth from '@/lib/hooks/use-auth';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  Separator,
-  Badge,
-} from 'xplorer-ui';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, Separator, Badge } from 'xplorer-ui';
 
 const Profile = () => {
   const { user } = useAuth();
@@ -25,9 +17,7 @@ const Profile = () => {
             <CardHeader className="flex flex-row items-start">
               <div className="grid gap-0.5">
                 <CardTitle className="text-4xl">{data.fullName}</CardTitle>
-                <CardDescription>
-                  Since: {data.dateOfJoining.asDateOnly().toDayString()}
-                </CardDescription>
+                <CardDescription>Since: {data.dateOfJoining.asDateOnly().toDayString()}</CardDescription>
               </div>
               <div className="ml-auto items-center gap-1">
                 <Badge variant="outline"> {data.jobTitleName}</Badge>
@@ -66,9 +56,7 @@ const Profile = () => {
                     <span>{data.companyEmail}</span>
                   </li>
                   <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground">
-                      Personal Email
-                    </span>
+                    <span className="text-muted-foreground">Personal Email</span>
                     <span>{data.personalEmail}</span>
                   </li>
                   <li className="flex items-center justify-between">

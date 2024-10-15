@@ -13,22 +13,16 @@ const statusMap = {
 export const columns: ColumnDef<EmployeeLeave>[] = [
   {
     accessorKey: 'employeeName',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Employee" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Employee" />,
     enableSorting: false,
   },
   {
     accessorKey: 'days',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Days" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Days" />,
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
-          <span className="max-w-[500px] truncate font-medium">
-            {differenceInDays(row.original['to'], row.original['from']) + 1}
-          </span>
+          <span className="max-w-[500px] truncate font-medium">{differenceInDays(row.original['to'], row.original['from']) + 1}</span>
         </div>
       );
     },
@@ -36,31 +30,23 @@ export const columns: ColumnDef<EmployeeLeave>[] = [
   },
   {
     accessorKey: 'from',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="From" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="From" />,
     cell: ({ row }) => row.original['from'].asDateOnly().toDayString(),
     enableSorting: false,
   },
   {
     accessorKey: 'to',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="To" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="To" />,
     cell: ({ row }) => row.original['to'].asDateOnly().toDayString(),
     enableSorting: false,
   },
   {
     accessorKey: 'status',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
-          <span className="max-w-[500px] truncate font-medium">
-            {statusMap[row.original['status']]}
-          </span>
+          <span className="max-w-[500px] truncate font-medium">{statusMap[row.original['status']]}</span>
         </div>
       );
     },
@@ -68,9 +54,7 @@ export const columns: ColumnDef<EmployeeLeave>[] = [
   },
   {
     accessorKey: 'remarks',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Remarks" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Remarks" />,
     enableSorting: false,
   },
 ];

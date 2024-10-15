@@ -15,22 +15,14 @@ export const columns: ColumnDef<Salary>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <span>
-            {row.original.salaryId ? (
-              <Badge>Yes</Badge>
-            ) : (
-              <Badge variant="secondary">No</Badge>
-            )}
-          </span>
+          <span>{row.original.salaryId ? <Badge>Yes</Badge> : <Badge variant="secondary">No</Badge>}</span>
         </div>
       );
     },
   },
   {
     accessorKey: 'disbursedOn',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Disbursed On" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Disbursed On" />,
     cell: ({ row }) => {
       return (
         <div>
@@ -45,11 +37,7 @@ export const columns: ColumnDef<Salary>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <span>
-            {row.original.compensation
-              ? `₹${row.original.compensation.toFixed(2)}`
-              : null}
-          </span>
+          <span>{row.original.compensation ? `₹${row.original.compensation.toFixed(2)}` : null}</span>
         </div>
       );
     },
@@ -60,11 +48,7 @@ export const columns: ColumnDef<Salary>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <span>
-            {row.original.salaryId
-              ? `₹${row.original.amount.toFixed(2)}`
-              : null}
-          </span>
+          <span>{row.original.salaryId ? `₹${row.original.amount.toFixed(2)}` : null}</span>
         </div>
       );
     },
@@ -74,22 +58,14 @@ export const columns: ColumnDef<Salary>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          <span>
-            {row.original.salaryId
-              ? `₹${_.sum(
-                  row.original.salaryDudections.map((d) => d.amount)
-                ).toFixed(2)}`
-              : null}
-          </span>
+          <span>{row.original.salaryId ? `₹${_.sum(row.original.salaryDudections.map((d) => d.amount)).toFixed(2)}` : null}</span>
         </div>
       );
     },
   },
   {
     accessorKey: 'action',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Action" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Action" />,
     cell: ({ row }) => {
       return (
         <div>
