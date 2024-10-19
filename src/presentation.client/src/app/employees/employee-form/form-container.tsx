@@ -32,14 +32,8 @@ const FormContainer = ({ defaultValues, departments }: { defaultValues: FormSche
               <TextInput control={form.control} label="First Name" name="firstName" placeholder="First Name" />
               <TextInput control={form.control} label="Last Name" name="lastName" placeholder="Last Name" />
               <TextInput control={form.control} label="Father's Name" name="fatherName" placeholder="Father's Name" />
-              <TextInput control={form.control} label="Date of Birth" name="dateOfBirth" placeholder="Date of Birth" type="date" />
-              <DatePicker
-                control={form.control}
-                label="Date of Joining"
-                name="dateOfJoining"
-                range={(d) => d < new Date()}
-                placeHolder="Date of Joining"
-              />
+              <DatePicker control={form.control} label="Date of Birth" name="dateOfBirth" placeholder="Date of Birth" />
+              <DatePicker placeholder="Date of Joining" label="Date of Joining" name="dateOfJoining" control={form.control} />
             </div>
           </CardContent>
         </Card>
@@ -71,7 +65,7 @@ const FormContainer = ({ defaultValues, departments }: { defaultValues: FormSche
           </CardContent>
         </Card>
         <div className="pt-2 pb-4">
-          <FormButtons form={form} />
+          <FormButtons form={form} loading={form.formState.isSubmitting} />
         </div>
       </form>
     </Form>

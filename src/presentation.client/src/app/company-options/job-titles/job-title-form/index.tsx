@@ -1,7 +1,6 @@
-import { PageSkeleton } from '@/lib/components';
 import useDefaultValues from './use-default-values';
 import { JobTitle } from '@/lib/types';
-import { TextInput, SimpleSelect, FormButtons } from 'xplorer-ui';
+import { TextInput, SimpleSelect, FormButtons, Container } from 'xplorer-ui';
 import useFormMethods from './use-form-methods';
 import { Form } from 'xplorer-ui';
 
@@ -10,7 +9,7 @@ export default function JobTitleForm({ jobTitle, onSuccess }: { jobTitle?: JobTi
   const { form, onSubmit } = useFormMethods(defaultValues, onSuccess);
 
   return (
-    <PageSkeleton isLoading={isLoading}>
+    <Container isLoading={isLoading}>
       {defaultValues && (
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -32,6 +31,6 @@ export default function JobTitleForm({ jobTitle, onSuccess }: { jobTitle?: JobTi
           </form>
         </Form>
       )}
-    </PageSkeleton>
+    </Container>
   );
 }

@@ -1,5 +1,5 @@
-import { BreadCrumbProps, PageContainer, PageSkeleton } from '@/lib/components';
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Separator, toast } from 'xplorer-ui';
+import { BreadCrumbProps, PageContainer } from '@/lib/components';
+import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Container, Separator, toast } from 'xplorer-ui';
 import { useAddSalaryMutation, useGetEstimatedSalaryQuery } from '@/lib/rtk/rtk.salary';
 import { useLocation } from 'react-router-dom';
 import DeductionList from './deduction-list';
@@ -44,7 +44,7 @@ const EstimatedSalary = () => {
 
   return (
     <PageContainer breadCrumb={breadCrumb}>
-      <PageSkeleton isLoading={isLoading || isFetching}>
+      <Container isLoading={isLoading || isFetching}>
         {data && (
           <div className="grid pt-4 md:pt-0 gap-4">
             <Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
@@ -92,7 +92,7 @@ const EstimatedSalary = () => {
             </Card>
           </div>
         )}
-      </PageSkeleton>
+      </Container>
     </PageContainer>
   );
 };

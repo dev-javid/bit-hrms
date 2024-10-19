@@ -1,6 +1,5 @@
 import { useGetAttendanceQuery } from '@/lib/rtk/rtk.attendance';
-import { PageSkeleton } from '@/lib/components';
-import { Card, CardHeader, CardTitle, CardContent } from 'xplorer-ui';
+import { Card, CardHeader, CardTitle, CardContent, Container } from 'xplorer-ui';
 import ClockIn from './clock-in';
 import ClockOut from './clock-out';
 import { DateOnly } from '@/lib/types';
@@ -11,7 +10,7 @@ const ClockInOut = () => {
   });
 
   return (
-    <PageSkeleton isLoading={isLoading || isFetching}>
+    <Container isLoading={isLoading || isFetching}>
       <Card>
         <CardHeader>
           <CardTitle>Clock</CardTitle>
@@ -21,7 +20,7 @@ const ClockInOut = () => {
           <ClockOut inOutTining={data?.[0]} />
         </CardContent>
       </Card>
-    </PageSkeleton>
+    </Container>
   );
 };
 

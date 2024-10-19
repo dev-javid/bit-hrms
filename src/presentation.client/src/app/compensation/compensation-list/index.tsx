@@ -1,7 +1,7 @@
-import { PageContainer, PageHeader, PageSkeleton, BreadCrumbProps, EmployeeDropdown } from '@/lib/components';
+import { PageContainer, PageHeader, BreadCrumbProps, EmployeeDropdown } from '@/lib/components';
 
 import { columns } from './columns';
-import { Card, CardContent, Button, ClientSideDataTable, useSimpleModal } from 'xplorer-ui';
+import { Card, CardContent, Button, ClientSideDataTable, useSimpleModal, Container } from 'xplorer-ui';
 import { useLocation } from 'react-router-dom';
 import { useGetCompensationQuery } from '@/lib/rtk/rtk.salary';
 import _ from 'lodash';
@@ -67,13 +67,13 @@ const CompensationList = () => {
           </>
         )}
       </PageHeader>
-      <PageSkeleton isLoading={isLoading || isFetching}>
+      <Container isLoading={isLoading || isFetching}>
         <Card>
           <CardContent>
             <ClientSideDataTable data={compensations} columns={columns} />
           </CardContent>
         </Card>
-      </PageSkeleton>
+      </Container>
     </PageContainer>
   );
 };

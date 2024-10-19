@@ -1,7 +1,7 @@
 import { useGetBasicEmployeeReportQuery } from '@/lib/rtk/rtk.reports';
-import { PageSkeleton } from '@/lib/components';
+
 import { Link } from 'react-router-dom';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, Button } from 'xplorer-ui';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, Button, Container } from 'xplorer-ui';
 
 const LeaveSummary = ({ employeeId, hideActions }: { employeeId?: number; hideActions: boolean }) => {
   const { data, isFetching } = useGetBasicEmployeeReportQuery({ employeeId });
@@ -13,7 +13,7 @@ const LeaveSummary = ({ employeeId, hideActions }: { employeeId?: number; hideAc
         <CardDescription>{}</CardDescription>
       </CardHeader>
       <CardContent>
-        <PageSkeleton isLoading={isFetching} rows={2}>
+        <Container isLoading={isFetching} rows={2}>
           <div className="grid gap-3">
             <ul className="grid gap-3">
               <li className="flex items-center justify-between">
@@ -35,7 +35,7 @@ const LeaveSummary = ({ employeeId, hideActions }: { employeeId?: number; hideAc
               </div>
             )}
           </div>
-        </PageSkeleton>
+        </Container>
       </CardContent>
     </Card>
   );

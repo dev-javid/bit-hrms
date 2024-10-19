@@ -1,6 +1,6 @@
-import { AddButton, BackButton, BreadCrumbProps, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
+import { AddButton, BackButton, BreadCrumbProps, PageContainer, PageHeader } from '@/lib/components';
 import { useColumns } from './columns';
-import { Card, CardContent, ClientSideDataTable, useSimpleModal } from 'xplorer-ui';
+import { Card, CardContent, ClientSideDataTable, Container, useSimpleModal } from 'xplorer-ui';
 import { useGetIncomeSourcesQuery } from '@/lib/rtk/rtk.income-sources';
 import IncomeSourceForm from '../income-source-form';
 import { IncomeSource } from '@/lib/types';
@@ -33,11 +33,11 @@ const IncomeSourceList = () => {
         <BackButton to="./../" text="Company Options" />
         <AddButton onClick={onAddNewClick} tooltip="Add new income source" />
       </PageHeader>
-      <PageSkeleton isLoading={isLoading || isFetching}>
+      <Container isLoading={isLoading || isFetching}>
         <Card>
           <CardContent>{data?.items && <ClientSideDataTable data={data.items} columns={columns} />}</CardContent>
         </Card>
-      </PageSkeleton>
+      </Container>
     </PageContainer>
   );
 };

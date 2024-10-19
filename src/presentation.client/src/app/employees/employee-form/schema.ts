@@ -10,7 +10,9 @@ export const FormSchema = z.object({
   firstName: z.string().min(1, { message: 'First Name is required' }).max(50),
   lastName: z.string().min(1, { message: 'Last Name is required' }).max(50),
   dateOfBirth: z.coerce.date(),
-  dateOfJoining: z.date(),
+  dateOfJoining: z.date({
+    invalid_type_error: 'Date of joining is required',
+  }),
   fatherName: z.string().min(1, { message: "Father's Name is required" }).max(50),
   phoneNumber: z.string().min(1, { message: 'Phone Number is required' }).max(50),
   companyEmail: z.string().min(1, { message: 'Company Email is required' }).max(50),

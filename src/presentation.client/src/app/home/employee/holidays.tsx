@@ -1,6 +1,6 @@
 import { useGetHolidaysQuery } from '@/lib/rtk/rtk.holidays';
-import { PageSkeleton } from '@/lib/components';
-import { Alert, AlertDescription, Card, CardContent, CardHeader, CardTitle } from 'xplorer-ui';
+import { Alert, AlertDescription, Card, CardContent, CardHeader, CardTitle, Container } from 'xplorer-ui';
+
 
 const Holidays = () => {
   const { data, isFetching } = useGetHolidaysQuery(null);
@@ -10,7 +10,7 @@ const Holidays = () => {
       <CardHeader>
         <CardTitle>Holidays</CardTitle>
       </CardHeader>
-      <PageSkeleton isLoading={isFetching}>
+      <Container isLoading={isFetching}>
         <CardContent className="space-y-1">
           {data?.items.map((holiday) => (
             <Alert key={holiday.holidayId}>
@@ -21,7 +21,7 @@ const Holidays = () => {
             </Alert>
           ))}
         </CardContent>
-      </PageSkeleton>
+      </Container>
     </Card>
   );
 };

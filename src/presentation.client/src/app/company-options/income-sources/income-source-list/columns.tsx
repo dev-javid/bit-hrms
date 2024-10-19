@@ -1,8 +1,7 @@
-import { ActionColumn } from '@/lib/components';
 import { IncomeSource } from '@/lib/types';
 import { ColumnDef } from '@tanstack/react-table';
 import { useMemo } from 'react';
-import { DataTableColumnHeader } from 'xplorer-ui';
+import { ActionColumn, DataTableColumnHeader } from 'xplorer-ui';
 
 export const useColumns = (onEditClick: (value: IncomeSource) => void): ColumnDef<IncomeSource>[] => {
   return useMemo(() => {
@@ -30,7 +29,7 @@ export const useColumns = (onEditClick: (value: IncomeSource) => void): ColumnDe
         },
       },
       {
-        ...ActionColumn(onEditClick),
+        ...ActionColumn({ onEditClick }),
       },
     ];
   }, [onEditClick]);

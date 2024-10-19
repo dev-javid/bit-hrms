@@ -1,7 +1,6 @@
-import { DataTableColumnHeader } from 'xplorer-ui';
+import { ActionColumn, DataTableColumnHeader } from 'xplorer-ui';
 import { Department } from '@/lib/types';
 import { ColumnDef } from '@tanstack/react-table';
-import { ActionColumn } from '@/lib/components';
 
 export const getColumns = (onEditClick: (value: Department) => void): ColumnDef<Department>[] => {
   return [
@@ -17,7 +16,7 @@ export const getColumns = (onEditClick: (value: Department) => void): ColumnDef<
       },
     },
     {
-      ...ActionColumn(onEditClick),
+      ...ActionColumn({ onEditClick }),
     },
   ];
 };

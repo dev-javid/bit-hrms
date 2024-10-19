@@ -1,7 +1,6 @@
-import { Badge, DataTableColumnHeader } from 'xplorer-ui';
+import { ActionColumn, Badge, DataTableColumnHeader } from 'xplorer-ui';
 import { Holiday } from '@/lib/types';
 import { ColumnDef } from '@tanstack/react-table';
-import { ActionColumn } from '@/lib/components';
 
 export const getColumns = (onEditClick: (value: Holiday) => void): ColumnDef<Holiday>[] => {
   return [
@@ -41,7 +40,7 @@ export const getColumns = (onEditClick: (value: Holiday) => void): ColumnDef<Hol
       },
     },
     {
-      ...ActionColumn(onEditClick),
+      ...ActionColumn({ onEditClick }),
     },
   ];
 };

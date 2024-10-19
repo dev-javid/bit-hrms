@@ -1,5 +1,5 @@
-import { PageContainer, PageHeader, PageSkeleton, BreadCrumbProps, MonthsDropdown, EmployeeDropdown, ActionButton } from '@/lib/components';
-import { Card, CardContent, ClientSideDataTable, useSimpleModal } from 'xplorer-ui';
+import { PageContainer, PageHeader, BreadCrumbProps, MonthsDropdown, EmployeeDropdown, ActionButton } from '@/lib/components';
+import { Card, CardContent, ClientSideDataTable, Container, useSimpleModal } from 'xplorer-ui';
 import useLoadData from './useLoadData';
 import { useMemo, useState } from 'react';
 import useAuth from '@/lib/hooks/use-auth';
@@ -19,7 +19,7 @@ const MonthlyAttendance = () => {
   const { showModal } = useSimpleModal();
   const attendance = useMemo(
     () => (employee ? getMonthData(data, holidays, leaves, date, employee.employeeId, regularizations) : []),
-    [data, holidays, leaves, employee, date, regularizations],
+    [data, holidays, leaves, employee, date, regularizations]
   );
 
   const onRegularizeClick = (inoutTiming: InOutTiming) => {
@@ -31,13 +31,14 @@ const MonthlyAttendance = () => {
     ? {
         title: 'Attendance',
         to: './',
+        state: {},
         child: {
           title: employee.fullName,
           to: '',
         },
       }
     : {
-        title: 'My Attendance',
+        title: user.isEmployee ? 'My Attendance' : 'Attendance',
         to: '',
       };
 
@@ -48,15 +49,15 @@ const MonthlyAttendance = () => {
         {user.isCompanyAdmin && (
           <EmployeeDropdown onEmployeeSelect={(e) => setEmployee(e)} selectedEmployeeId={employee?.employeeId ?? user?.employeeId} />
         )}
-        <MonthsDropdown onMonthChange={setDate} defaultValue={date} referenceDate={user.dateOfJoining ?? date} />
+        {employee && <MonthsDropdown onMonthChange={setDate} defaultValue={date} referenceDate={employee.dateOfJoining.asDateOnly() ?? date} />}
       </PageHeader>
-      <PageSkeleton isLoading={isLoading} rows={30}>
+      <Container isLoading={isLoading} rows={30}>
         <Card>
           <CardContent>
             <>{attendance && <ClientSideDataTable pageSize={31} data={attendance} columns={getColumns(onRegularizeClick)} />}</>
           </CardContent>
         </Card>
-      </PageSkeleton>
+      </Container>
     </PageContainer>
   );
 };
@@ -67,7 +68,7 @@ const getMonthData = (
   leaves: EmployeeLeave[],
   dateOnly: DateOnly,
   employeeId: number,
-  regularizations: AttendanceRegularization[],
+  regularizations: AttendanceRegularization[]
 ): InOutTiming[] => {
   const now = new Date();
   const year = dateOnly.year;

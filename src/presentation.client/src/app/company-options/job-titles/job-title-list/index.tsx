@@ -1,7 +1,7 @@
-import { AddButton, BackButton, BreadCrumbProps, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
+import { AddButton, BackButton, BreadCrumbProps, PageContainer, PageHeader } from '@/lib/components';
 import { JobTitle } from '@/lib/types';
 import { useParams } from 'react-router-dom';
-import { Card, CardContent, ClientSideDataTable, useSimpleModal } from 'xplorer-ui';
+import { Card, CardContent, ClientSideDataTable, Container, useSimpleModal } from 'xplorer-ui';
 import { useGetJobTitlesQuery } from '@/lib/rtk/rtk.job-titles';
 import JobTitleForm from '../job-title-form';
 import { getColumns } from './columns';
@@ -33,11 +33,11 @@ const JobTitleList = () => {
         <BackButton to="./../" text="Company Options" />
         <AddButton onClick={onAddNewClick} tooltip="Add new job title" />
       </PageHeader>
-      <PageSkeleton isLoading={isLoading || isFetching}>
+      <Container isLoading={isLoading || isFetching}>
         <Card>
           <CardContent>{data && <ClientSideDataTable data={data?.items} columns={getColumns(onEditClick)} />}</CardContent>
         </Card>
-      </PageSkeleton>
+      </Container>
     </PageContainer>
   );
 };

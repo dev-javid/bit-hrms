@@ -1,8 +1,8 @@
-import { BackButton, BreadCrumbProps, EmployeeDropdown, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
+import { BackButton, BreadCrumbProps, EmployeeDropdown, PageContainer, PageHeader } from '@/lib/components';
 import { getColumns } from './columns';
 import { AttendanceRegularization, Employee } from '@/lib/types';
 import { useLocation } from 'react-router-dom';
-import { CardContent, Card, ClientSideDataTable, useSimpleConfirm, toast } from 'xplorer-ui';
+import { CardContent, Card, ClientSideDataTable, useSimpleConfirm, toast, Container } from 'xplorer-ui';
 import { useApproveRegularizationMutation, useGetRegularizationsQuery } from '@/lib/rtk/rtk.attendance';
 import { useState } from 'react';
 import useAuth from '@/lib/hooks/use-auth';
@@ -41,7 +41,7 @@ const RegularizationList = () => {
   const onApproveClick = async (regularization: AttendanceRegularization) => {
     const ok = await showConfirm(
       `Approve Regularization: ${regularization.date.asDateOnly().toDayString()}`,
-      'Are you sure you want to approve this regularization?',
+      'Are you sure you want to approve this regularization?'
     );
 
     if (ok) {
@@ -67,9 +67,9 @@ const RegularizationList = () => {
       </PageHeader>
       <Card>
         <CardContent>
-          <PageSkeleton isLoading={isLoading || isFetching} rows={30}>
+          <Container isLoading={isLoading || isFetching} rows={30}>
             {data && <ClientSideDataTable data={data?.items} columns={getColumns(onApproveClick, user)} />}
-          </PageSkeleton>
+          </Container>
         </CardContent>
       </Card>
     </PageContainer>

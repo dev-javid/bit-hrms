@@ -1,7 +1,7 @@
 import { useApproveEamployeeLeaveMutation, useDeleteEmployeeLeaveMutation, useGetEmployeeLeavesQuery } from '@/lib/rtk/rtk.employee-leaves';
-import { ActionButton, BreadCrumbProps, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
+import { ActionButton, BreadCrumbProps, PageContainer, PageHeader } from '@/lib/components';
 import { columns } from './columns';
-import { Card, CardContent, ClientSideDataTable, useSimpleModal, useSimpleConfirm } from 'xplorer-ui';
+import { Card, CardContent, ClientSideDataTable, useSimpleModal, useSimpleConfirm, Container } from 'xplorer-ui';
 import { EmployeeLeave } from '@/lib/types';
 import { toast } from 'xplorer-ui';
 import { useState } from 'react';
@@ -78,7 +78,7 @@ const EmployeeLeaveList = () => {
         {user.isEmployee && <ActionButton onClick={onApplyLeaveClick} tooltip="Apply Leave" text="Apply Leave" />}
       </PageHeader>
       {decline && <DeclineLeaveForm leave={decline} onCancelDecline={() => setDecline(undefined)} />}
-      <PageSkeleton isLoading={isLoading || isFetching}>
+      <Container isLoading={isLoading || isFetching}>
         <Card>
           <CardContent>
             {data && (
@@ -107,7 +107,7 @@ const EmployeeLeaveList = () => {
             )}
           </CardContent>
         </Card>
-      </PageSkeleton>
+      </Container>
     </PageContainer>
   );
 };

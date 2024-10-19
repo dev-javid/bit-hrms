@@ -1,10 +1,11 @@
-import { AddButton, BreadCrumbProps, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
-import { columns } from './columns';
-import { Card, CardContent, ClientSideDataTable } from 'xplorer-ui';
+import { AddButton, BreadCrumbProps, PageContainer, PageHeader } from '@/lib/components';
+import useColumns from './useColumns';
+import { Card, CardContent, ClientSideDataTable, Container } from 'xplorer-ui';
 import { useGetEmployeesQuery } from '@/lib/rtk/rtk.employees';
 
 const EmployeesList = () => {
   const { data, isLoading, isFetching } = useGetEmployeesQuery(null);
+  const columns = useColumns();
 
   const breadCrumb: BreadCrumbProps = {
     title: 'Employees',
@@ -16,11 +17,11 @@ const EmployeesList = () => {
       <PageHeader title="Employees">
         <AddButton to="0" tooltip="Add new employee" />
       </PageHeader>
-      <PageSkeleton isLoading={isLoading || isFetching}>
+      <Container isLoading={isLoading || isFetching}>
         <Card>
           <CardContent>{data && <ClientSideDataTable data={data?.items} columns={columns} />}</CardContent>
         </Card>
-      </PageSkeleton>
+      </Container>
     </PageContainer>
   );
 };

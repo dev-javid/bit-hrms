@@ -1,5 +1,3 @@
-import { DateOnly } from './types.date-only';
-
 const key: string = 'auth-tokens';
 const device_id_key: string = 'device-id';
 export interface AuthTokens {
@@ -14,7 +12,6 @@ export interface User {
   roles: RoleName[];
   email: string;
   name: string;
-  dateOfJoining?: DateOnly;
   isCompanyAdmin: boolean;
   isSuperAdmin: boolean;
   isEmployee: boolean;

@@ -1,7 +1,7 @@
 import { useGetDepartmentsQuery } from '@/lib/rtk/rtk.departments';
-import { AddButton, BackButton, BreadCrumbProps, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
+import { AddButton, BackButton, BreadCrumbProps, PageContainer, PageHeader } from '@/lib/components';
 import { Department } from '@/lib/types';
-import { Card, CardContent, ClientSideDataTable, useSimpleModal } from 'xplorer-ui';
+import { Card, CardContent, ClientSideDataTable, Container, useSimpleModal } from 'xplorer-ui';
 import DepartmentForm from '../department-form';
 import { getColumns } from './columns';
 
@@ -29,11 +29,11 @@ const DepartmentList = () => {
         <BackButton to="./../" text="Company Options" />
         <AddButton onClick={onAddNewClick} tooltip="Add new department" />
       </PageHeader>
-      <PageSkeleton isLoading={isLoading || isFetching}>
+      <Container isLoading={isLoading || isFetching}>
         <Card>
           <CardContent>{data && <ClientSideDataTable data={data?.items} columns={getColumns(onEditClick)} />}</CardContent>
         </Card>
-      </PageSkeleton>
+      </Container>
     </PageContainer>
   );
 };

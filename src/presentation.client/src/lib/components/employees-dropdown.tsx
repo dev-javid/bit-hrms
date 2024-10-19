@@ -1,7 +1,5 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from 'xplorer-ui';
-
+import { Container, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from 'xplorer-ui';
 import { useGetEmployeesQuery } from '@/lib/rtk/rtk.employees';
-import { PageSkeleton } from '@/lib/components';
 import { Employee } from '../types';
 
 const EmployeeDropdown = ({
@@ -14,7 +12,7 @@ const EmployeeDropdown = ({
   const { data, isLoading, isFetching } = useGetEmployeesQuery(null);
 
   return (
-    <PageSkeleton isLoading={isLoading || isFetching} rows={1}>
+    <Container isLoading={isLoading || isFetching} rows={1}>
       {data && (
         <Select
           onValueChange={(employeeId) => onEmployeeSelect(data!.items.find((e) => e.employeeId == Number(employeeId))!)}
@@ -32,7 +30,7 @@ const EmployeeDropdown = ({
           </SelectContent>
         </Select>
       )}
-    </PageSkeleton>
+    </Container>
   );
 };
 

@@ -1,5 +1,4 @@
 import { Button, DateRangePicker, toast } from 'xplorer-ui';
-import { DateRange } from 'react-day-picker';
 import { useState } from 'react';
 import { differenceInDays } from 'date-fns';
 import { useAddEmployeeLeaveMutation } from '@/lib/rtk/rtk.employee-leaves';

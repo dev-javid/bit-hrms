@@ -1,6 +1,6 @@
-import { BreadCrumbProps, MonthsDropdown, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
+import { BreadCrumbProps, MonthsDropdown, PageContainer, PageHeader } from '@/lib/components';
 import { columns } from './columns';
-import { Card, CardContent, ClientSideDataTable } from 'xplorer-ui';
+import { Card, CardContent, ClientSideDataTable, Container } from 'xplorer-ui';
 import useLoadData from './useLoadData';
 import { useState } from 'react';
 import { DateOnly } from '@/lib/types';
@@ -22,13 +22,13 @@ const SalaryList = () => {
           <MonthsDropdown onMonthChange={setDate} defaultValue={DateOnly.firstDayOfCurrentMonth()} referenceDate={company.createdOn.asDateOnly()} />
         )}
       </PageHeader>
-      <PageSkeleton isLoading={isLoading}>
+      <Container isLoading={isLoading}>
         <Card>
           <CardContent>
             <ClientSideDataTable data={data} columns={columns} />
           </CardContent>
         </Card>
-      </PageSkeleton>
+      </Container>
     </PageContainer>
   );
 };

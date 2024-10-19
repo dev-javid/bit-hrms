@@ -1,6 +1,6 @@
-import { BreadCrumbProps, PageContainer, PageHeader, PageSkeleton } from '@/lib/components';
+import { BreadCrumbProps, PageContainer, PageHeader } from '@/lib/components';
 import { Company } from '@/lib/types';
-import { CardContent, Card, Button, ClientSideDataTable, useSimpleModal, useSimpleConfirm, toast } from 'xplorer-ui';
+import { CardContent, Card, Button, ClientSideDataTable, useSimpleModal, useSimpleConfirm, toast, Container } from 'xplorer-ui';
 import { useDeleteCompanyMutation, useGetCompaniesQuery } from '@/lib/rtk/rtk.comapnies';
 import CompanyForm from '../company-form';
 import { getColumns } from './columns';
@@ -24,7 +24,7 @@ const CompanyList = () => {
       'Delete Company',
       <div>
         Are you sure you want to delete the company - <strong>{company.name}</strong>?
-      </div>,
+      </div>
     );
     if (ok) {
       const response = await deleteCompany(company.companyId);
@@ -50,11 +50,11 @@ const CompanyList = () => {
           Add company
         </Button>
       </PageHeader>
-      <PageSkeleton isLoading={isLoading || isFetching}>
+      <Container isLoading={isLoading || isFetching}>
         <Card>
           <CardContent>{data && <ClientSideDataTable data={data?.items} columns={getColumns(onEditClick, onDeleteClick)} />}</CardContent>
         </Card>
-      </PageSkeleton>
+      </Container>
     </PageContainer>
   );
 };

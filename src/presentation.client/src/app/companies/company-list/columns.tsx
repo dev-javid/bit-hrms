@@ -1,6 +1,6 @@
-import { ActionColumn } from '@/lib/components';
 import { Company } from '@/lib/types';
 import { ColumnDef } from '@tanstack/react-table';
+import { ActionColumn } from 'xplorer-ui';
 
 export const getColumns = (onEditClick: (value: Company) => void, onDeleteClick: (value: Company) => void) => {
   const columns: ColumnDef<Company>[] = [
@@ -44,7 +44,7 @@ export const getColumns = (onEditClick: (value: Company) => void, onDeleteClick:
       header: 'Address',
     },
     {
-      ...ActionColumn(onEditClick, onDeleteClick),
+      ...ActionColumn({ onEditClick, onDeleteClick }),
     },
   ];
 

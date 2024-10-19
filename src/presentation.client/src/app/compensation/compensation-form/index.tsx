@@ -11,15 +11,7 @@ const CompensationForm = ({ employee, onSuccess }: { employee: Employee; onSucce
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="pb-4">
           <TextInput control={form.control} name="amount" label="Amount" placeholder="Amount" type="number" />
-          <DatePicker
-            label="Effective From"
-            name="effectiveFrom"
-            control={form.control}
-            range={(date) => {
-              return date >= new Date();
-            }}
-            placeHolder="Effective From"
-          />
+          <DatePicker control={form.control} label="Effective From" name="effectiveFrom" placeholder="Effective From" minDate={new Date()} />
         </div>
         <FormButtons form={form} hideCancel />
       </form>

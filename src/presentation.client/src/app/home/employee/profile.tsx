@@ -1,7 +1,6 @@
 import { useGetEmployeeQuery } from '@/lib/rtk/rtk.employees';
-import { PageSkeleton } from '@/lib/components';
 import useAuth from '@/lib/hooks/use-auth';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, Separator, Badge } from 'xplorer-ui';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, Separator, Badge, Container } from 'xplorer-ui';
 
 const Profile = () => {
   const { user } = useAuth();
@@ -10,7 +9,7 @@ const Profile = () => {
   });
 
   return (
-    <PageSkeleton isLoading={isFetching}>
+    <Container isLoading={isFetching}>
       {data && (
         <div>
           <Card className="overflow-hidden" x-chunk="dashboard-05-chunk-4">
@@ -82,7 +81,7 @@ const Profile = () => {
           </Card>
         </div>
       )}
-    </PageSkeleton>
+    </Container>
   );
 };
 
