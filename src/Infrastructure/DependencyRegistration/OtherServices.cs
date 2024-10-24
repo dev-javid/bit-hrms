@@ -23,9 +23,10 @@ namespace Infrastructure.DependencyRegistration
 
             services.AddSingleton<IFileService>((_) =>
             {
+                var apiUrl = configuration.GetValue<string?>("ApplicationUrls:ApiUrl");
                 var request = _.GetService<IHttpContextAccessor>()!.HttpContext!.Request;
                 var url = $"{request.Scheme}://{request.Host}{request.PathBase}";
-                return new FileService(configuration.GetValue<string>("FileStorage:RootDirectory")!, url);
+                return new FileService(configuration.GetValue<string>("FileStorage:RootDirectory")!, string.IsNullOrWhiteSpace(apiUrl) ? url : apiUrl);
             });
 
             services.AddHttpServices(configuration);

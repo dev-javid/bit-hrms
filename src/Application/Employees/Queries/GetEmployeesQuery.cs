@@ -1,13 +1,54 @@
 namespace Application.Employees.Queries
 {
-    public class GetEmployeesQuery : PagedQuery<GetEmployeeQuery.Response>
+    public class GetEmployeesQuery : PagedQuery<GetEmployeesQuery.Response>
     {
-        internal class Handler(IDbContext dbContext, IFileService fileService) : IRequestHandler<GetEmployeesQuery, PagedResponse<GetEmployeeQuery.Response>>
+        public class Response
         {
-            public async Task<PagedResponse<GetEmployeeQuery.Response>> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
+            public required int EmployeeId { get; set; }
+
+            public required int DepartmentId { get; set; }
+
+            public required string DepartmentName { get; set; }
+
+            public required int JobTitleId { get; set; }
+
+            public required string JobTitleName { get; set; }
+
+            public required string FirstName { get; set; }
+
+            public required string LastName { get; set; }
+
+            public required string FullName { get; set; }
+
+            public required DateOnly DateOfBirth { get; set; }
+
+            public required DateOnly DateOfJoining { get; set; }
+
+            public required string FatherName { get; set; }
+
+            public required string PhoneNumber { get; set; }
+
+            public required string CompanyEmail { get; set; }
+
+            public required string PersonalEmail { get; set; }
+
+            public required string Address { get; set; }
+
+            public required string City { get; set; }
+
+            public required string PAN { get; set; }
+
+            public required string Aadhar { get; set; }
+
+            public required decimal? Compensation { get; set; }
+        }
+
+        internal class Handler(IDbContext dbContext) : IRequestHandler<GetEmployeesQuery, PagedResponse<Response>>
+        {
+            public async Task<PagedResponse<Response>> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
             {
                 var response = await dbContext.Employees
-                   .Select(x => new GetEmployeeQuery.Response
+                   .Select(x => new Response
                    {
                        EmployeeId = x.Id,
                        Aadhar = x.Aadhar.Value,
@@ -27,22 +68,10 @@ namespace Application.Employees.Queries
                        PAN = x.PAN.Value,
                        PersonalEmail = x.PersonalEmail.Value,
                        PhoneNumber = x.PhoneNumber.Value,
-                       Documents = x.EmployeeDocuments.Select(x => new GetEmployeeQuery.Response.DocumentResponse
-                       {
-                           Type = x.DocumentType.ToString(),
-                           Url = x.FileName.Value,
-                       })
+                       Compensation = x.Compensations.Any() ? x.Compensations.OrderByDescending(s => s.EffectiveFrom).First().Amount : null,
                    })
                    .OrderBy(x => x.EmployeeId)
                    .ToPagedResponseAsync(request, cancellationToken);
-
-                response.Items.ToList().ForEach(e =>
-                {
-                    e.Documents.ToList().ForEach(d =>
-                    {
-                        d.Url = fileService.GetFileUrl(d.Url.ToValueObject<FileName>(), $"Employees/{e.EmployeeId}");
-                    });
-                });
 
                 return response;
             }

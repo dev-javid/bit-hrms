@@ -20,18 +20,18 @@ const navMenuItems: {
     isActive: (pathName) => pathName == '/app',
   },
   {
-    title: 'Attendance',
-    link: '/app/attendance',
-    icon: <CalendarDays className="h-5 w-5" />,
-    authorized: ['Employee', 'CompanyAdmin'],
-    isActive: (pathName) => pathName.indexOf('/app/attendance') > -1,
-  },
-  {
     title: 'Employees',
     link: '/app/employees',
     icon: <Users2 className="h-5 w-5" />,
     authorized: ['CompanyAdmin'],
     isActive: (pathName) => pathName.includes('/app/employees'),
+  },
+  {
+    title: 'Attendance',
+    link: '/app/attendance',
+    icon: <CalendarDays className="h-5 w-5" />,
+    authorized: ['Employee', 'CompanyAdmin'],
+    isActive: (pathName) => pathName.indexOf('/app/attendance') > -1,
   },
   {
     title: 'Leaves',
@@ -86,7 +86,7 @@ const NavMenu = () => {
                     to={m.link}
                     className={cn(
                       'flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8',
-                      m.isActive(pathname) ? 'bg-primary text-lg font-semibold text-primary-foreground md:text-base' : '',
+                      m.isActive(pathname) ? 'bg-primary text-lg font-semibold text-primary-foreground md:text-base' : ''
                     )}
                   >
                     {m.icon}

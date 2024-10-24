@@ -1,24 +1,28 @@
-import { useParams } from 'react-router-dom';
 import FormContainer from './form-container';
 import useDefaultValues from './use-default-values';
 import { BackButton, BreadCrumbProps, PageContainer, PageHeader } from '@/lib/components';
+import { Container } from 'xplorer-ui';
 
 export default function EmployeeForm() {
-  const employeeId = useParams().employeeId ?? 0;
-  const { defaultValues, departments } = useDefaultValues();
+  const { defaultValues, departments, isLoading, fullName } = useDefaultValues();
 
   const breadCrumb: BreadCrumbProps = {
     title: 'Employees',
-    to: './../',
-    child: { title: employeeId != 0 ? 'Edit' : 'Add', to: '' },
+    to: './../../',
+    child: {
+      title: fullName || 'Add',
+      to: './../',
+    },
   };
 
   return (
     <PageContainer breadCrumb={breadCrumb}>
-      <PageHeader title={employeeId != 0 ? 'Edit Employee' : 'Add Employee'}>
+      <PageHeader title={defaultValues.employeeId != 0 ? 'Edit Employee' : 'Add Employee'}>
         <BackButton to="./../" text="Employee List" />
       </PageHeader>
-      <>{defaultValues && <FormContainer defaultValues={defaultValues} departments={departments} />}</>
+      <Container isLoading={isLoading}>
+        <>{defaultValues && <FormContainer defaultValues={defaultValues} departments={departments} />}</>
+      </Container>
     </PageContainer>
   );
 }

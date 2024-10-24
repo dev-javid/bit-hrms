@@ -41,16 +41,17 @@ namespace Presentation.Middleware
             using var scope = app.Services.CreateScope();
             var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
             var roorDirectory = configuration.GetValue<string>("FileStorage:RootDirectory")!;
+
             if (!Directory.Exists(roorDirectory))
             {
-                var directory = Directory.CreateDirectory(roorDirectory);
-
-                app.UseStaticFiles(new StaticFileOptions()
-                {
-                    FileProvider = new PhysicalFileProvider(directory.FullName),
-                    RequestPath = new PathString("/media")
-                });
+               Directory.CreateDirectory(roorDirectory);
             }
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(new DirectoryInfo(roorDirectory).FullName),
+                RequestPath = new PathString("/media")
+            });
         }
     }
 }

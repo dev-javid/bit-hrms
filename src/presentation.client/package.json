@@ -18,7 +18,8 @@
     "react-hook-form": "^7.51.2",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.22.3",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "xplorer-ui": "^1.0.62"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

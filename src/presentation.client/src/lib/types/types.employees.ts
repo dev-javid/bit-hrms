@@ -17,6 +17,7 @@ export interface Employee {
   city: string;
   pan: string;
   aadhar: string;
+  compensation: number;
   documents: EmployeeDocument[];
 }
 
@@ -31,6 +32,9 @@ export interface EmployeeLeave {
 }
 
 export interface EmployeeDocument {
-  type: 'PAN' | 'Aadhar';
+  type: DocumentType;
   url: string;
+  updatedOn: Date;
 }
+
+export type DocumentType = 'PAN' | 'Aadhar';

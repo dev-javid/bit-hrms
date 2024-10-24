@@ -9,6 +9,7 @@ export const FormSchema = z.object({
   jobTitleId: z.coerce.number().min(1, 'Job Title is required'),
   firstName: z.string().min(1, { message: 'First Name is required' }).max(50),
   lastName: z.string().min(1, { message: 'Last Name is required' }).max(50),
+  fullName: z.string().optional(),
   dateOfBirth: z.coerce.date(),
   dateOfJoining: z.date({
     invalid_type_error: 'Date of joining is required',

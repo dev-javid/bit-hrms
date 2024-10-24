@@ -47,6 +47,8 @@ namespace Application.Employees.Queries
 
             public required string Aadhar { get; set; }
 
+            public required decimal? Compensation { get; set; }
+
             public required IEnumerable<DocumentResponse> Documents { get; set; }
 
             public class DocumentResponse
@@ -54,6 +56,8 @@ namespace Application.Employees.Queries
                 public required string Type { get; set; }
 
                 public required string Url { get; set; }
+
+                public required DateTime UpdatedOn { get; set; }
             }
         }
 
@@ -71,6 +75,7 @@ namespace Application.Employees.Queries
             public async Task<Response?> Handle(GetEmployeeQuery request, CancellationToken cancellationToken)
             {
                 return await dbContext.Employees
+                   .AsSplitQuery()
                    .Select(x => new Response
                    {
                        EmployeeId = x.Id,
@@ -91,10 +96,12 @@ namespace Application.Employees.Queries
                        PAN = x.PAN.Value,
                        PersonalEmail = x.PersonalEmail.Value,
                        PhoneNumber = x.PhoneNumber.Value,
+                       Compensation = x.Compensations.Any() ? x.Compensations.OrderByDescending(s => s.EffectiveFrom).First().Amount : null,
                        Documents = x.EmployeeDocuments.Select(x => new Response.DocumentResponse
                        {
                            Type = x.DocumentType.ToString(),
-                           Url = fileService.GetFileUrl(x.FileName, $"Employees/{x.EmployeeId}")
+                           Url = fileService.GetFileUrl(x.FileName, $"Employees/{x.EmployeeId}"),
+                           UpdatedOn = x.ModifiedOn != null ? x.ModifiedOn.Value : x.CreatedOn
                        })
                    })
                    .FirstOrDefaultAsync(x => x.EmployeeId == request.EmployeeId, cancellationToken);

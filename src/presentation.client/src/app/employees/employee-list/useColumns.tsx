@@ -1,40 +1,9 @@
-import { ActionColumn, DataTableColumnHeader, useSimpleModal } from 'xplorer-ui';
+import { ActionColumn, DataTableColumnHeader } from 'xplorer-ui';
 import { Employee } from '@/lib/types';
-import { ColumnDef, Row } from '@tanstack/react-table';
-import { CalendarDays, FileIcon, IndianRupee, MonitorOff, UploadIcon } from 'lucide-react';
-import { DropdownMenu, DropdownMenuTrigger, Button, DropdownMenuContent, DropdownMenuCheckboxItem } from 'xplorer-ui';
-import DocumentForm from '../document-form';
+import { ColumnDef } from '@tanstack/react-table';
+import { FileText, IndianRupee } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
-const DocumentsCell = ({ row }: { row: Row<Employee> }) => {
-  const { showModal } = useSimpleModal();
-
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm">
-          {row.original.documents.length == 2 ? <FileIcon size={20} /> : <UploadIcon size={20} />}
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuCheckboxItem onClick={() => showModal('Upload Document', <DocumentForm employee={row.original} />)}>
-          Upload new
-        </DropdownMenuCheckboxItem>
-        {row.original.documents.map((d) => (
-          <DropdownMenuCheckboxItem
-            checked
-            key={d.type}
-            onClick={() => {
-              showModal('Upload Document', <DocumentForm employee={row.original} document={d} />);
-            }}
-          >
-            {d.type}
-          </DropdownMenuCheckboxItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-};
+import { AddButton } from '@/lib/components';
 
 const useColumns = () => {
   const navigateTo = useNavigate();
@@ -67,35 +36,50 @@ const useColumns = () => {
       enableSorting: false,
     },
     {
-      header: 'Documents',
-      accessorKey: 'documents',
-      cell: DocumentsCell,
-    },
-    {
       accessorKey: 'dateOfJoining',
       header: ({ column }) => <DataTableColumnHeader column={column} title="Joined On" />,
       cell: ({ row }) => <div className="w-[80px]">{row.original['dateOfJoining'].asDateOnly().toDayString()}</div>,
       enableSorting: false,
     },
     {
+      accessorKey: 'compensation',
+      header: () => <div className="flex gap-2 justify-end">Compensation</div>,
+      cell: ({ row }) => {
+        return (
+          <div className="flex justify-end">
+            {row.original.compensation ? (
+              <div
+                className="flex justify-end cursor-pointer text-gray-500 hover:text-foreground"
+                onClick={() => navigateTo(`/app/compensation/`, { state: { employee: row.original } })}
+              >
+                <IndianRupee size={12} className="mt-1" />
+                <span>{row.original.compensation.toFixed(2)}</span>
+              </div>
+            ) : (
+              <AddButton
+                text="Add Compensation"
+                to="/app/compensation/"
+                className="px-0"
+                state={{ employee: row.original }}
+                tooltip="Add compensation"
+              />
+            )}
+          </div>
+        );
+      },
+    },
+    {
       ...ActionColumn({
-        onEditClick: () => alert('edit clicked'),
+        placement: 'right',
+        onEditClick: (employee) => navigateTo(`/app/employees/${employee.employeeId}`),
         onDeleteClick: () => alert('delete clicked'),
+        editIconSize: 16,
+        deleteIconSize: 16,
         otherActions: [
           {
-            icon: <IndianRupee scale={16} />,
-            toolTip: 'Salary',
-            onClick: (employee) => navigateTo(`/app/salary/`, { state: { employee } }),
-          },
-          {
-            icon: <CalendarDays scale={16} />,
-            toolTip: 'Attendance',
-            onClick: (employee) => navigateTo(`/app/attendance/`, { state: { employee } }),
-          },
-          {
-            icon: <MonitorOff scale={16} />,
-            toolTip: 'Leave',
-            onClick: (employee) => navigateTo(`/app/leave/`, { state: { employee } }),
+            icon: <FileText size={16} />,
+            toolTip: 'Documents',
+            onClick: (employee) => navigateTo(`/app/employees/${employee.employeeId}/documents`),
           },
         ],
       }),
