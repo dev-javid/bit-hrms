@@ -1,4 +1,4 @@
-import { PageContainer, PageHeader, BreadCrumbProps, EmployeeDropdown } from '@/lib/components';
+import { PageContainer, PageHeader, BreadCrumbProps, EmployeeDropdown, ActionButton, AddButton } from '@/lib/components';
 
 import { columns } from './columns';
 import { Card, CardContent, Button, ClientSideDataTable, useSimpleModal, Container } from 'xplorer-ui';
@@ -50,7 +50,7 @@ const CompensationList = () => {
   }
 
   const onAddCompensationClick = () => {
-    showModal('Add Compensation', <CompensationForm employee={employee!} onSuccess={hideModal} />);
+    showModal(`Add Compensation(${employee?.fullName})`, <CompensationForm employee={employee!} onSuccess={hideModal} />);
   };
 
   return (
@@ -59,11 +59,7 @@ const CompensationList = () => {
         {user.isCompanyAdmin && (
           <>
             <EmployeeDropdown onEmployeeSelect={(e) => setEmploee(e)} selectedEmployeeId={employee?.employeeId} />
-            {employee && (
-              <Button variant="outline" onClick={onAddCompensationClick}>
-                Add New Compensation
-              </Button>
-            )}
+            {employee && <AddButton onClick={onAddCompensationClick} text="Add Compensation" tooltip={`Add Compensation for ${employee.fullName}`} />}
           </>
         )}
       </PageHeader>
